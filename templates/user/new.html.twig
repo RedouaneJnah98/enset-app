@@ -1,0 +1,186 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block content %}
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <h4 class="fw-bold py-3 mb-4">
+            <span class="text-muted fw-light">User/</span>
+            New User
+        </h4>
+
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <!-- Account Details -->
+                    <div class="card-header">
+                        <h5 class="fw-semibold">Account Details</h5>
+                        <hr class="mt-0"/>
+                    </div>
+
+                    <div class="card-body">
+                        <form class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label" for="formValidationEmail">Username</label>
+                                <input class="form-control" type="email" id="formValidationEmail" name="formValidationEmail" placeholder="john.doe"/>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="formValidationEmail">First Name</label>
+                                <input class="form-control" type="email" id="formValidationEmail" name="formValidationEmail" placeholder="john.doe"/>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="formValidationEmail">Last Name</label>
+                                <input class="form-control" type="email" id="formValidationEmail" name="formValidationEmail" placeholder="john.doe"/>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="formValidationEmail">Email</label>
+                                <input class="form-control" type="email" id="formValidationEmail" name="formValidationEmail" placeholder="john.doe"/>
+                                <div class="invalid-feedback"></div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-password-toggle">
+                                    <label class="form-label" for="formValidationPass">Password</label>
+                                    <div class="input-group input-group-merge">
+                                        <input class="form-control" type="password" id="formValidationPass" name="formValidationPass"
+                                               placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="multicol-password2"/>
+                                        <span class="input-group-text cursor-pointer" id="multicol-password2"><i class="bx bx-hide"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-password-toggle">
+                                    <label class="form-label" for="formValidationConfirmPass">Confirm Password</label>
+                                    <div class="input-group input-group-merge">
+                                        <input class="form-control" type="password" id="formValidationConfirmPass" name="formValidationConfirmPass"
+                                               placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="multicol-confirm-password2"/>
+                                        <span class="input-group-text cursor-pointer" id="multicol-confirm-password2"><i class="bx bx-hide"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Personal Info -->
+
+                            <div class="col-12">
+                                <h5 class="mt-2 fw-semibold">Personal Info</h5>
+                                <hr class="mt-0"/>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="formValidationFile" class="form-label">Profile Pic</label>
+                                <input class="form-control" type="file" id="formValidationFile" name="formValidationFile" placeholder="Choose profile pic">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="formValidationDob">Date of Birth</label>
+                                <input type="date" class="form-control  flatpickr-validation" name="formValidationDob" id="formValidationDob" required/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label" for="employee_id">Employee ID</label>
+                                <input type="text" id="employee_id" class="form-control" placeholder="Q34dC56A" name="employee_id"/>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="formValidationEmail">CIN</label>
+                                <input class="form-control" type="email" id="formValidationEmail" name="formValidationEmail" placeholder="john.doe"/>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="gender">Gender</label>
+                                <select id="gender" name="gender" class="form-select">
+                                    <option value="">Choose...</option>
+                                    <option value="Australia">Male</option>
+                                    <option value="Bangladesh">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label" for="address">Address Line</label>
+                                <input type="text" class="form-control" name="address" id="address" placeholder="Rue Mohamed V"/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label" for="gender">City</label>
+                                <select id="gender" name="gender" class="form-select">
+                                    <option value="">Choose...</option>
+                                    <option value="Australia">Male</option>
+                                    <option value="Bangladesh">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="zipCode">Zip Code</label>
+                                <input type="number" class="form-control" name="address" id="zipCode" placeholder="90000"/>
+                            </div>
+
+
+                            <!-- Choose Your Plan -->
+
+                            <div class="col-12">
+                                <h5 class="mt-2 fw-semibold">Security & Roles</h5>
+                                <hr class="mt-0"/>
+                            </div>
+                            <div class="alert alert-info d-flex" role="alert">
+                                <span class="me-2">
+                                    <i class='bx bxs-error-circle fs-1'></i>
+                                </span>
+                                <div class="d-flex flex-column ps-1 text-black">
+                                    <h6 class="alert-heading d-flex align-items-center fw-bold mb-1">Choose User Role</h6>
+                                    <span class="w-75">For security reasons please choose role carefully, the Administrator will receive a notification. For more info, please read our
+                                        <a href="#">Security Section</a>.
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-xl-3 col-md-5 col-sm-6 col-12">
+                                    <div class="form-check custom-option custom-option-icon">
+                                        <label class="form-check-label custom-option-content" for="basicPlanMain1">
+                                              <span class="custom-option-body">
+                                                <i class='bx bx-shield-quarter'></i>
+                                                <span class="custom-option-title"> Administrator </span>
+                                                <small>Can have access to the hole system.</small>
+                                              </span>
+                                            <input name="formValidationPlan" class="form-check-input" type="radio" value="admin" id="basicPlanMain1"/>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-5 col-sm-6 col-12">
+                                    <div class="form-check custom-option custom-option-icon">
+                                        <label class="form-check-label custom-option-content" for="basicPlanMain2">
+                                              <span class="custom-option-body">
+                                                <i class="bx bx-user"></i>
+                                                <span class="custom-option-title"> Professor </span>
+                                                <small>Can have access to some parts of the system.</small>
+                                              </span>
+                                            <input name="formValidationPlan" class="form-check-input" type="radio" value="professor" id="basicPlanMain2"/>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-5 col-sm-6 col-12">
+                                    <div class="form-check custom-option custom-option-icon">
+                                        <label class="form-check-label custom-option-content" for="basicPlanMain3">
+                                          <span class="custom-option-body">
+                                            <i class='bx bxs-business'></i>
+                                            <span class="custom-option-title"> Human Resources </span>
+                                            <small>Can have access to what users need in the system.</small>
+                                          </span>
+                                            <input name="formValidationPlan" class="form-check-input" type="radio" value="humanResources" id="basicPlanMain3"/>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="col-12 mt-2">
+                                <button type="submit" name="createUser" class="btn btn-label-primary">Create User</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
