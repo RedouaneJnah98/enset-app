@@ -19,46 +19,71 @@
                         <hr class="mt-0"/>
                     </div>
 
+                    {# store the errors in a variable #}
+                    {% set usernameError = form_errors(form.username) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set firstNameError = form_errors(form.firstName) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set lastNameError = form_errors(form.lastName) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set emailError = form_errors(form.lastName) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set passwordFirstError = form_errors(form.password.first) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set passwordSecondtError = form_errors(form.password.second) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set employeeIdError = form_errors(form.employeeId) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set cardIdError = form_errors(form.cardId) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set phoneError = form_errors(form.phoneNumber) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set dateError = form_errors(form.dateOfBirth) ? 'form-control is-invalid' : 'form-control' %}
+
                     <div class="card-body">
-                        <form class="row g-3">
+                        {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
+                        <div class="row g-3">
                             <div class="col-md-4">
-                                <label class="form-label" for="formValidationEmail">Username</label>
-                                <input class="form-control" type="email" id="formValidationEmail" name="formValidationEmail" placeholder="john.doe"/>
-                                <div class="invalid-feedback"></div>
+                                <label class="form-label" for="{{ form.username.vars.id }}">Username</label>
+                                {{ form_widget(form.username, {'attr': {'class': usernameError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.username) }}
+                                </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label" for="formValidationEmail">First Name</label>
-                                <input class="form-control" type="email" id="formValidationEmail" name="formValidationEmail" placeholder="john.doe"/>
-                                <div class="invalid-feedback"></div>
+                                <label class="form-label" for="{{ form.firstName.vars.id }}">First Name</label>
+                                {{ form_widget(form.firstName, {'attr': {'class': firstNameError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.firstName) }}
+                                </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label" for="formValidationEmail">Last Name</label>
-                                <input class="form-control" type="email" id="formValidationEmail" name="formValidationEmail" placeholder="john.doe"/>
-                                <div class="invalid-feedback"></div>
+                                <label class="form-label" for="{{ form.lastName.vars.id }}">Last Name</label>
+                                {{ form_widget(form.lastName, {'attr': {'class': lastNameError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.lastName) }}
+                                </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label" for="formValidationEmail">Email</label>
-                                <input class="form-control" type="email" id="formValidationEmail" name="formValidationEmail" placeholder="john.doe"/>
-                                <div class="invalid-feedback"></div>
+                                <label class="form-label" for="email">Email</label>
+                                {{ form_widget(form.email, {'attr': {'class': emailError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.email) }}
+                                </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-password-toggle">
-                                    <label class="form-label" for="formValidationPass">Password</label>
+                                    <label class="form-label" for="{{ form.password.first.vars.id }}">Password</label>
                                     <div class="input-group input-group-merge">
-                                        <input class="form-control" type="password" id="formValidationPass" name="formValidationPass"
-                                               placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="multicol-password2"/>
+                                        {{ form_widget(form.password.first, {'attr': {'class': passwordFirstError}}) }}
                                         <span class="input-group-text cursor-pointer" id="multicol-password2"><i class="bx bx-hide"></i></span>
+                                        <div class="invalid-feedback">
+                                            {{ form_errors(form.password.first) }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-password-toggle">
-                                    <label class="form-label" for="formValidationConfirmPass">Confirm Password</label>
+                                    <label class="form-label" for="{{ form.password.second.vars.id }}">Confirm Password</label>
                                     <div class="input-group input-group-merge">
-                                        <input class="form-control" type="password" id="formValidationConfirmPass" name="formValidationConfirmPass"
-                                               placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="multicol-confirm-password2"/>
+                                        {{ form_widget(form.password.second, {'attr': {'class': passwordSecondtError}}) }}
                                         <span class="input-group-text cursor-pointer" id="multicol-confirm-password2"><i class="bx bx-hide"></i></span>
+                                        <div class="invalid-feedback">
+                                            {{ form_errors(form.password.second) }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -70,32 +95,43 @@
                                 <hr class="mt-0"/>
                             </div>
 
-                            <div class="col-md-6">
-                                <label for="formValidationFile" class="form-label">Profile Pic</label>
-                                <input class="form-control" type="file" id="formValidationFile" name="formValidationFile" placeholder="Choose profile pic">
+                            <div class="col-md-4">
+                                <label class="form-label" for="{{ form.employeeId.vars.id }}">Employee ID</label>
+                                {{ form_widget(form.employeeId, {'attr': {'class': employeeIdError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.employeeId) }}
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <label class="form-label" for="formValidationDob">Date of Birth</label>
-                                <input type="date" class="form-control  flatpickr-validation" name="formValidationDob" id="formValidationDob" required/>
+                            <div class="col-md-4">
+                                <label class="form-label" for="{{ form.cardId.vars.id }}">CIN</label>
+                                {{ form_widget(form.cardId, {'attr': {'class': cardIdError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.cardId) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="{{ form.phoneNumber.vars.id }}">Phone no</label>
+                                {{ form_widget(form.phoneNumber, {'attr': {'class': phoneError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.phoneNumber) }}
+                                </div>
                             </div>
 
                             <div class="col-md-4">
-                                <label class="form-label" for="employee_id">Employee ID</label>
-                                <input type="text" id="employee_id" class="form-control" placeholder="Q34dC56A" name="employee_id"/>
-                                <div class="invalid-feedback"></div>
+                                <label for="formValidationFile" class="form-label">Profile Pic</label>
+                                <input class="form-control" type="file" id="formValidationFile" name="formValidationFile" placeholder="Choose profile pic">
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label" for="formValidationEmail">CIN</label>
-                                <input class="form-control" type="email" id="formValidationEmail" name="formValidationEmail" placeholder="john.doe"/>
-                                <div class="invalid-feedback"></div>
+                                <label class="form-label" for="formValidationDob">Date of Birth</label>
+                                {{ form_widget(form.dateOfBirth, {'attr': {'class': dateError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.dateOfBirth) }}
+                                </div>
                             </div>
+
                             <div class="col-md-4">
-                                <label class="form-label" for="gender">Gender</label>
-                                <select id="gender" name="gender" class="form-select">
-                                    <option value="">Choose...</option>
-                                    <option value="Australia">Male</option>
-                                    <option value="Bangladesh">Female</option>
-                                </select>
+                                <label class="form-label" for="{{ form.gender.vars.id }}">Gender</label>
+                                {{ form_widget(form.gender, {'attr': {'class': 'form-select'}}) }}
                             </div>
 
                             <div class="col-md-4">
@@ -177,7 +213,7 @@
                             <div class="col-12 mt-2">
                                 <button type="submit" name="createUser" class="btn btn-label-primary">Create User</button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
