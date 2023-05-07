@@ -426,11 +426,16 @@ div.dataTables_wrapper div.dataTables_length select {
     color: #566a7f;
 }
 
-.form-check .form-check-input {
-    float: none !important;
-    margin: 0 !important;
-}
+/*.form-check .form-check-input {*/
+/*    float: none !important;*/
+/*    margin: 0 !important;*/
+/*}*/
 
 .form-check label {
     display: inline-block;
 }
+
+/*.form-check .form-check-input {*/
+/*    float: left;*/
+/*    margin-left: -1.7em;*/
+/*}*/

@@ -5,64 +5,119 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank]
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $username = null;
+
+    #[ORM\Column]
+    private array $roles = [];
+
+    #[ORM\Column]
+    private ?string $password = null;
+
     #[ORM\Column(length: 100)]
     private ?string $firstName = null;
 
-    #[Assert\NotBlank]
     #[ORM\Column(length: 100)]
     private ?string $lastName = null;
 
-    #[Assert\NotBlank]
     #[ORM\Column(length: 150)]
     private ?string $email = null;
 
-    #[Assert\NotBlank]
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
-
-    #[Assert\NotBlank]
-    #[ORM\Column(length: 12)]
-    private ?string $gender = null;
-
-    #[Assert\NotBlank]
-    #[ORM\Column(length: 15)]
-    private ?string $phoneNumber = null;
-
-    #[Assert\NotBlank]
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $profilePicture = null;
-
-    #[Assert\NotNull]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateOfBirth = null;
 
-    #[Assert\NotBlank]
+    #[ORM\Column(length: 15)]
+    private ?string $phoneNumber = null;
+
     #[ORM\Column]
     private ?int $employeeId = null;
 
-    #[Assert\NotBlank]
     #[ORM\Column(length: 10)]
     private ?string $cardId = null;
 
-    #[Assert\NotBlank]
-    #[ORM\Column(length: 100)]
-    private ?string $username = null;
+    #[ORM\Column(length: 10)]
+    private ?string $gender = null;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string)$this->username;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
     public function getFirstName(): ?string
@@ -101,26 +156,14 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    public function getDateOfBirth(): ?\DateTimeInterface
     {
-        return $this->password;
+        return $this->dateOfBirth;
     }
 
-    public function setPassword(string $password): self
+    public function setDateOfBirth(\DateTimeInterface $dateOfBirth): self
     {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getGender(): ?string
-    {
-        return $this->gender;
-    }
-
-    public function setGender(string $gender): self
-    {
-        $this->gender = $gender;
+        $this->dateOfBirth = $dateOfBirth;
 
         return $this;
     }
@@ -133,30 +176,6 @@ class User
     public function setPhoneNumber(string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
-
-        return $this;
-    }
-
-    public function getProfilePicture(): ?string
-    {
-        return $this->profilePicture;
-    }
-
-    public function setProfilePicture(?string $profilePicture): self
-    {
-        $this->profilePicture = $profilePicture;
-
-        return $this;
-    }
-
-    public function getDateOfBirth(): ?\DateTimeInterface
-    {
-        return $this->dateOfBirth;
-    }
-
-    public function setDateOfBirth(\DateTimeInterface $dateOfBirth): self
-    {
-        $this->dateOfBirth = $dateOfBirth;
 
         return $this;
     }
@@ -185,14 +204,14 @@ class User
         return $this;
     }
 
-    public function getUsername(): ?string
+    public function getGender(): ?string
     {
-        return $this->username;
+        return $this->gender;
     }
 
-    public function setUsername(string $username): self
+    public function setGender(string $gender): self
     {
-        $this->username = $username;
+        $this->gender = $gender;
 
         return $this;
     }
