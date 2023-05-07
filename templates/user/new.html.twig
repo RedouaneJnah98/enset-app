@@ -30,6 +30,7 @@
                     {% set cardIdError = form_errors(form.cardId) ? 'form-control is-invalid' : 'form-control' %}
                     {% set phoneError = form_errors(form.phoneNumber) ? 'form-control is-invalid' : 'form-control' %}
                     {% set dateError = form_errors(form.dateOfBirth) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set genderError = form_errors(form.gender) ? 'form-control is-invalid' : 'form-control' %}
 
                     <div class="card-body">
                         {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
@@ -131,7 +132,10 @@
 
                             <div class="col-md-4">
                                 <label class="form-label" for="{{ form.gender.vars.id }}">Gender</label>
-                                {{ form_widget(form.gender, {'attr': {'class': 'form-select'}}) }}
+                                {{ form_widget(form.gender, {'attr': {'class': genderError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.gender) }}
+                                </div>
                             </div>
 
                             <div class="col-md-4">
@@ -209,6 +213,8 @@
                                 </div>
                             </div>
                             <hr>
+                            {# CSRF Token #}
+                            {{ form_rest(form) }}
 
                             <div class="col-12 mt-2">
                                 <button type="submit" name="createUser" class="btn btn-label-primary">Create User</button>

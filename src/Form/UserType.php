@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -51,7 +52,7 @@ class UserType extends AbstractType
             ->add('cardId', TextType::class, [
                 'attr' => ['placeholder' => 'K987345']
             ])
-            ->add('dateOfBirth', DateType::class, [
+            ->add('dateOfBirth', BirthdayType::class, [
                 'widget' => 'single_text',
                 'empty_data' => null
             ]);

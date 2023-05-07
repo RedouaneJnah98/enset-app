@@ -7,6 +7,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -17,33 +19,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $username = null;
 
     #[ORM\Column]
     private array $roles = [];
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?string $password = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 100)]
     private ?string $firstName = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 100)]
     private ?string $lastName = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 150)]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateOfBirth = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 15)]
     private ?string $phoneNumber = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?int $employeeId = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 10)]
     private ?string $cardId = null;
 
