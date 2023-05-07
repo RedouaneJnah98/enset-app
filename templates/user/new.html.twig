@@ -119,8 +119,8 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label for="formValidationFile" class="form-label">Profile Pic</label>
-                                <input class="form-control" type="file" id="formValidationFile" name="formValidationFile" placeholder="Choose profile pic">
+                                <label for="{{ form.imageFile.vars.id }}" class="form-label">Profile Pic</label>
+                                {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label" for="formValidationDob">Date of Birth</label>
@@ -208,6 +208,10 @@
                                             <small>Can have access to what users need in the system.</small>
                                           </span>
                                             <input name="formValidationPlan" class="form-check-input" type="radio" value="humanResources" id="basicPlanMain3"/>
+
+                                            {#                                         {% for label, value in field_choices(form.roles) %} #}
+                                            {#                                                <option value="{{ value }}">{{ label }}</option> #}
+                                            {#                                            {% endfor %} #}
                                         </label>
                                     </div>
                                 </div>
