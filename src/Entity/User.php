@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -16,6 +17,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -32,6 +35,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    private $plainPassword;
+
     #[Assert\NotBlank]
     #[ORM\Column(length: 100)]
     private ?string $firstName = null;
@@ -41,7 +46,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lastName = null;
 
     #[Assert\NotBlank]
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -52,11 +57,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $phoneNumber = null;
 
     #[Assert\NotBlank]
-    #[ORM\Column]
+    #[ORM\Column(unique: true)]
     private ?int $employeeId = null;
 
     #[Assert\NotBlank]
-    #[ORM\Column(length: 10)]
+    #[ORM\Column(length: 10, unique: true)]
     private ?string $cardId = null;
 
     #[ORM\Column(length: 10)]
@@ -133,12 +138,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * @return mixed
+     */
+    public function getPlainPassword(): mixed
+    {
+        return $this->plainPassword;
+    }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword(string $plainPassword): void
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
+    /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getFirstName(): ?string
