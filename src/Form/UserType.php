@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -15,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Role\Role;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserType extends AbstractType
@@ -58,13 +60,21 @@ class UserType extends AbstractType
                 'widget' => 'single_text',
                 'empty_data' => null
             ])
-            ->add('imageFile', VichImageType::class);
+            ->add('imageFile', VichImageType::class)
+            ->add('roles', ChoiceType::class, [
+                'expanded' => true,
+                'choices' => ['Admin' => 'ROLE_ADMIN', 'Professor' => 'ROLE_PROFESSOR', 'HR' => 'ROLE_HUMAN_RESOURCES'],
+                'multiple' => true
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id' => 'user_item'
         ]);
     }
 }

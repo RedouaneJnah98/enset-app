@@ -63,7 +63,6 @@ final class UserFactory extends ModelFactory
             'phoneNumber' => '06060606060',
             'roles' => (new User())->getRoles(),
             'username' => self::faker()->unique()->userName(),
-            'imageName' => self::faker()->imageUrl(100, 100, 'avatars')
         ];
     }
 
