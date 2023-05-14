@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,6 +16,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[Vich\Uploadable]
+#[UniqueEntity('email')]
+#[UniqueEntity('username')]
+#[UniqueEntity('employeeId')]
+#[UniqueEntity('cardId')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
@@ -31,10 +36,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    #[Assert\NotBlank]
     #[ORM\Column]
     private ?string $password = null;
-
+    
     private $plainPassword;
 
     #[Assert\NotBlank]
@@ -46,6 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $lastName = null;
 
     #[Assert\NotBlank]
+    #[Assert\Email]
     #[ORM\Column(length: 150, unique: true)]
     private ?string $email = null;
 
@@ -75,6 +80,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageSize = null;
+
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Address $address = null;
 
     public function getId(): ?int
     {
@@ -296,5 +305,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setImageFile(?File $imageFile): void
     {
         $this->imageFile = $imageFile;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
+
+        return $this;
     }
 }

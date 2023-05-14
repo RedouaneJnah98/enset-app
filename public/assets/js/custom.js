@@ -1,18 +1,13 @@
-const adminCheckbox = document.getElementById('basicPlanMain1');
-const profCheckbox = document.getElementById('basicPlanMain2');
-const hrCheckbox = document.getElementById('basicPlanMain3');
-const parentDiv = document.querySelector('.custom-option');
-
-
-adminCheckbox.addEventListener('click', function () {
-    if (adminCheckbox.checked) {
-        console.log('yes')
-    } else {
-        console.log('no')
-    }
-})
-
-// function showBorder() {
-//     parentDiv
+// async function logJSONData() {
+//     const response = await fetch("");
+//     const jsonData = await response.json();
+//     console.log(jsonData);
 // }
+//
+// logJSONData().then(data => {
+//     console.log(data)
+// });
 
+// fetch("https://github.com/alaouy/sql-moroccan-cities/blob/master/json/ville.json")
+//     .then(res => res.json())
+//     .then(data => console.log(data));

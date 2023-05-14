@@ -197,14 +197,14 @@
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
                                 aria-label="Role: activate to sort column ascending">Role
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Role: activate to sort column ascending">Gender
-                            </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
                                 aria-label="Status: activate to sort column ascending">Last Login
                             </th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                style="width: 85px;" aria-label="Status: activate to sort column ascending">Status
+                                aria-label="Role: activate to sort column ascending">Two-Step
+                            </th>
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                                aria-label="Role: activate to sort column ascending">Joined Date
                             </th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">Actions</th>
                         </tr>
@@ -233,30 +233,39 @@
                                     </div>
                                 </td>
                                 <td>
-                                    {#                                    {% for role in user.roles %} #}
-                                    {#                                        {% if role == "ROLE_ADMIN" %} #}
-                                    <span class="text-truncate d-flex align-items-center">
+                                    {% for role in user.roles %}
+                                        {% if role == "ROLE_ADMIN" %}
+                                            <span class="text-truncate d-flex align-items-center">
                                                 <span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2">
                                                     <i class='bx bx-shield-quarter bx-xs'></i>
                                                 </span>
                                                 Admin
                                             </span>
-                                    {#                                        {% elseif role == "ROLE_USER" %} #}
-                                    {#                                            <span class="text-truncate d-flex align-items-center"> #}
-                                    {#                                                <span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"> #}
-                                    {#                                                <i class='bx bx-user bx-xs'></i> #}
-                                    {#                                                </span> #}
-                                    {#                                                User #}
-                                    {#                                            </span> #}
-                                    {#                                        {% endif %} #}
-                                    {#                                    {% endfor %} #}
+                                        {% elseif role == "ROLE_PROFESSOR" %}
+                                            <span class="text-truncate d-flex align-items-center">
+                                                <span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2">
+                                                    <i class='bx bx-user bx-xs'></i>
+                                                </span>
+                                                Professor
+                                            </span>
+                                        {% elseif role == "ROLE_HUMAN_RESOURCES" %}
+                                            <span class="text-truncate d-flex align-items-center">
+                                                <span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30 me-2">
+                                                    <i class='bx bxs-business bx-xs'></i>
+                                                </span>
+                                                Human Resources
+                                            </span>
+                                        {% endif %}
+                                    {% endfor %}
                                 </td>
                                 <td>
-                                    <span class="fw-semibold">{{ user.gender }}</span>
+                                    <span class="badge bg-label-dark fs-tiny">2 days ago</span>
                                 </td>
-                                <td>Auto Debit</td>
                                 <td>
-                                    <span class="badge bg-label-success">Active</span>
+                                    <span class="badge bg-label-success fs-tiny">Enabled</span>
+                                </td>
+                                <td>
+                                    <span>{{ user.createdAt|date }}</span>
                                 </td>
                                 <td>
                                     <div class="d-inline-block text-nowrap">

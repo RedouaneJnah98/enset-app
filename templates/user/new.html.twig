@@ -23,9 +23,9 @@
                     {% set usernameError = form_errors(form.username) ? 'form-control is-invalid' : 'form-control' %}
                     {% set firstNameError = form_errors(form.firstName) ? 'form-control is-invalid' : 'form-control' %}
                     {% set lastNameError = form_errors(form.lastName) ? 'form-control is-invalid' : 'form-control' %}
-                    {% set emailError = form_errors(form.lastName) ? 'form-control is-invalid' : 'form-control' %}
-                    {% set passwordFirstError = form_errors(form.password.first) ? 'form-control is-invalid' : 'form-control' %}
-                    {% set passwordSecondtError = form_errors(form.password.second) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set emailError = form_errors(form.email) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set passwordFirstError = form_errors(form.plainPassword.first) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set passwordSecondtError = form_errors(form.plainPassword.second) ? 'form-control is-invalid' : 'form-control' %}
                     {% set employeeIdError = form_errors(form.employeeId) ? 'form-control is-invalid' : 'form-control' %}
                     {% set cardIdError = form_errors(form.cardId) ? 'form-control is-invalid' : 'form-control' %}
                     {% set phoneError = form_errors(form.phoneNumber) ? 'form-control is-invalid' : 'form-control' %}
@@ -37,54 +37,73 @@
 
                         <div class="row g-3">
                             <div class="col-md-4">
-                                <label class="form-label" for="{{ form.username.vars.id }}">Username</label>
+                                <label class="form-label" for="{{ form.username.vars.id }}">Username *</label>
+
                                 {{ form_widget(form.username, {'attr': {'class': usernameError}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.username) }}
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label" for="{{ form.firstName.vars.id }}">First Name</label>
+                                <label class="form-label" for="{{ form.firstName.vars.id }}">First Name *</label>
                                 {{ form_widget(form.firstName, {'attr': {'class': firstNameError}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.firstName) }}
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label" for="{{ form.lastName.vars.id }}">Last Name</label>
+                                <label class="form-label" for="{{ form.lastName.vars.id }}">Last Name *</label>
                                 {{ form_widget(form.lastName, {'attr': {'class': lastNameError}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.lastName) }}
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label" for="email">Email</label>
+                                <label class="form-label" for="email">
+                                    Email
+                                    <i class='bx bxs-error-circle text-muted fs-6 ms-1 mb-1' data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                       data-bs-placement="top" data-bs-html="true" title="Email must be active"></i>
+                                </label>
                                 {{ form_widget(form.email, {'attr': {'class': emailError}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.email) }}
                                 </div>
                             </div>
 
+                            {#                            <div class="col-md-4"> #}
+                            {#                                <div class="form-password-toggle"> #}
+                            {#                                    <label class="form-label" for="{{ form.plainPassword.vars.id }}">Password *</label> #}
+                            {#                                    <div class="input-group input-group-merge"> #}
+                            {#                                        {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control'}}) }} #}
+                            {#                                        <span class="input-group-text cursor-pointer" id="multicol-password2"><i class="bx bx-hide"></i></span> #}
+                            {#                                        <div class="invalid-feedback"> #}
+                            {#                                            {{ form_errors(form.plainPassword) }} #}
+                            {#                                        </div> #}
+                            {#                                    </div> #}
+                            {#                                </div> #}
+                            {#                            </div> #}
+
+
                             <div class="col-md-4">
                                 <div class="form-password-toggle">
-                                    <label class="form-label" for="{{ form.password.first.vars.id }}">Password</label>
+                                    <label class="form-label" for="{{ form.plainPassword.first.vars.id }}">Password *</label>
                                     <div class="input-group input-group-merge">
-                                        {{ form_widget(form.password.first, {'attr': {'class': passwordFirstError}}) }}
+                                        {{ form_widget(form.plainPassword.first, {'attr': {'class': passwordFirstError, 'placeholder': '············'}}) }}
                                         <span class="input-group-text cursor-pointer" id="multicol-password2"><i class="bx bx-hide"></i></span>
                                         <div class="invalid-feedback">
-                                            {{ form_errors(form.password.first) }}
+                                            {{ form_errors(form.plainPassword.first) }}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-password-toggle">
-                                    <label class="form-label" for="{{ form.password.second.vars.id }}">Confirm Password</label>
+                                    <label class="form-label" for="{{ form.plainPassword.second.vars.id }}">Confirm Password *</label>
                                     <div class="input-group input-group-merge">
-                                        {{ form_widget(form.password.second, {'attr': {'class': passwordSecondtError}}) }}
+                                        {{ form_widget(form.plainPassword.second, {'attr': {'class': passwordSecondtError, 'placeholder': '············'}}) }}
                                         <span class="input-group-text cursor-pointer" id="multicol-confirm-password2"><i class="bx bx-hide"></i></span>
                                         <div class="invalid-feedback">
-                                            {{ form_errors(form.password.second) }}
+                                            {{ form_errors(form.plainPassword.second) }}
                                         </div>
                                     </div>
                                 </div>
@@ -98,21 +117,25 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label class="form-label" for="{{ form.employeeId.vars.id }}">Employee ID</label>
+                                <label class="form-label" for="{{ form.employeeId.vars.id }}">Employee ID *</label>
                                 {{ form_widget(form.employeeId, {'attr': {'class': employeeIdError}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.employeeId) }}
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label" for="{{ form.cardId.vars.id }}">CIN</label>
+                                <label class="form-label" for="{{ form.cardId.vars.id }}">CIN *</label>
                                 {{ form_widget(form.cardId, {'attr': {'class': cardIdError}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.cardId) }}
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label" for="{{ form.phoneNumber.vars.id }}">Phone no</label>
+                                <label class="form-label" for="{{ form.phoneNumber.vars.id }}">
+                                    Phone no
+                                    <i class='bx bxs-error-circle text-muted fs-6 ms-1 mb-1' data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                       data-bs-placement="top" data-bs-html="true" title="Phone must be active"></i>
+                                </label>
                                 {{ form_widget(form.phoneNumber, {'attr': {'class': phoneError}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.phoneNumber) }}
@@ -124,7 +147,7 @@
                                 {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label" for="formValidationDob">Date of Birth</label>
+                                <label class="form-label" for="formValidationDob">Date of Birth *</label>
                                 {{ form_widget(form.dateOfBirth, {'attr': {'class': dateError}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.dateOfBirth) }}
@@ -132,31 +155,30 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label class="form-label" for="{{ form.gender.vars.id }}">Gender</label>
+                                <label class="form-label" for="{{ form.gender.vars.id }}">Gender *</label>
                                 {{ form_widget(form.gender, {'attr': {'class': genderError}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.gender) }}
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label class="form-label" for="address">Address Line</label>
-                                <input type="text" class="form-control" name="address" id="address" placeholder="Rue Mohamed V"/>
+                                <input type="text" class="form-control" name="street" id="address" placeholder="Rue Mohamed V"/>
                             </div>
 
-                            <div class="col-md-4">
-                                <label class="form-label" for="gender">City</label>
-                                <select id="gender" name="gender" class="form-select">
-                                    <option value="">Choose...</option>
-                                    <option value="Australia">Male</option>
-                                    <option value="Bangladesh">Female</option>
-                                </select>
+                            <div class="col-md-3">
+                                <label class="form-label" for="city">
+                                    City
+                                    <i class='bx bxs-error-circle text-muted fs-6 ms-1 mb-1' data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                       data-bs-placement="top" data-bs-html="true" title="Resident city"></i>
+                                </label>
+                                <input type="text" name="city" id="city" class="form-control">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label class="form-label" for="zipCode">Zip Code</label>
-                                <input type="number" class="form-control" name="address" id="zipCode" placeholder="90000"/>
+                                <input type="number" class="form-control" name="zipCode" id="zipCode" placeholder="90000"/>
                             </div>
-
 
                             <!-- Choose Your Plan -->
 
@@ -184,7 +206,7 @@
                                                 <span class="custom-option-title"> Administrator </span>
                                                 <small>Can have access to the hole system.</small>
                                               </span>
-                                            <input name="user[roles][]" class="form-check-input" type="radio" value="ROLE_ADMIN" id="basicPlanMain1"/>
+                                            <input name="roles[]" class="form-check-input" type="radio" value="ROLE_ADMIN" id="basicPlanMain1"/>
                                         </label>
                                     </div>
                                 </div>
@@ -196,7 +218,7 @@
                                                 <span class="custom-option-title"> Professor </span>
                                                 <small>Can have access to some parts of the system.</small>
                                               </span>
-                                            <input name="user[roles][]" class="form-check-input" type="radio" value="ROLE_PROFESSOR" id="basicPlanMain2" checked/>
+                                            <input name="roles[]" class="form-check-input" type="radio" value="ROLE_PROFESSOR" id="basicPlanMain2" checked/>
                                         </label>
                                     </div>
                                 </div>
@@ -208,11 +230,7 @@
                                             <span class="custom-option-title"> Human Resources </span>
                                             <small>Can have access to what users need in the system.</small>
                                           </span>
-                                            <input name="user[roles][]" class="form-check-input" type="radio" value="ROLE_HUMAN_RESOURCES" id="basicPlanMain3"/>
-                                            {#                                            {{ form_widget(form.roles) }} #}
-                                            {#                                         {% for label, value in field_choices(form.roles) %} #}
-                                            {#                                                <option value="{{ value }}">{{ label }}</option> #}
-                                            {#                                            {% endfor %} #}
+                                            <input name="roles[]" class="form-check-input" type="radio" value="ROLE_HUMAN_RESOURCES" id="basicPlanMain3"/>
                                         </label>
                                     </div>
                                 </div>

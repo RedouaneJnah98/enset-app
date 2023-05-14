@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -36,12 +37,24 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [
                 'attr' => ['placeholder' => 'john.doe@example.com']
             ])
-            ->add('password', PasswordType::class, [
-                'attr' => ['placeholder' => '············']
+//            ->add('password', PasswordType::class, [
+//                'attr' => ['placeholder' => '············'],
+//                'hash_property_path' => 'password'
+//            ])
+//            ->add('password', RepeatedType::class, [
+//                'type' => PasswordType::class,
+//                'options' => ['attr' => ['placeholder' => '············']]
+//            ])
+            ->add('plainPassword', PasswordType::class, [
+                'hash_property_path' => 'password',
+                'mapped' => false
             ])
-            ->add('password', RepeatedType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'options' => ['attr' => ['placeholder' => '············']]
+                //'attr' => ['placeholder' => '············'],
+                'first_options' => ['label' => 'Password', 'hash_property_path' => 'password'],
+                'second_options' => ['label' => 'Repeat Password'],
+                'mapped' => false
             ])
             ->add('gender', ChoiceType::class, [
                 'choices' => ['Male' => 'Male', 'Female' => 'Female'],
@@ -61,11 +74,12 @@ class UserType extends AbstractType
                 'empty_data' => null
             ])
             ->add('imageFile', VichImageType::class)
-            ->add('roles', ChoiceType::class, [
-                'expanded' => true,
-                'choices' => ['Admin' => 'ROLE_ADMIN', 'Professor' => 'ROLE_PROFESSOR', 'HR' => 'ROLE_HUMAN_RESOURCES'],
-                'multiple' => true
-            ]);
+//            ->add('roles', ChoiceType::class, [
+//                'expanded' => true,
+//                'choices' => ['Admin' => 'ROLE_ADMIN', 'Professor' => 'ROLE_PROFESSOR', 'HR' => 'ROLE_HUMAN_RESOURCES'],
+//                'multiple' => true
+//            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
