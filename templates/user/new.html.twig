@@ -5,10 +5,17 @@
 {% block content %}
     <div class="container-xxl flex-grow-1 container-p-y">
 
-        <h4 class="fw-bold py-3 mb-4">
-            <span class="text-muted fw-light">User/</span>
-            New User
-        </h4>
+        <nav aria-label="breadcrumb mb-0">
+            <ol class="breadcrumb breadcrumb-style2">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_user_index') }}">Users</a>
+                </li>
+                <li class="breadcrumb-item active">New User</li>
+            </ol>
+        </nav>
 
         <div class="row">
             <div class="col-xl">
@@ -69,21 +76,6 @@
                                     {{ form_errors(form.email) }}
                                 </div>
                             </div>
-
-                            {#                            <div class="col-md-4"> #}
-                            {#                                <div class="form-password-toggle"> #}
-                            {#                                    <label class="form-label" for="{{ form.plainPassword.vars.id }}">Password *</label> #}
-                            {#                                    <div class="input-group input-group-merge"> #}
-                            {#                                        {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control'}}) }} #}
-                            {#                                        <span class="input-group-text cursor-pointer" id="multicol-password2"><i class="bx bx-hide"></i></span> #}
-                            {#                                        <div class="invalid-feedback"> #}
-                            {#                                            {{ form_errors(form.plainPassword) }} #}
-                            {#                                        </div> #}
-                            {#                                    </div> #}
-                            {#                                </div> #}
-                            {#                            </div> #}
-
-
                             <div class="col-md-4">
                                 <div class="form-password-toggle">
                                     <label class="form-label" for="{{ form.plainPassword.first.vars.id }}">Password *</label>

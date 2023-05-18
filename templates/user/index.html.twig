@@ -134,9 +134,13 @@
                         <div class="col-md-10">
                             <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-end flex-md-row flex-column mb-3 mb-md-0">
                                 <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                                    <label>
-                                        <input type="search" class="form-control" placeholder="Search..">
-                                    </label>
+                                    <div class="input-group input-group-merge">
+                                        <span class="input-group-text" id="basic-addon-search31">
+                                            <i class="bx bx-search"></i>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="Search..."
+                                               aria-label="Search...">
+                                    </div>
                                 </div>
                                 <div class="dt-buttons btn-group flex-wrap">
                                     <div class="btn-group">
@@ -226,7 +230,7 @@
                                         </div>
                                         <div class="d-flex flex-column">
                                             <a href="#" class="text-body text-truncate">
-                                                <span class="fw-semibold">{{ user.firstName }} {{ user.lastName }}</span>
+                                                <span class="fw-semibold text-capitalize">{{ user.firstName }} {{ user.lastName }}</span>
                                             </a>
                                             <small class="text-muted">{{ user.email }}</small>
                                         </div>
@@ -259,29 +263,29 @@
                                     {% endfor %}
                                 </td>
                                 <td>
-                                    <span class="badge bg-label-dark fs-tiny">2 days ago</span>
+                                    <span class="badge bg-label-dark fs-tiny text-lowercase">2 days ago</span>
                                 </td>
                                 <td>
                                     <span class="badge bg-label-success fs-tiny">Enabled</span>
                                 </td>
                                 <td>
-                                    <span>{{ user.createdAt|date }}</span>
+                                    <span class="fs-6">{{ user.createdAt|date }}</span>
                                 </td>
                                 <td>
-                                    <div class="d-inline-block text-nowrap">
-                                        <button class="btn btn-sm btn-icon">
-                                            <i class="bx bx-edit"></i>
+                                    <div class="btn-group dropdown">
+                                        <button type="button" class="btn btn-label-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Actions
                                         </button>
-                                        <button class="btn btn-sm btn-icon delete-record">
-                                            <i class="bx bx-trash"></i>
-                                        </button>
-                                        <button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end m-0">
-                                            <a href="#" class="dropdown-item">View</a>
-                                            <a href="javascript:" class="dropdown-item">Suspend</a>
-                                        </div>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="dropdown-item"
+                                                   href="{{ path('app_user_edit', {id: user.id}) }}">Edit</a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item text-danger"
+                                                   href="{{ path('app_user_delete', {id: user.id}) }}">Delete</a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </td>
                             </tr>

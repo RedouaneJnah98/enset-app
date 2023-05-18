@@ -31,7 +31,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         $roles = $request->get('roles');
-//        $plainPassword = $request->get('password');
 
         // address data from User Form
         $street = $request->get('street');
@@ -44,8 +43,6 @@ class UserController extends AbstractController
             $address->setStreet($street);
             $address->setCity($city);
             $address->setZipCode($zipCode);
-
-//            dd($plainPassword);
 
             $user->setRoles($roles);
 
@@ -64,15 +61,15 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/user/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user): Response
-    {
-        return $this->render('user/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
+//    #[Route('/user/{id}', name: 'app_user_show', methods: ['GET'])]
+//    public function show(User $user): Response
+//    {
+//        return $this->render('user/show.html.twig', [
+//            'user' => $user,
+//        ]);
+//    }
 
-    #[Route('/user/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    #[Route('/user/{id}', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
         $form = $this->createForm(UserType::class, $user);
@@ -84,9 +81,9 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('user/edit.html.twig', [
+        return $this->render('user/edit.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
