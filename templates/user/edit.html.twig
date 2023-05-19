@@ -5,614 +5,721 @@
 {% block content %}
     <div class="container-xxl flex-grow-1 container-p-y">
 
-        <nav aria-label="breadcrumb mb-0">
-            <ol class="breadcrumb breadcrumb-style2">
-                <li class="breadcrumb-item">
-                    <a href="{{ path('app_dashboard') }}">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ path('app_user_index') }}">User Management</a>
-                </li>
-                <li class="breadcrumb-item active">Edit User</li>
-            </ol>
-        </nav>
+    <nav aria-label="breadcrumb mb-0">
+        <ol class="breadcrumb breadcrumb-style2">
+            <li class="breadcrumb-item">
+                <a href="{{ path('app_dashboard') }}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a href="{{ path('app_user_index') }}">User Management</a>
+            </li>
+            <li class="breadcrumb-item active">Edit User</li>
+        </ol>
+    </nav>
 
-        <div class="row">
-            <!-- User Sidebar -->
-            <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
-                <!-- User Card -->
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="user-avatar-section">
-                            <div class=" d-flex align-items-center flex-column">
-                                <img class="img-fluid rounded-circle my-4" src="../../assets/img/avatars/1.png" alt="User avatar" width="110" height="110">
-                                <div class="user-info text-center">
-                                    <h5 class="mb-2 text-capitalize">{{ user.firstName }} {{ user.lastName }}</h5>
-                                    <span class="badge bg-label-info">Author</span>
-                                </div>
+    <div class="row">
+        <!-- User Sidebar -->
+        <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+            <!-- User Card -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="user-avatar-section">
+                        <div class=" d-flex align-items-center flex-column">
+                            <img class="img-fluid rounded-circle my-4" src="../../assets/img/avatars/1.png" alt="User avatar" width="110" height="110">
+                            <div class="user-info text-center">
+                                <h5 class="mb-2 text-capitalize">{{ user.firstName }} {{ user.lastName }}</h5>
+                                <span class="badge bg-label-info">Author</span>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-around flex-wrap my-4 py-3">
-                            <div class="d-flex align-items-start me-4 mt-3 gap-3">
+                    </div>
+                    <div class="d-flex justify-content-around flex-wrap my-4 py-3">
+                        <div class="d-flex align-items-start me-4 mt-3 gap-3">
                                 <span class="badge bg-label-primary p-2 rounded">
                                     <i class="bx bx-check bx-sm"></i>
                                 </span>
-                                <div>
-                                    <h5 class="mb-0">1.23k</h5>
-                                    <span>Tasks Done</span>
-                                </div>
+                            <div>
+                                <h5 class="mb-0">1.23k</h5>
+                                <span>Tasks Done</span>
                             </div>
-                            <div class="d-flex align-items-start mt-3 gap-3">
+                        </div>
+                        <div class="d-flex align-items-start mt-3 gap-3">
                                 <span class="badge bg-label-primary p-2 rounded">
                                     <i class="bx bx-customize bx-sm"></i>
                                 </span>
-                                <div>
-                                    <h5 class="mb-0">568</h5>
-                                    <span>Projects Done</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between pb-2 border-bottom mb-4 h-100">
-                            <span class="fs-5">Details</span>
-                            <button type="button" class="btn btn-sm btn-label-primary" data-bs-toggle="modal" data-bs-target="#modalEdit">
-                                Edit
-                            </button>
-                        </div>
-
-                        <div class="info-container">
-                            <ul class="list-unstyled">
-                                <li class="mb-3">
-                                    <span class="fw-bold me-2">Account ID:</span>
-                                    <span>ID-45453423</span>
-                                </li>
-                                <li class="mb-3">
-                                    <span class="fw-bold me-2">Username:</span>
-                                    <span>{{ user.username }}</span>
-                                </li>
-                                <li class="mb-3">
-                                    <span class="fw-bold me-2">Email:</span>
-                                    <span>{{ user.email }}</span>
-                                </li>
-                                <li class="mb-3">
-                                    <span class="fw-bold me-2">Status:</span>
-                                    <span class="badge bg-label-success">Active</span>
-                                </li>
-                                <li class="mb-3">
-                                    <span class="fw-bold me-2">Role:</span>
-                                    <span>Author</span>
-                                </li>
-                                <li class="mb-3">
-                                    <span class="fw-bold me-2">Contact:</span>
-                                    <span>{{ user.phoneNumber }}</span>
-                                </li>
-                                <li class="mb-3">
-                                    <span class="fw-bold me-2">City:</span>
-                                    <span>{{ user.address.city }}</span>
-                                </li>
-                            </ul>
-
-                            <!-- Large Modal -->
-                            <div class="modal fade" id="modalEdit" tabindex="-1" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header border-bottom pb-4">
-                                            <h5 class="modal-title text-capitalize" id="exampleModalLabel3">Update user details</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h5 class="mb-1">User Information</h5>
-                                            <p class="small">Updating user details will receive a privacy audit.</p>
-
-                                            {{ form_start(form) }}
-                                            <div class="row mt-2">
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label" for="{{ form.cardId.vars.id }}">CIN</label>
-                                                    {{ form_widget(form.cardId, {'attr': {'class': 'form-control'}}) }}
-                                                    <div class="invalid-feedback">
-                                                        {{ form_errors(form.cardId) }}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label" for="{{ form.username.vars.id }}">Username</label>
-                                                    {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
-                                                    <div class="invalid-feedback">
-                                                        {{ form_errors(form.username) }}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label" for="{{ form.firstName.vars.id }}">Firstname</label>
-                                                    {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
-                                                    <div class="invalid-feedback">
-                                                        {{ form_errors(form.firstName) }}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label" for="{{ form.lastName.vars.id }}">Lastname</label>
-                                                    {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
-                                                    <div class="invalid-feedback">
-                                                        {{ form_errors(form.lastName) }}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label" for="{{ form.employeeId.vars.id }}">Employee ID</label>
-                                                    {{ form_widget(form.employeeId, {'attr': {'class': 'form-control'}}) }}
-                                                    <div class="invalid-feedback">
-                                                        {{ form_errors(form.employeeId) }}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 mb-3">
-                                                    <label class="form-label" for="{{ form.gender.vars.id }}">Gender</label>
-                                                    {{ form_widget(form.gender, {'attr': {'class': 'form-control'}}) }}
-                                                    <div class="invalid-feedback">
-                                                        {{ form_errors(form.gender) }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Discard</button>
-                                            <button type="button" class="btn btn-label-primary">Save Changes</button>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div>
+                                <h5 class="mb-0">568</h5>
+                                <span>Projects Done</span>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- /User Card -->
-                <div class="card">
-                    <h5 class="card-header">Connected Accounts</h5>
-                    <div class="card-body">
-                        <p>Display content from your connected accounts on your site</p>
-                        <!-- Connections -->
-                        <div class="d-flex mb-3">
-                            <div class="flex-shrink-0">
-                                <img src="{{ asset('assets/img/icons/brands/slack-original.svg') }}" alt="slack" class="me-3" height="30"/>
-                            </div>
-                            <div class="flex-grow-1 row">
-                                <div class="col-9 mb-sm-0 mb-2">
-                                    <h6 class="mb-0">Slack</h6>
-                                    <small class="text-muted">Communication</small>
-                                </div>
-                                <div class="col-3 text-end">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input float-end" type="checkbox" role="switch" checked/>
+                    <div class="d-flex align-items-center justify-content-between pb-2 border-bottom mb-4 h-100">
+                        <span class="fs-5">Details</span>
+                        <button type="button" class="btn btn-sm btn-label-primary" data-bs-toggle="modal" data-bs-target="#modalEdit">
+                            Edit
+                        </button>
+                    </div>
+
+                    <div class="info-container">
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <span class="fw-bold me-2">Account ID:</span>
+                                <span>ID-45453423</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fw-bold me-2">Username:</span>
+                                <span>{{ user.username }}</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fw-bold me-2">Email:</span>
+                                <span>{{ user.email }}</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fw-bold me-2">Status:</span>
+                                <span class="badge bg-label-success">Active</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fw-bold me-2">Role:</span>
+                                <span>Author</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fw-bold me-2">Contact:</span>
+                                <span>{{ user.phoneNumber }}</span>
+                            </li>
+                            <li class="mb-3">
+                                <span class="fw-bold me-2">City:</span>
+                                <span>{{ user.address.city }}</span>
+                            </li>
+                        </ul>
+
+                        <!-- Large Modal -->
+                        <div class="modal fade" id="modalEdit" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header border-bottom pb-4">
+                                        <h5 class="modal-title text-capitalize" id="exampleModalLabel3">Update user details</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h5 class="mb-1">User Information</h5>
+                                        <p class="small">Updating user details will receive a privacy audit.</p>
+
+                                        {{ form_start(form) }}
+                                        <div class="row mt-2">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="{{ form.cardId.vars.id }}">CIN</label>
+                                                {{ form_widget(form.cardId, {'attr': {'class': 'form-control'}}) }}
+                                                <div class="invalid-feedback">
+                                                    {{ form_errors(form.cardId) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="{{ form.username.vars.id }}">Username</label>
+                                                {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                                                <div class="invalid-feedback">
+                                                    {{ form_errors(form.username) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="{{ form.firstName.vars.id }}">Firstname</label>
+                                                {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
+                                                <div class="invalid-feedback">
+                                                    {{ form_errors(form.firstName) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="{{ form.lastName.vars.id }}">Lastname</label>
+                                                {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
+                                                <div class="invalid-feedback">
+                                                    {{ form_errors(form.lastName) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="{{ form.employeeId.vars.id }}">Employee ID</label>
+                                                {{ form_widget(form.employeeId, {'attr': {'class': 'form-control'}}) }}
+                                                <div class="invalid-feedback">
+                                                    {{ form_errors(form.employeeId) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="{{ form.gender.vars.id }}">Gender</label>
+                                                {{ form_widget(form.gender, {'attr': {'class': 'form-control'}}) }}
+                                                <div class="invalid-feedback">
+                                                    {{ form_errors(form.gender) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Discard</button>
+                                        <button type="button" class="btn btn-label-primary">Save Changes</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex mb-3">
-                            <div class="flex-shrink-0">
-                                <img src="{{ asset('assets/img/icons/brands/github-original.svg') }}" alt="github" class="me-3" height="30"/>
-                            </div>
-                            <div class="flex-grow-1 row">
-                                <div class="col-9 mb-sm-0 mb-2">
-                                    <h6 class="mb-0">Github</h6>
-                                    <small class="text-muted">Manage your Git repositories</small>
-                                </div>
-                                <div class="col-3 text-end">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input float-end" type="checkbox" role="switch"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex mb-3">
-                            <div class="flex-shrink-0">
-                                <img src="{{ asset('assets/img/icons/brands/google-original.svg') }}" alt="google" class="me-3" height="30"/>
-                            </div>
-                            <div class="flex-grow-1 row">
-                                <div class="col-9 mb-sm-0 mb-2">
-                                    <h6 class="mb-0">Google</h6>
-                                    <small class="text-muted">Plan properly your workflow</small>
-                                </div>
-                                <div class="col-3 text-end">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input float-end" type="checkbox" role="switch" checked/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="flex-shrink-0">
-                                <img src="{{ asset('assets/img/icons/brands/twitter-original.svg') }}" alt="twitter icon" class="me-3" height="30"/>
-                            </div>
-                            <div class="flex-grow-1 row">
-                                <div class="col-9 mb-sm-0 mb-2">
-                                    <h6 class="mb-0">Twitter</h6>
-                                    <small class="text-muted">Communication</small>
-                                </div>
-                                <div class="col-3 text-end">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input float-end" type="checkbox" role="switch" checked/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Connections -->
                     </div>
                 </div>
             </div>
-            <!--/ User Sidebar -->
+            <!-- /User Card -->
+            <div class="card">
+                <h5 class="card-header">Connected Accounts</h5>
+                <div class="card-body">
+                    <p>Display content from your connected accounts on your site</p>
+                    <!-- Connections -->
+                    <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                            <img src="{{ asset('assets/img/icons/brands/slack-original.svg') }}" alt="slack" class="me-3" height="30"/>
+                        </div>
+                        <div class="flex-grow-1 row">
+                            <div class="col-9 mb-sm-0 mb-2">
+                                <h6 class="mb-0">Slack</h6>
+                                <small class="text-muted">Communication</small>
+                            </div>
+                            <div class="col-3 text-end">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input float-end" type="checkbox" role="switch" checked/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                            <img src="{{ asset('assets/img/icons/brands/github-original.svg') }}" alt="github" class="me-3" height="30"/>
+                        </div>
+                        <div class="flex-grow-1 row">
+                            <div class="col-9 mb-sm-0 mb-2">
+                                <h6 class="mb-0">Github</h6>
+                                <small class="text-muted">Manage your Git repositories</small>
+                            </div>
+                            <div class="col-3 text-end">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input float-end" type="checkbox" role="switch"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3">
+                        <div class="flex-shrink-0">
+                            <img src="{{ asset('assets/img/icons/brands/google-original.svg') }}" alt="google" class="me-3" height="30"/>
+                        </div>
+                        <div class="flex-grow-1 row">
+                            <div class="col-9 mb-sm-0 mb-2">
+                                <h6 class="mb-0">Google</h6>
+                                <small class="text-muted">Plan properly your workflow</small>
+                            </div>
+                            <div class="col-3 text-end">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input float-end" type="checkbox" role="switch" checked/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <img src="{{ asset('assets/img/icons/brands/twitter-original.svg') }}" alt="twitter icon" class="me-3" height="30"/>
+                        </div>
+                        <div class="flex-grow-1 row">
+                            <div class="col-9 mb-sm-0 mb-2">
+                                <h6 class="mb-0">Twitter</h6>
+                                <small class="text-muted">Communication</small>
+                            </div>
+                            <div class="col-3 text-end">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input float-end" type="checkbox" role="switch" checked/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Connections -->
+                </div>
+            </div>
+        </div>
+        <!--/ User Sidebar -->
 
-            <!-- User Content -->
-            <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
-                <div class="nav-align-top">
-                    <ul class="nav nav-pills mb-3" role="tablist">
-                        <li class="nav-item">
-                            <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-overview"
-                                    aria-controls="navs-pills-top-overview" aria-selected="true">
-                                Overview
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-security" aria-controls="navs-pills-top-security"
-                                    aria-selected="false">
-                                Security
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-event-logs" aria-controls="navs-pills-top-event-logs"
-                                    aria-selected="false">
-                                Event Logs
-                            </button>
-                        </li>
-                    </ul>
+        <!-- User Content -->
+        <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
+            <div class="nav-align-top">
+                <ul class="nav nav-pills mb-3" role="tablist">
+                    <li class="nav-item">
+                        <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-overview"
+                                aria-controls="navs-pills-top-overview" aria-selected="true">
+                            Overview
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-security" aria-controls="navs-pills-top-security"
+                                aria-selected="false">
+                            Security
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-event-logs" aria-controls="navs-pills-top-event-logs"
+                                aria-selected="false">
+                            Event Logs
+                        </button>
+                    </li>
+                </ul>
 
-                    <div class="tab-content">
-                        <div class="tab-pane fade" id="navs-pills-top-overview" role="tabpanel">
-                            <!-- Project table -->
-                            <div class="card mb-4 tab-pane fade show active">
-                                <h5 class="card-header">User's Projects List</h5>
-                                <div class="table-responsive mb-3">
-                                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                                        <div class="d-flex justify-content-between align-items-center flex-column flex-sm-row mx-4 row">
-                                            <div class="col-sm-4 col-12 d-flex align-items-center justify-content-sm-start justify-content-center">
-                                                <div class="dataTables_length" id="DataTables_Table_0_length">
-                                                    <label>Show
-                                                        <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select">
-                                                            <option value="7">7</option>
-                                                            <option value="10">10</option>
-                                                            <option value="25">25</option>
-                                                            <option value="50">50</option>
-                                                            <option value="75">75</option>
-                                                            <option value="100">100</option>
-                                                        </select>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-8 col-12 d-flex align-items-center justify-content-sm-end justify-content-center">
-                                                <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                                                    <label>Search:
-                                                        <input type="search" class="form-control" placeholder="Search Project" aria-controls="DataTables_Table_0">
-                                                    </label>
-                                                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="navs-pills-top-overview" role="tabpanel">
+                        <!-- Project table -->
+                        <div class="card mb-4 tab-pane fade show active">
+                            <h5 class="card-header">User's Projects List</h5>
+                            <div class="table-responsive mb-3">
+                                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                                    <div class="d-flex justify-content-between align-items-center flex-column flex-sm-row mx-4 row">
+                                        <div class="col-sm-4 col-12 d-flex align-items-center justify-content-sm-start justify-content-center">
+                                            <div class="dataTables_length" id="DataTables_Table_0_length">
+                                                <label>Show
+                                                    <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select">
+                                                        <option value="7">7</option>
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="75">75</option>
+                                                        <option value="100">100</option>
+                                                    </select>
+                                                </label>
                                             </div>
                                         </div>
-                                        <table class="table datatable-project border-top dataTable no-footer dtr-column" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info"
-                                               style="width: 745px;">
-                                            <thead>
-                                            <tr>
-                                                <th class="control sorting dtr-hidden" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 0px; display: none;"
-                                                    aria-label=": activate to sort column ascending"></th>
-                                                <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 275px;"
-                                                    aria-label="Project: activate to sort column ascending" aria-sort="descending">Project
-                                                </th>
-                                                <th class="text-nowrap sorting_disabled" rowspan="1" colspan="1" style="width: 114px;" aria-label="Total Task">Total Task</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 105px;"
-                                                    aria-label="Progress: activate to sort column ascending">Progress
-                                                </th>
-                                                <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 79px;" aria-label="Hours">Hours</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr class="odd">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3">
-                                                                <img src="../../assets/img/icons/brands/vue-label.png" alt="Project Image" class="rounded-circle">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column">
-                                                            <span class="text-truncate fw-semibold">Vue Admin template</span><small class="text-muted">Vuejs Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>214/627</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">78%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-success" style="width: 78%" aria-valuenow="78%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>88:19h</td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/event-label.png" alt="Project Image" class="rounded-circle">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Online Webinar</span><small class="text-muted">Official Event</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>12/20</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">69%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-info" style="width: 69%" aria-valuenow="69%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>12:12h</td>
-                                            </tr>
-                                            <tr class="odd">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/html-label.png" alt="Project Image" class="rounded-circle"></div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Hoffman Website</span><small class="text-muted">HTML Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>56/183</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">43%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-warning" style="width: 43%" aria-valuenow="43%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>76h</td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/sketch-label.png" alt="Project Image" class="rounded-circle">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Foodista mobile app</span><small class="text-muted">iPhone
-                                                                Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>12/86</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">49%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-warning" style="width: 49%" aria-valuenow="49%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>45h</td>
-                                            </tr>
-                                            <tr class="odd">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/xd-label.png" alt="Project Image" class="rounded-circle"></div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Falcon Logo Design</span><small class="text-muted">UI/UX Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>9/50</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">15%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-danger" style="width: 15%" aria-valuenow="15%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>89h</td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/react-label.png" alt="Project Image" class="rounded-circle">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Dojo React Project</span><small class="text-muted">React Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>234/378</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">73%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-info" style="width: 73%" aria-valuenow="73%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>67:10h</td>
-                                            </tr>
-                                            <tr class="odd">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3">
-                                                                <img src="../../assets/img/icons/brands/vue-label.png" alt="Project Image" class="rounded-circle">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column">
-                                                            <span class="text-truncate fw-semibold">Dashboard Design</span>
-                                                            <small class="text-muted">Vuejs Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>100/190</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">90%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-success" style="width: 90%" aria-valuenow="90%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>129:45h</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <div class="d-flex justify-content-between mx-4 row">
-                                            <div class="col-sm-12 col-md-6">
-                                                <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 7 of 11 entries</div>
+                                        <div class="col-sm-8 col-12 d-flex align-items-center justify-content-sm-end justify-content-center">
+                                            <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                                                <label>Search:
+                                                    <input type="search" class="form-control" placeholder="Search Project" aria-controls="DataTables_Table_0">
+                                                </label>
                                             </div>
-                                            <div class="col-sm-12 col-md-6">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
-                                                            <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="previous" tabindex="0" class="page-link">Previous</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item active">
-                                                            <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">1</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">2</a></li>
-                                                        <li class="paginate_button page-item next" id="DataTables_Table_0_next">
-                                                            <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
-                                                        </li>
-                                                    </ul>
+                                        </div>
+                                    </div>
+                                    <table class="table datatable-project border-top dataTable no-footer dtr-column" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info"
+                                           style="width: 745px;">
+                                        <thead>
+                                        <tr>
+                                            <th class="control sorting dtr-hidden" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 0px; display: none;"
+                                                aria-label=": activate to sort column ascending"></th>
+                                            <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 275px;"
+                                                aria-label="Project: activate to sort column ascending" aria-sort="descending">Project
+                                            </th>
+                                            <th class="text-nowrap sorting_disabled" rowspan="1" colspan="1" style="width: 114px;" aria-label="Total Task">Total Task</th>
+                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 105px;"
+                                                aria-label="Progress: activate to sort column ascending">Progress
+                                            </th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 79px;" aria-label="Hours">Hours</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="odd">
+                                            <td class="  control" style="display: none;" tabindex="0"></td>
+                                            <td class="sorting_1">
+                                                <div class="d-flex justify-content-left align-items-center">
+                                                    <div class="avatar-wrapper">
+                                                        <div class="avatar avatar-sm me-3">
+                                                            <img src="../../assets/img/icons/brands/vue-label.png" alt="Project Image" class="rounded-circle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-column">
+                                                        <span class="text-truncate fw-semibold">Vue Admin template</span><small class="text-muted">Vuejs Project</small>
+                                                    </div>
                                                 </div>
+                                            </td>
+                                            <td>214/627</td>
+                                            <td>
+                                                <div class="d-flex flex-column"><small class="mb-1">78%</small>
+                                                    <div class="progress w-100 me-3" style="height: 6px;">
+                                                        <div class="progress-bar bg-success" style="width: 78%" aria-valuenow="78%" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>88:19h</td>
+                                        </tr>
+                                        <tr class="even">
+                                            <td class="  control" style="display: none;" tabindex="0"></td>
+                                            <td class="sorting_1">
+                                                <div class="d-flex justify-content-left align-items-center">
+                                                    <div class="avatar-wrapper">
+                                                        <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/event-label.png" alt="Project Image" class="rounded-circle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Online Webinar</span><small class="text-muted">Official Event</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>12/20</td>
+                                            <td>
+                                                <div class="d-flex flex-column"><small class="mb-1">69%</small>
+                                                    <div class="progress w-100 me-3" style="height: 6px;">
+                                                        <div class="progress-bar bg-info" style="width: 69%" aria-valuenow="69%" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>12:12h</td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td class="  control" style="display: none;" tabindex="0"></td>
+                                            <td class="sorting_1">
+                                                <div class="d-flex justify-content-left align-items-center">
+                                                    <div class="avatar-wrapper">
+                                                        <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/html-label.png" alt="Project Image" class="rounded-circle"></div>
+                                                    </div>
+                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Hoffman Website</span><small class="text-muted">HTML Project</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>56/183</td>
+                                            <td>
+                                                <div class="d-flex flex-column"><small class="mb-1">43%</small>
+                                                    <div class="progress w-100 me-3" style="height: 6px;">
+                                                        <div class="progress-bar bg-warning" style="width: 43%" aria-valuenow="43%" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>76h</td>
+                                        </tr>
+                                        <tr class="even">
+                                            <td class="  control" style="display: none;" tabindex="0"></td>
+                                            <td class="sorting_1">
+                                                <div class="d-flex justify-content-left align-items-center">
+                                                    <div class="avatar-wrapper">
+                                                        <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/sketch-label.png" alt="Project Image" class="rounded-circle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Foodista mobile app</span><small class="text-muted">iPhone
+                                                            Project</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>12/86</td>
+                                            <td>
+                                                <div class="d-flex flex-column"><small class="mb-1">49%</small>
+                                                    <div class="progress w-100 me-3" style="height: 6px;">
+                                                        <div class="progress-bar bg-warning" style="width: 49%" aria-valuenow="49%" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>45h</td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td class="  control" style="display: none;" tabindex="0"></td>
+                                            <td class="sorting_1">
+                                                <div class="d-flex justify-content-left align-items-center">
+                                                    <div class="avatar-wrapper">
+                                                        <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/xd-label.png" alt="Project Image" class="rounded-circle"></div>
+                                                    </div>
+                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Falcon Logo Design</span><small class="text-muted">UI/UX Project</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>9/50</td>
+                                            <td>
+                                                <div class="d-flex flex-column"><small class="mb-1">15%</small>
+                                                    <div class="progress w-100 me-3" style="height: 6px;">
+                                                        <div class="progress-bar bg-danger" style="width: 15%" aria-valuenow="15%" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>89h</td>
+                                        </tr>
+                                        <tr class="even">
+                                            <td class="  control" style="display: none;" tabindex="0"></td>
+                                            <td class="sorting_1">
+                                                <div class="d-flex justify-content-left align-items-center">
+                                                    <div class="avatar-wrapper">
+                                                        <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/react-label.png" alt="Project Image" class="rounded-circle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Dojo React Project</span><small class="text-muted">React Project</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>234/378</td>
+                                            <td>
+                                                <div class="d-flex flex-column"><small class="mb-1">73%</small>
+                                                    <div class="progress w-100 me-3" style="height: 6px;">
+                                                        <div class="progress-bar bg-info" style="width: 73%" aria-valuenow="73%" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>67:10h</td>
+                                        </tr>
+                                        <tr class="odd">
+                                            <td class="  control" style="display: none;" tabindex="0"></td>
+                                            <td class="sorting_1">
+                                                <div class="d-flex justify-content-left align-items-center">
+                                                    <div class="avatar-wrapper">
+                                                        <div class="avatar avatar-sm me-3">
+                                                            <img src="../../assets/img/icons/brands/vue-label.png" alt="Project Image" class="rounded-circle">
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-column">
+                                                        <span class="text-truncate fw-semibold">Dashboard Design</span>
+                                                        <small class="text-muted">Vuejs Project</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>100/190</td>
+                                            <td>
+                                                <div class="d-flex flex-column"><small class="mb-1">90%</small>
+                                                    <div class="progress w-100 me-3" style="height: 6px;">
+                                                        <div class="progress-bar bg-success" style="width: 90%" aria-valuenow="90%" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>129:45h</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="d-flex justify-content-between mx-4 row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 7 of 11 entries</div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
+                                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="previous" tabindex="0" class="page-link">Previous</a>
+                                                    </li>
+                                                    <li class="paginate_button page-item active">
+                                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">1</a>
+                                                    </li>
+                                                    <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">2</a></li>
+                                                    <li class="paginate_button page-item next" id="DataTables_Table_0_next">
+                                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- /Project table -->
+                        </div>
+                        <!-- /Project table -->
 
-                            <!-- Activity Timeline -->
-                            <div class="card mb-4">
-                                <h5 class="card-header">User Activity Timeline</h5>
-                                <div class="card-body">
-                                    <ul class="timeline">
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point timeline-point-primary"></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">12 Invoices have been paid</h6>
-                                                    <small class="text-muted">12 min ago</small>
+                        <!-- Activity Timeline -->
+                        <div class="card mb-4">
+                            <h5 class="card-header">User Activity Timeline</h5>
+                            <div class="card-body">
+                                <ul class="timeline">
+                                    <li class="timeline-item timeline-item-transparent">
+                                        <span class="timeline-point timeline-point-primary"></span>
+                                        <div class="timeline-event">
+                                            <div class="timeline-header mb-1">
+                                                <h6 class="mb-0">12 Invoices have been paid</h6>
+                                                <small class="text-muted">12 min ago</small>
+                                            </div>
+                                            <p class="mb-2">Invoices have been paid to the company</p>
+                                            <div class="d-flex">
+                                                <a href="javascript:void(0)" class="me-3">
+                                                    <img src="../../assets/img/icons/misc/pdf.png" alt="PDF image" class="me-2" width="15">
+                                                    <span class="fw-bold text-body">invoices.pdf</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-item timeline-item-transparent">
+                                        <span class="timeline-point timeline-point-warning"></span>
+                                        <div class="timeline-event">
+                                            <div class="timeline-header mb-1">
+                                                <h6 class="mb-0">Client Meeting</h6>
+                                                <small class="text-muted">45 min ago</small>
+                                            </div>
+                                            <p class="mb-2">Project meeting with john @10:15am</p>
+                                            <div class="d-flex flex-wrap">
+                                                <div class="avatar me-3">
+                                                    <img src="../../assets/img/avatars/3.png" alt="Avatar" class="rounded-circle">
                                                 </div>
-                                                <p class="mb-2">Invoices have been paid to the company</p>
-                                                <div class="d-flex">
-                                                    <a href="javascript:void(0)" class="me-3">
-                                                        <img src="../../assets/img/icons/misc/pdf.png" alt="PDF image" class="me-2" width="15">
-                                                        <span class="fw-bold text-body">invoices.pdf</span>
-                                                    </a>
+                                                <div>
+                                                    <h6 class="mb-0">Lester McCarthy (Client)</h6>
+                                                    <span class="text-muted">CEO of ThemeSelection</span>
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point timeline-point-warning"></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">Client Meeting</h6>
-                                                    <small class="text-muted">45 min ago</small>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-item timeline-item-transparent">
+                                        <span class="timeline-point timeline-point-info"></span>
+                                        <div class="timeline-event">
+                                            <div class="timeline-header mb-1">
+                                                <h6 class="mb-0">Create a new project for client</h6>
+                                                <small class="text-muted">2 Day Ago</small>
+                                            </div>
+                                            <p class="mb-2">5 team members in a project</p>
+                                            <div class="d-flex align-items-center avatar-group">
+                                                <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" aria-label="Vinnie Mostowy"
+                                                     data-bs-original-title="Vinnie Mostowy">
+                                                    <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
                                                 </div>
-                                                <p class="mb-2">Project meeting with john @10:15am</p>
-                                                <div class="d-flex flex-wrap">
-                                                    <div class="avatar me-3">
-                                                        <img src="../../assets/img/avatars/3.png" alt="Avatar" class="rounded-circle">
-                                                    </div>
-                                                    <div>
-                                                        <h6 class="mb-0">Lester McCarthy (Client)</h6>
-                                                        <span class="text-muted">CEO of ThemeSelection</span>
-                                                    </div>
+                                                <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" aria-label="Marrie Patty"
+                                                     data-bs-original-title="Marrie Patty">
+                                                    <img src="../../assets/img/avatars/12.png" alt="Avatar" class="rounded-circle">
+                                                </div>
+                                                <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" aria-label="Jimmy Jackson"
+                                                     data-bs-original-title="Jimmy Jackson">
+                                                    <img src="../../assets/img/avatars/9.png" alt="Avatar" class="rounded-circle">
+                                                </div>
+                                                <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" aria-label="Kristine Gill"
+                                                     data-bs-original-title="Kristine Gill">
+                                                    <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
+                                                </div>
+                                                <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" aria-label="Nelson Wilson"
+                                                     data-bs-original-title="Nelson Wilson">
+                                                    <img src="../../assets/img/avatars/14.png" alt="Avatar" class="rounded-circle">
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point timeline-point-info"></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">Create a new project for client</h6>
-                                                    <small class="text-muted">2 Day Ago</small>
-                                                </div>
-                                                <p class="mb-2">5 team members in a project</p>
-                                                <div class="d-flex align-items-center avatar-group">
-                                                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" aria-label="Vinnie Mostowy"
-                                                         data-bs-original-title="Vinnie Mostowy">
-                                                        <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">
-                                                    </div>
-                                                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" aria-label="Marrie Patty"
-                                                         data-bs-original-title="Marrie Patty">
-                                                        <img src="../../assets/img/avatars/12.png" alt="Avatar" class="rounded-circle">
-                                                    </div>
-                                                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" aria-label="Jimmy Jackson"
-                                                         data-bs-original-title="Jimmy Jackson">
-                                                        <img src="../../assets/img/avatars/9.png" alt="Avatar" class="rounded-circle">
-                                                    </div>
-                                                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" aria-label="Kristine Gill"
-                                                         data-bs-original-title="Kristine Gill">
-                                                        <img src="../../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                                                    </div>
-                                                    <div class="avatar pull-up" data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" aria-label="Nelson Wilson"
-                                                         data-bs-original-title="Nelson Wilson">
-                                                        <img src="../../assets/img/avatars/14.png" alt="Avatar" class="rounded-circle">
-                                                    </div>
-                                                </div>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-item timeline-item-transparent">
+                                        <span class="timeline-point timeline-point-success"></span>
+                                        <div class="timeline-event">
+                                            <div class="timeline-header mb-1">
+                                                <h6 class="mb-0">Design Review</h6>
+                                                <small class="text-muted">5 days Ago</small>
                                             </div>
-                                        </li>
-                                        <li class="timeline-item timeline-item-transparent">
-                                            <span class="timeline-point timeline-point-success"></span>
-                                            <div class="timeline-event">
-                                                <div class="timeline-header mb-1">
-                                                    <h6 class="mb-0">Design Review</h6>
-                                                    <small class="text-muted">5 days Ago</small>
-                                                </div>
-                                                <p class="mb-0">Weekly review of freshly prepared design for our new app.</p>
-                                            </div>
-                                        </li>
-                                        <li class="timeline-end-indicator">
-                                            <i class="bx bx-check-circle"></i>
-                                        </li>
+                                            <p class="mb-0">Weekly review of freshly prepared design for our new app.</p>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-end-indicator">
+                                        <i class="bx bx-check-circle"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /Activity Timeline -->
+                    </div>
+
+                    <div class="tab-pane fade" id="navs-pills-top-security" role="tabpanel">
+                        <div class="card mb-4">
+                            <div class="card-header h4">Profile</div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <p class="col-3">Email</p>
+                                    <p class="col-8">{{ user.email }}</p>
+                                    <div class="col-1">
+                                        <button type="button" class="btn btn-sm btn-icon me-2 btn-label-secondary" data-bs-toggle="modal" data-bs-target="#updateEmailModal">
+                                            <span class="tf-icons bx bx-pencil"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <p class="col-3">Password</p>
+                                    <p class="col-8">············</p>
+                                    <div class="col-1">
+                                        <button type="button" class="btn btn-sm btn-icon me-2 btn-label-secondary">
+                                            <span class="tf-icons bx bx-pencil"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <p class="col-3">Role</p>
+                                    <p class="col-8">Professor</p>
+                                    <div class="col-1">
+                                        <button type="button" class="btn btn-sm btn-icon me-2 btn-label-secondary">
+                                            <span class="tf-icons bx bx-pencil"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h4 class="card-title text-capitalize">Two step authentication</h4>
+                                <h6 class="card-subtitle mb-4">Keep your account extra secure with a second authentication step.</h6>
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-label-primary dropdown-toggle hide-arrow d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class='bx bx-fingerprint fs-6 me-2'></i>
+                                        Add Authentication Step
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Use authenticator app</a></li>
+                                        <li><a class="dropdown-item" href="#">Enable one-time password</a></li>
                                     </ul>
                                 </div>
-                            </div>
-                            <!-- /Activity Timeline -->
-                        </div>
 
-                        <div class="tab-pane fade show active" id="navs-pills-top-security" role="tabpanel">
-                            <div class="card">
-                                <div class="card-header">Profile</div>
-
-                                <div class="card-body">
-                                    {{ form_start(form) }}
-
-                                    <div class="row mb-3">
-                                        <label class="col-sm-2 col-form-label" for="basic-default-name">Name</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="basic-default-name" placeholder="John Doe">
-                                        </div>
+                                <div class="row mt-4">
+                                    <p class="col-3 mb-0">SMS</p>
+                                    <p class="col-7">{{ user.phoneNumber }}</p>
+                                    <div class="col-1">
+                                        <button type="button" class="btn btn-sm btn-icon me-2 btn-label-secondary">
+                                            <span class="tf-icons bx bx-pencil"></span>
+                                        </button>
+                                    </div>
+                                    <div class="col-1">
+                                        <button type="button" class="btn btn-sm btn-icon me-2 btn-label-secondary">
+                                            <span class="tf-icons bx bxs-trash"></span>
+                                        </button>
                                     </div>
                                 </div>
+                                <hr>
+                                <p class="small text-muted">If your lose your mobile device or security key, you can <a href="#">generate a backup code</a> to sign in to your account.</p>
                             </div>
                         </div>
-
-                        <div class="tab-pane fade" id="navs-pills-top-event-logs" role="tabpanel">
-                            <div class="card">
-                                <p>
-                                    Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies cupcake gummi
-                                    bears
-                                    cake chocolate.
-                                </p>
-                                <p class="mb-0">
-                                    Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet roll icing
-                                    sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly jelly-o tart brownie
-                                    jelly.
-                                </p>
+                        <div class="card">
+                            <h5 class="card-header">Recent Devices</h5>
+                            <div class="table-responsive">
+                                <table class="table border-top">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-truncate">Browser</th>
+                                        <th class="text-truncate">Device</th>
+                                        <th class="text-truncate">Location</th>
+                                        <th class="text-truncate">Recent Activities</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-truncate"><i class="bx bxl-windows text-info me-3"></i> <span class="fw-semibold">Chrome on Windows</span></td>
+                                        <td class="text-truncate">HP Spectre 360</td>
+                                        <td class="text-truncate">Switzerland</td>
+                                        <td class="text-truncate">10, July 2021 20:07</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-truncate"><i class="bx bx-mobile-alt text-danger me-3"></i> <span class="fw-semibold">Chrome on iPhone</span></td>
+                                        <td class="text-truncate">iPhone 12x</td>
+                                        <td class="text-truncate">Australia</td>
+                                        <td class="text-truncate">13, July 2021 10:10</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-truncate"><i class="bx bxl-android text-success me-3"></i> <span class="fw-semibold">Chrome on Android</span></td>
+                                        <td class="text-truncate">Oneplus 9 Pro</td>
+                                        <td class="text-truncate">Dubai</td>
+                                        <td class="text-truncate">14, July 2021 15:15</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-truncate"><i class="bx bxl-apple me-3"></i> <span class="fw-semibold">Chrome on MacOS</span></td>
+                                        <td class="text-truncate">Apple iMac</td>
+                                        <td class="text-truncate">India</td>
+                                        <td class="text-truncate">16, July 2021 16:17</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-truncate"><i class="bx bxl-windows text-info me-3"></i> <span class="fw-semibold">Chrome on Windows</span></td>
+                                        <td class="text-truncate">HP Spectre 360</td>
+                                        <td class="text-truncate">Switzerland</td>
+                                        <td class="text-truncate">20, July 2021 21:01</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-truncate border-bottom-0"><i class="bx bxl-android text-success me-3"></i> <span class="fw-semibold">Chrome on Android</span></td>
+                                        <td class="text-truncate border-bottom-0">Oneplus 9 Pro</td>
+                                        <td class="text-truncate border-bottom-0">Dubai</td>
+                                        <td class="text-truncate border-bottom-0">21, July 2021 12:22</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="navs-pills-top-event-logs" role="tabpanel">
+                        <div class="card">
+                            <p>
+                                Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies cupcake gummi
+                                bears
+                                cake chocolate.
+                            </p>
+                            <p class="mb-0">
+                                Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet roll icing
+                                sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly jelly-o tart brownie
+                                jelly.
+                            </p>
                         </div>
                     </div>
 
@@ -621,8 +728,8 @@
         </div>
         <!--/ User Content -->
 
-
-        <!-- Event Logs Content -->
-        <!--/ Event Logs Content -->
+        <!-- Modals -->
+        {{ include('components/modals/_update-email.html.twig') }}
+        <!--/ Modals -->
     </div>
 {% endblock %}

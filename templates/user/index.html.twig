@@ -272,18 +272,16 @@
                                     <span class="fs-6">{{ user.createdAt|date }}</span>
                                 </td>
                                 <td>
-                                    <div class="btn-group dropdown">
-                                        <button type="button" class="btn btn-label-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Actions
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-label-secondary btn-icon rounded-pill dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <a class="dropdown-item"
-                                                   href="{{ path('app_user_edit', {id: user.id}) }}">Edit</a>
+                                                <a class="dropdown-item" href="{{ path('app_user_edit',{id: user.id}) }}">Edit</a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item text-danger"
-                                                   href="{{ path('app_user_delete', {id: user.id}) }}">Delete</a>
+                                                <a class="dropdown-item text-danger" href="#">Delete</a>
                                             </li>
                                         </ul>
                                     </div>
