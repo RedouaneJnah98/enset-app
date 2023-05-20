@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Department{% endblock %}
+
+{% block content %}
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <nav aria-label="breadcrumb mb-0">
+            <ol class="breadcrumb breadcrumb-style2">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_department_index') }}">Departments</a>
+                </li>
+                <li class="breadcrumb-item active">New Department</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <!-- Account Details -->
+                    <div class="card-header">
+                        <h5 class="fw-semibold">Department Details</h5>
+                        <hr class="mt-0"/>
+                    </div>
+
+                    {# store the errors in a variable #}
+                    {% set nameError = form_errors(form.name) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set buildingError = form_errors(form.building) ? 'form-control is-invalid' : 'form-control' %}
+
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label" for="{{ form.name.vars.id }}">Name *</label>
+
+                                {{ form_widget(form.name, {'attr': {'class': nameError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.name) }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="{{ form.building.vars.id }}">Building *</label>
+
+                                {{ form_widget(form.building, {'attr': {'class': buildingError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.building) }}
+                                </div>
+                            </div>
+
+                            {{ form_rest(form) }}
+
+                            <div class="col-12 mt-4">
+                                <button type="submit" name="createUser" class="btn btn-label-primary">Create Department</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
