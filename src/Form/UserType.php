@@ -37,14 +37,6 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [
                 'attr' => ['placeholder' => 'john.doe@example.com']
             ])
-//            ->add('password', PasswordType::class, [
-//                'attr' => ['placeholder' => '············'],
-//                'hash_property_path' => 'password'
-//            ])
-//            ->add('password', RepeatedType::class, [
-//                'type' => PasswordType::class,
-//                'options' => ['attr' => ['placeholder' => '············']]
-//            ])
             ->add('plainPassword', PasswordType::class, [
                 'hash_property_path' => 'password',
                 'mapped' => false
@@ -73,22 +65,14 @@ class UserType extends AbstractType
                 'widget' => 'single_text',
                 'empty_data' => null
             ])
-            ->add('imageFile', VichImageType::class)
-//            ->add('roles', ChoiceType::class, [
-//                'expanded' => true,
-//                'choices' => ['Admin' => 'ROLE_ADMIN', 'Professor' => 'ROLE_PROFESSOR', 'HR' => 'ROLE_HUMAN_RESOURCES'],
-//                'multiple' => true
-//            ])
-        ;
+            ->add('imageFile', VichImageType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'csrf_protection' => true,
-            'csrf_field_name' => '_token',
-            'csrf_token_id' => 'user_item'
+            'csrf_token_id' => 'user_csrf'
         ]);
     }
 }

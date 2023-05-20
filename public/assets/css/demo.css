@@ -117,8 +117,11 @@
 }
 
 .layout-navbar .navbar-dropdown .badge-notifications {
-    top: .5rem;
-    padding: .2rem .4rem;
+    top: .6rem;
+    /*padding: .2rem .4rem;*/
+    padding: .1rem .25rem;
+    border: 2px solid #fff;
+    right: -.5rem;
 }
 
 .badge-notifications {
@@ -129,7 +132,7 @@
 }
 
 .badge-notifications:not(.badge-dot) {
-    font-size: .582rem;
+    font-size: .685rem;
     line-height: .75rem;
 }
 

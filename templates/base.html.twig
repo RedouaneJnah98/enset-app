@@ -286,7 +286,7 @@
                                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
                                        data-bs-auto-close="outside" aria-expanded="false">
                                         <i class="bx bx-bell bx-sm"></i>
-                                        <span class="badge bg-danger rounded-pill badge-notifications">5</span>
+                                        <span class="badge bg-danger rounded-pill badge-notifications">8</span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end py-0">
                                         <li class="dropdown-menu-header border-bottom">
@@ -491,8 +491,15 @@
                                 <!-- User -->
                                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                                        <div class="avatar avatar-online">
-                                            <img src="../../assets/img/avatars/1.png" alt="" class="w-px-40 h-auto rounded-circle">
+                                        {#                                        <div class="avatar avatar-sm me-3"> #}
+                                        {#                                            <img src="../../assets/img/avatars/1.png" alt="" class="w-px-40 h-auto rounded-circle"> #}
+                                        {#                                        </div> #}
+
+                                        <div class="avatar avatar-sm ">
+                                            {#                                            <img src="{{ user.imageName }}" alt="Avatar" class="rounded-circle"> #}
+                                            <span class="avatar-initial rounded-circle bg-label-info">
+                                                JD
+                                            </span>
                                         </div>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">

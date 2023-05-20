@@ -225,7 +225,11 @@
                                     <div class="d-flex justify-content-start align-items-center user-name">
                                         <div class="avatar-wrapper">
                                             <div class="avatar avatar-sm me-3">
-                                                <img src="{{ user.imageName }}" alt="Avatar" class="rounded-circle">
+                                                {#                                                <img src="{{ user.imageName }}" alt="Avatar" class="rounded-circle"> #}
+                                                <span
+                                                        class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}"
+                                                >
+                                                    {{ user.firstName|first }}{{ user.lastName|first }}</span>
                                             </div>
                                         </div>
                                         <div class="d-flex flex-column">

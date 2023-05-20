@@ -147,11 +147,35 @@
                                                     {{ form_errors(form.gender) }}
                                                 </div>
                                             </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="{{ form.email.vars.id }}">Email</label>
+                                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                                <div class="invalid-feedback">
+                                                    {{ form_errors(form.email) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="{{ form.phoneNumber.vars.id }}">Phone Number</label>
+                                                {{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control'}}) }}
+                                                <div class="invalid-feedback">
+                                                    {{ form_errors(form.phoneNumber) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="{{ form.dateOfBirth.vars.id }}">Date of Birth</label>
+                                                {{ form_widget(form.dateOfBirth, {'attr': {'class': 'form-control'}}) }}
+                                                <div class="invalid-feedback">
+                                                    {{ form_errors(form.dateOfBirth) }}
+                                                </div>
+                                            </div>
                                         </div>
+
+                                        <input type="hidden" name="user[_token]" value="{{ csrf_token('user_csrf') }}">
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Discard</button>
-                                        <button type="button" class="btn btn-label-primary">Save Changes</button>
+                                        <button type="submit" class="btn btn-label-primary">Save Changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -263,7 +287,7 @@
                     <div class="tab-pane fade show active" id="navs-pills-top-overview" role="tabpanel">
                         <!-- Project table -->
                         <div class="card mb-4 tab-pane fade show active">
-                            <h5 class="card-header">User's Projects List</h5>
+                            <h5 class="card-header">Professor's Courses List</h5>
                             <div class="table-responsive mb-3">
                                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                                     <div class="d-flex justify-content-between align-items-center flex-column flex-sm-row mx-4 row">
@@ -284,7 +308,7 @@
                                         <div class="col-sm-8 col-12 d-flex align-items-center justify-content-sm-end justify-content-center">
                                             <div id="DataTables_Table_0_filter" class="dataTables_filter">
                                                 <label>Search:
-                                                    <input type="search" class="form-control" placeholder="Search Project" aria-controls="DataTables_Table_0">
+                                                    <input type="search" class="form-control" placeholder="Search Course" aria-controls="DataTables_Table_0">
                                                 </label>
                                             </div>
                                         </div>
@@ -296,9 +320,9 @@
                                             <th class="control sorting dtr-hidden" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 0px; display: none;"
                                                 aria-label=": activate to sort column ascending"></th>
                                             <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 275px;"
-                                                aria-label="Project: activate to sort column ascending" aria-sort="descending">Project
+                                                aria-label="Project: activate to sort column ascending" aria-sort="descending">Course
                                             </th>
-                                            <th class="text-nowrap sorting_disabled" rowspan="1" colspan="1" style="width: 114px;" aria-label="Total Task">Total Task</th>
+                                            <th class="text-nowrap sorting_disabled" rowspan="1" colspan="1" style="width: 114px;" aria-label="Total Task">Total Session</th>
                                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 105px;"
                                                 aria-label="Progress: activate to sort column ascending">Progress
                                             </th>
@@ -316,11 +340,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="d-flex flex-column">
-                                                        <span class="text-truncate fw-semibold">Vue Admin template</span><small class="text-muted">Vuejs Project</small>
+                                                        <span class="text-truncate fw-semibold">Java course</span>
+                                                        <small class="text-muted">Spring Boot Project</small>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>214/627</td>
+                                            <td>2/8</td>
                                             <td>
                                                 <div class="d-flex flex-column"><small class="mb-1">78%</small>
                                                     <div class="progress w-100 me-3" style="height: 6px;">
@@ -328,7 +353,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>88:19h</td>
+                                            <td>32 hours</td>
                                         </tr>
                                         <tr class="even">
                                             <td class="  control" style="display: none;" tabindex="0"></td>
@@ -338,11 +363,12 @@
                                                         <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/event-label.png" alt="Project Image" class="rounded-circle">
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Online Webinar</span><small class="text-muted">Official Event</small>
+                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Data Structure & Algorithms</span>
+                                                        <small class="text-muted">C Project</small>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>12/20</td>
+                                            <td>5/8</td>
                                             <td>
                                                 <div class="d-flex flex-column"><small class="mb-1">69%</small>
                                                     <div class="progress w-100 me-3" style="height: 6px;">
@@ -359,7 +385,8 @@
                                                     <div class="avatar-wrapper">
                                                         <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/html-label.png" alt="Project Image" class="rounded-circle"></div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Hoffman Website</span><small class="text-muted">HTML Project</small>
+                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Javascript Course</span>
+                                                        <small class="text-muted">Javascript Project</small>
                                                     </div>
                                                 </div>
                                             </td>
@@ -381,8 +408,8 @@
                                                         <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/sketch-label.png" alt="Project Image" class="rounded-circle">
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Foodista mobile app</span><small class="text-muted">iPhone
-                                                            Project</small>
+                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Mobile App Course</span>
+                                                        <small class="text-muted">iPhone Project</small>
                                                     </div>
                                                 </div>
                                             </td>
@@ -403,7 +430,8 @@
                                                     <div class="avatar-wrapper">
                                                         <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/xd-label.png" alt="Project Image" class="rounded-circle"></div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Falcon Logo Design</span><small class="text-muted">UI/UX Project</small>
+                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Network Course</span>
+                                                        <small class="text-muted">UI/UX Project</small>
                                                     </div>
                                                 </div>
                                             </td>
@@ -425,7 +453,8 @@
                                                         <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/react-label.png" alt="Project Image" class="rounded-circle">
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Dojo React Project</span><small class="text-muted">React Project</small>
+                                                    <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Linux course</span>
+                                                        <small class="text-muted">Setup Ubuntu on local machine</small>
                                                     </div>
                                                 </div>
                                             </td>
