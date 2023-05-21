@@ -34,7 +34,7 @@
                         {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
 
                         <div class="row g-3">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="form-label" for="{{ form.name.vars.id }}">Name *</label>
 
                                 {{ form_widget(form.name, {'attr': {'class': nameError}}) }}
@@ -42,7 +42,7 @@
                                     {{ form_errors(form.name) }}
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label class="form-label" for="{{ form.building.vars.id }}">Building *</label>
 
                                 {{ form_widget(form.building, {'attr': {'class': buildingError}}) }}

@@ -1,13 +1,25 @@
-// async function logJSONData() {
-//     const response = await fetch("");
-//     const jsonData = await response.json();
-//     console.log(jsonData);
-// }
+// $(function () {
+//     $("form[name='department']").on('submit', function (e) {
+//         e.preventDefault();
 //
-// logJSONData().then(data => {
-//     console.log(data)
-// });
-
-// fetch("https://github.com/alaouy/sql-moroccan-cities/blob/master/json/ville.json")
-//     .then(res => res.json())
-//     .then(data => console.log(data));
+//         let formData = {
+//             name: $("#department_name").val(),
+//             building: $("#department_building").val(),
+//             token: $("#department__token").val()
+//         };
+//
+//         //let token = $("#department__token").val();
+//         // let action = $(this).closest('form').serialize();
+//
+//         // console.log(action);
+//         let url = $(location).attr('href');
+//         let formURL = $(this).attr('action');
+//
+//         $.post(formURL, formData)
+//             .then(function (res) {
+//                 console.log(res)
+//             });
+//     })
+//
+//
+// })

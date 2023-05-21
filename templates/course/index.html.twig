@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Departments{% endblock %}
+{% block title %}Courses{% endblock %}
 
 {% block content %}
     <div class="container-xxl flex-grow-1 container-p-y">
 
-        <h4 class="fw-bold py-3 mb-2">Departments List</h4>
+        <h4 class="fw-bold py-3 mb-2">Courses List</h4>
         <p class="mb-4">Each category (Basic, Professional, and Business) includes the four predefined roles shown below.</p>
 
         <div class="card">
@@ -33,12 +33,11 @@
                                         </label>
                                     </div>
                                 </div>
-                                <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
-                                    <a href="{{ path('app_department_new') }}" class="text-white">
-                                        <i class='bx bx-plus me-0 me-sm-1'></i>
-                                        <span class="d-none d-sm-inline-block">Add New Department</span>
-                                    </a>
-                                </button>
+                                <div class="dt-buttons btn-group flex-wrap">
+                                    <button type="button" class="btn add-new btn-primary mb-3 mb-md-0" data-bs-toggle="modal" data-bs-target="#addDepartmentModal">
+                                        <span>Add Course</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -55,24 +54,29 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% if departments is empty %}
+                        {% if courses is empty %}
                             <tr>
-                                <td colspan="4" class="text-center"> empty table</td>
+                                <td colspan="4" class="text-center">
+                                    <div class="d-flex flex-column align-items-center py-3">
+                                        <img src="{{ asset('assets/img/illustrations/empty.svg') }}" width="200" alt="empty svg">
+                                        <span class="mt-2">Not enough data</span>
+                                    </div>
+                                </td>
                             </tr>
                         {% else %}
-                            {% for department in departments %}
+                            {% for course in courses %}
                                 <tr class="{{ department.id is odd ? 'odd' : 'even' }}">
                                     <td class="control" style="display: none;" tabindex="0"></td>
                                     <td>
-                                        <span class="text-nowrap">{{ department.name }}</span>
+                                        <span class="text-nowrap">{{ course.name }}</span>
                                     </td>
                                     <td>
                                 <span class="text-nowrap">
-                                    <span class="badge  bg-label-primary m-1">{{ department.building }}</span>
+                                    <span class="badge  bg-label-primary m-1">{{ course.description }}</span>
                                 </span>
                                     </td>
                                     <td>
-                                        <span class="text-nowrap">{{ department.createdAt|date }}</span>
+                                        <span class="text-nowrap">{{ course.createdAt|date }}</span>
                                     </td>
                                     <td>
                                         <div class="btn-group">
@@ -118,5 +122,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
