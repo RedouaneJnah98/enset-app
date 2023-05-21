@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DepartmentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -26,6 +28,10 @@ class Department
     #[Assert\NotBlank]
     #[ORM\Column(length: 10)]
     private ?string $building = null;
+
+    #[ORM\ManyToOne(inversedBy: 'departments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $headDepartment = null;
 
     public function getId(): ?int
     {
@@ -52,6 +58,18 @@ class Department
     public function setBuilding(string $building): self
     {
         $this->building = $building;
+
+        return $this;
+    }
+
+    public function getHeadDepartment(): ?User
+    {
+        return $this->headDepartment;
+    }
+
+    public function setHeadDepartment(?User $headDepartment): self
+    {
+        $this->headDepartment = $headDepartment;
 
         return $this;
     }

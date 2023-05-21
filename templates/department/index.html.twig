@@ -36,7 +36,7 @@
                                 <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
                                     <a href="{{ path('app_department_new') }}" class="text-white">
                                         <i class='bx bx-plus me-0 me-sm-1'></i>
-                                        <span class="d-none d-sm-inline-block">Add New Department</span>
+                                        <span class="d-none d-sm-inline-block">Add Department</span>
                                     </a>
                                 </button>
                             </div>
@@ -49,6 +49,7 @@
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 240px;" aria-label="Name: activate to sort column ascending">
                                 Name
                             </th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 382px;" aria-label="Assigned To">Head of department</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 382px;" aria-label="Assigned To">Building</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 234px;" aria-label="Created Date">Created Date</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 112px;" aria-label="Actions">Actions</th>
@@ -57,14 +58,21 @@
                         <tbody>
                         {% if departments is empty %}
                             <tr>
-                                <td colspan="4" class="text-center"> empty table</td>
-                            </tr>
-                        {% else %}
+                                <td colspan="5" class="text-center">
+                                    <div class="d-flex flex-column align-items-center py-3">
+                                        <img src="{{ asset('assets/img/illustrations/empty.svg') }}" width="200" alt="empty svg">
+                                        <span class="mt-2">Not enough data</span>
+                                    </div>
+                                </td>
+                            </tr>                        {% else %}
                             {% for department in departments %}
                                 <tr class="{{ department.id is odd ? 'odd' : 'even' }}">
                                     <td class="control" style="display: none;" tabindex="0"></td>
                                     <td>
-                                        <span class="text-nowrap">{{ department.name }}</span>
+                                        <span class="text-nowrap text-capitalize">{{ department.name }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-nowrap text-capitalize">{{ department.headDepartment.firstName }} {{ department.headDepartment.lastName }}</span>
                                     </td>
                                     <td>
                                 <span class="text-nowrap">
@@ -81,7 +89,7 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item" href="{{ path('app_department_edit', {'id': department.id}) }}">Edit</a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item text-danger" href="#">Delete</a>

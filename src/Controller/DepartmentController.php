@@ -48,23 +48,23 @@ class DepartmentController extends AbstractController
 //        ]);
 //    }
 
-//    #[Route('/{id}/edit', name: 'app_department_edit', methods: ['GET', 'POST'])]
-//    public function edit(Request $request, Department $department, DepartmentRepository $departmentRepository): Response
-//    {
-//        $form = $this->createForm(DepartmentType::class, $department);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $departmentRepository->save($department, true);
-//
-//            return $this->redirectToRoute('app_department_index', [], Response::HTTP_SEE_OTHER);
-//        }
-//
-//        return $this->render('department/edit.html.twig', [
-//            'department' => $department,
-//            'form' => $form,
-//        ]);
-//    }
+    #[Route('/{id}/edit', name: 'app_department_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Department $department, DepartmentRepository $departmentRepository): Response
+    {
+        $form = $this->createForm(DepartmentType::class, $department);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $departmentRepository->save($department, true);
+
+            return $this->redirectToRoute('app_department_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('department/edit.html.twig', [
+            'department' => $department,
+            'form' => $form,
+        ]);
+    }
 
     #[Route('/{id}', name: 'app_department_delete', methods: ['POST'])]
     public function delete(Request $request, Department $department, DepartmentRepository $departmentRepository): Response

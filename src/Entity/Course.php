@@ -6,8 +6,15 @@ use App\Repository\CourseRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
+#[Vich\Uploadable]
+#[UniqueEntity('name')]
 class Course
 {
     use TimestampableEntity;
@@ -17,11 +24,16 @@ class Course
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::SIMPLE_ARRAY)]
-    private array $name = [];
+    #[Assert\NotBlank]
+    #[ORM\Column(type: Types::STRING, length: 200)]
+    private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
+
+    #[Assert\NotBlank]
+    #[Vich\UploadableField(mapping: 'avatars', fileNameProperty: 'imageName', size: 'imageSize')]
+    private ?File $imageFile = null;
 
     #[ORM\Column(length: 255)]
     private ?string $imageName = null;
@@ -29,9 +41,11 @@ class Course
     #[ORM\Column(length: 255)]
     private ?string $imageSize = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?int $totalSession = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column]
     private ?int $hours = null;
 
@@ -40,12 +54,12 @@ class Course
         return $this->id;
     }
 
-    public function getName(): array
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName(array $name): self
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -110,5 +124,21 @@ class Course
         $this->hours = $hours;
 
         return $this;
+    }
+
+    /**
+     * @return File|null
+     */
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File|null $imageFile
+     */
+    public function setImageFile(?File $imageFile): void
+    {
+        $this->imageFile = $imageFile;
     }
 }

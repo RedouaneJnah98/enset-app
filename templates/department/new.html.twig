@@ -50,6 +50,14 @@
                                     {{ form_errors(form.building) }}
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="{{ form.headDepartment.vars.id }}">Head of Department *</label>
+
+                                {{ form_widget(form.headDepartment, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.headDepartment) }}
+                                </div>
+                            </div>
 
                             {{ form_rest(form) }}
 
