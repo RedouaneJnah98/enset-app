@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Course;
+use App\Entity\Department;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -28,7 +30,11 @@ class CourseType extends AbstractType
             ->add('hours', NumberType::class, [
                 'attr' => ['placeholder' => '32 hours']
             ])
-            ->add('imageFile', VichImageType::class);
+            ->add('imageFile', VichImageType::class)
+            ->add('department', EntityType::class, [
+                'class' => Department::class,
+                'placeholder' => 'choose'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -46,13 +46,13 @@
                         <thead>
                         <tr>
                             <th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1" style="width: 0px; display: none;" aria-label=""></th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 240px;" aria-label="Name: activate to sort column ascending">
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 400px;" aria-label="Name: activate to sort column ascending">
                                 Name
                             </th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 382px;" aria-label="Assigned To">Description</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 382px;" aria-label="Assigned To">Department</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 382px;" aria-label="Assigned To">Total session</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 382px;" aria-label="Assigned To">hours</th>
+                            {#                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 600px;" aria-label="Assigned To">Description</th> #}
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 400px;" aria-label="Assigned To">Department</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 500px;" aria-label="Assigned To">Total session</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 150px;" aria-label="Assigned To">hours</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 234px;" aria-label="Created Date">Created Date</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 112px;" aria-label="Actions">Actions</th>
                         </tr>
@@ -60,7 +60,7 @@
                         <tbody>
                         {% if courses is empty %}
                             <tr>
-                                <td colspan="4" class="text-center">
+                                <td colspan="7" class="text-center">
                                     <div class="d-flex flex-column align-items-center py-3">
                                         <img src="{{ asset('assets/img/illustrations/empty.svg') }}" width="200" alt="empty svg">
                                         <span class="mt-2">Not enough data</span>
@@ -71,13 +71,31 @@
                             {% for course in courses %}
                                 <tr class="{{ course.id is odd ? 'odd' : 'even' }}">
                                     <td class="control" style="display: none;" tabindex="0"></td>
-                                    <td>
-                                        <span class="text-nowrap">{{ course.name }}</span>
+                                    <td class="sorting_1">
+                                        <div class="d-flex justify-content-start align-items-center user-name">
+                                            <div class="avatar-wrapper">
+                                                <div class="avatar avatar-sm me-3">
+                                                    <img src="{{ vich_uploader_asset(course) }}" alt="Avatar" class="rounded-circle">
+                                                </div>
+                                            </div>
+                                            <span class="text-nowrap">
+                                                <strong>{{ course.name }}</strong>
+                                            </span>
+                                        </div>
                                     </td>
                                     <td>
                                         <span class="text-nowrap">
-                                            <span class="badge  bg-label-primary m-1">{{ course.description }}</span>
+                                            <span>{{ course.department.name }}</span>
                                         </span>
+                                    </td>
+                                    <td>
+                                        <span class="text-nowrap">
+                                            <span class="badge badge-center bg-label-primary">{{ course.totalSession }}</span>
+                                            sessions
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-label-secondary">{{ course.hours }} hours</span>
                                     </td>
                                     <td>
                                         <span class="text-nowrap">{{ course.createdAt|date }}</span>

@@ -49,6 +49,10 @@ class Course
     #[ORM\Column]
     private ?int $hours = null;
 
+    #[ORM\ManyToOne(inversedBy: 'courses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Department $department = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -140,5 +144,17 @@ class Course
     public function setImageFile(?File $imageFile): void
     {
         $this->imageFile = $imageFile;
+    }
+
+    public function getDepartment(): ?Department
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(?Department $department): self
+    {
+        $this->department = $department;
+
+        return $this;
     }
 }
