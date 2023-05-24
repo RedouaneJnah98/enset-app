@@ -3,13 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\CourseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
@@ -31,15 +31,15 @@ class Course
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[Assert\NotBlank]
-    #[Vich\UploadableField(mapping: 'avatars', fileNameProperty: 'imageName', size: 'imageSize')]
-    private ?File $imageFile = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $imageName = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $imageSize = null;
+//    #[Assert\NotBlank]
+//    #[Vich\UploadableField(mapping: 'avatars', fileNameProperty: 'imageName', size: 'imageSize')]
+//    private ?File $imageFile = null;
+//
+//    #[ORM\Column(length: 255)]
+//    private ?string $imageName = null;
+//
+//    #[ORM\Column(length: 255)]
+//    private ?string $imageSize = null;
 
     #[Assert\NotBlank]
     #[ORM\Column]
@@ -52,6 +52,14 @@ class Course
     #[ORM\ManyToOne(inversedBy: 'courses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Department $department = null;
+
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Module::class)]
+    private Collection $modules;
+
+    public function __construct()
+    {
+        $this->modules = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -82,30 +90,6 @@ class Course
         return $this;
     }
 
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
-
-    public function setImageName(string $imageName): self
-    {
-        $this->imageName = $imageName;
-
-        return $this;
-    }
-
-    public function getImageSize(): ?string
-    {
-        return $this->imageSize;
-    }
-
-    public function setImageSize(string $imageSize): self
-    {
-        $this->imageSize = $imageSize;
-
-        return $this;
-    }
-
     public function getTotalSession(): ?int
     {
         return $this->totalSession;
@@ -130,22 +114,6 @@ class Course
         return $this;
     }
 
-    /**
-     * @return File|null
-     */
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    /**
-     * @param File|null $imageFile
-     */
-    public function setImageFile(?File $imageFile): void
-    {
-        $this->imageFile = $imageFile;
-    }
-
     public function getDepartment(): ?Department
     {
         return $this->department;
@@ -156,5 +124,40 @@ class Course
         $this->department = $department;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Module>
+     */
+    public function getModules(): Collection
+    {
+        return $this->modules;
+    }
+
+    public function addModule(Module $module): self
+    {
+        if (!$this->modules->contains($module)) {
+            $this->modules->add($module);
+            $module->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModule(Module $module): self
+    {
+        if ($this->modules->removeElement($module)) {
+            // set the owning side to null (unless already changed)
+            if ($module->getCourse() === $this) {
+                $module->setCourse(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

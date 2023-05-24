@@ -56,6 +56,7 @@ class CourseController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $courseRepository->save($course, true);
+            $this->addFlash('success', 'You updated the course information');
 
             return $this->redirectToRoute('app_course_index', [], Response::HTTP_SEE_OTHER);
         }

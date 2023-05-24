@@ -1,19 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Courses{% endblock %}
+{% block title %}Modules{% endblock %}
 
 {% block content %}
     <div class="container-xxl flex-grow-1 container-p-y">
 
-        <h4 class="fw-bold py-3 mb-2">Courses List</h4>
+        <h4 class="fw-bold py-3 mb-2">Modules List</h4>
         <p class="mb-4">Each category (Basic, Professional, and Business) includes the four predefined roles shown below.</p>
 
         <div class="card">
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-info">
-                    {{ message }}
-                </div>
-            {% endfor %}
             <div class="card-datatable table-responsive">
                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                     <div class="row mx-1">
@@ -39,9 +34,9 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
-                                    <a href="{{ path('app_course_new') }}" class="text-white">
+                                    <a href="{{ path('app_module_new') }}" class="text-white">
                                         <i class='bx bx-plus me-0 me-sm-1'></i>
-                                        <span class="d-none d-sm-inline-block">Add Course</span>
+                                        <span class="d-none d-sm-inline-block">Add Module</span>
                                     </a>
                                 </button>
                             </div>
@@ -54,16 +49,16 @@
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 400px;" aria-label="Name: activate to sort column ascending">
                                 Name
                             </th>
+                            {#                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 600px;" aria-label="Assigned To">Description</th> #}
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 400px;" aria-label="Assigned To">Department</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 600px;" aria-label="Assigned To">Modules</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 500px;" aria-label="Assigned To">Total session</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 150px;" aria-label="Assigned To">hours</th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 500px;" aria-label="Assigned To">Description</th>
+                            {#                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 150px;" aria-label="Assigned To">hours</th> #}
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 234px;" aria-label="Created Date">Created Date</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 112px;" aria-label="Actions">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% if courses is empty %}
+                        {% if modules is empty %}
                             <tr>
                                 <td colspan="7" class="text-center">
                                     <div class="d-flex flex-column align-items-center py-3">
@@ -73,41 +68,29 @@
                                 </td>
                             </tr>
                         {% else %}
-                            {% for course in courses %}
-                                <tr class="{{ course.id is odd ? 'odd' : 'even' }}">
+                            {% for module in modules %}
+                                <tr class="{{ module.id is odd ? 'odd' : 'even' }}">
                                     <td class="control" style="display: none;" tabindex="0"></td>
                                     <td class="sorting_1">
-                                        <strong class="text-nowrap text-capitalize">{{ course.name|length > 20 ? course.name|slice(0, 20) ~ '...' : course.name }}</strong>
+                                        <div class="d-flex justify-content-start align-items-center user-name">
+                                            <div class="avatar-wrapper">
+                                                <div class="avatar-sm me-3">
+                                                    <img src="{{ vich_uploader_asset(module) }}" alt="Avatar" class="rounded">
+                                                </div>
+                                            </div>
+                                            <span class="text-nowrap">
+                                                <strong>{{ module.name }}</strong>
+                                            </span>
+                                        </div>
                                     </td>
                                     <td>
-                                        <span class="text-nowrap">
-                                            <span class="text-nowrap">{{ course.department|length > 20 ? course.department|slice(0, 20) ~ '...' : course.department }}</span>
-                                        </span>
+                                        <span class="text-nowrap">{{ module.description|length > 30 ? module.description|slice(0, 30) ~ '...' : module.description }}</span>
                                     </td>
                                     <td>
-                                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                                            {% for module in course.modules %}
-                                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up"
-                                                    aria-label="Lilian Fuller"
-                                                    data-bs-original-title="{{ module.name }}">
-                                                    <img src="{{ vich_uploader_asset(module) }}" alt="Avatar" class="rounded-circle">
-                                                </li>
-                                            {% else %}
-                                                <span class="badge bg-label-danger">empty</span>
-                                            {% endfor %}
-                                        </ul>
+                                        <span class="text-nowrap">{{ module.course.department.name }}</span>
                                     </td>
                                     <td>
-                                        <span class="text-nowrap">
-                                            <span class="badge badge-center bg-label-primary">{{ course.totalSession }}</span>
-                                            sessions
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-label-secondary">{{ course.hours }} hours</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-nowrap">{{ course.createdAt|date }}</span>
+                                        <span class="text-nowrap">{{ module.createdAt|date }}</span>
                                     </td>
                                     <td>
                                         <div class="btn-group">
@@ -116,7 +99,7 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a class="dropdown-item" href="{{ path('app_course_edit', {'id': course.id}) }}">Edit</a>
+                                                    <a class="dropdown-item" href="#">Edit</a>
                                                 </li>
                                                 <li>
                                                     <a class="dropdown-item text-danger" href="#">Delete</a>

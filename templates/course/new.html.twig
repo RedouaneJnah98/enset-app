@@ -28,7 +28,6 @@
 
                     {# store the errors in a variable #}
                     {% set nameError = form_errors(form.name) ? 'form-control is-invalid' : 'form-control' %}
-                    {% set imageFileError = form_errors(form.imageFile) ? 'form-control is-invalid' : 'form-control' %}
                     {% set totalSessionError = form_errors(form.totalSession) ? 'form-control is-invalid' : 'form-control' %}
                     {% set hoursError = form_errors(form.hours) ? 'form-control is-invalid' : 'form-control' %}
                     {% set departmentError = form_errors(form.department) ? 'form-control is-invalid' : 'form-control' %}
@@ -57,27 +56,7 @@
                             </div>
                         </div>
                         <div class="row g-3 mb-4">
-                            <div class="col-md-8">
-                                <label class="form-label fw-bold" for="{{ form.description.vars.id }}">Description</label>
-
-                                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
-                                <div class="invalid-feedback">
-                                    {{ form_errors(form.description) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-8">
-                                <label class="form-label fw-bold" for="{{ form.imageFile.vars.id }}">Image *</label>
-
-                                {{ form_widget(form.imageFile, {'attr': {'class': imageFileError}}) }}
-                                <div class="invalid-feedback">
-                                    {{ form_errors(form.imageFile) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                 <label class="form-label fw-bold" for="{{ form.totalSession.vars.id }}">Total Session *</label>
 
                                 {{ form_widget(form.totalSession, {'attr': {'class': totalSessionError}}) }}
@@ -85,14 +64,22 @@
                                     {{ form_errors(form.totalSession) }}
                                 </div>
                             </div>
-                        </div>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                 <label class="form-label fw-bold" for="{{ form.hours.vars.id }}">Hours *</label>
 
                                 {{ form_widget(form.hours, {'attr': {'class': hoursError}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.hours) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold" for="{{ form.description.vars.id }}">Description</label>
+
+                                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.description) }}
                                 </div>
                             </div>
                         </div>

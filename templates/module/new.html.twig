@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Course{% endblock %}
+{% block title %}New Module{% endblock %}
 
 {% block content %}
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -11,9 +11,9 @@
                     <a href="{{ path('app_dashboard') }}">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{ path('app_course_index') }}">Courses</a>
+                    <a href="{{ path('app_course_index') }}">Modules</a>
                 </li>
-                <li class="breadcrumb-item active">Edit Course</li>
+                <li class="breadcrumb-item active">New Module</li>
             </ol>
         </nav>
 
@@ -27,10 +27,11 @@
                     </div>
 
                     {# store the errors in a variable #}
-                    {% set nameError = form_errors(form.name) ? 'form-control is-invalid' : 'form-control' %}
-                    {% set totalSessionError = form_errors(form.totalSession) ? 'form-control is-invalid' : 'form-control' %}
-                    {% set hoursError = form_errors(form.hours) ? 'form-control is-invalid' : 'form-control' %}
-                    {% set departmentError = form_errors(form.department) ? 'form-control is-invalid' : 'form-control' %}
+                    {#                    {% set nameError = form_errors(form.name) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set imageFileError = form_errors(form.imageFile) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set totalSessionError = form_errors(form.totalSession) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set hoursError = form_errors(form.hours) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set departmentError = form_errors(form.department) ? 'form-control is-invalid' : 'form-control' %} #}
 
                     <div class="card-body">
                         {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
@@ -39,37 +40,27 @@
                             <div class="col-md-8">
                                 <label class="form-label fw-bold" for="{{ form.name.vars.id }}">Name *</label>
 
-                                {{ form_widget(form.name, {'attr': {'class': nameError}}) }}
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.name) }}
                                 </div>
                             </div>
                         </div>
                         <div class="row g-3 mb-4">
-                            <div class="col-md-8">
-                                <label class="form-label fw-bold" for="{{ form.department.vars.id }}">Department *</label>
-
-                                {{ form_widget(form.department, {'attr': {'class': departmentError}}) }}
-                                <div class="invalid-feedback">
-                                    {{ form_errors(form.department) }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row g-3 mb-4">
                             <div class="col-md-4">
-                                <label class="form-label fw-bold" for="{{ form.totalSession.vars.id }}">Total Session *</label>
+                                <label class="form-label fw-bold" for="{{ form.imageFile.vars.id }}">Image *</label>
 
-                                {{ form_widget(form.totalSession, {'attr': {'class': totalSessionError}}) }}
+                                {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
                                 <div class="invalid-feedback">
-                                    {{ form_errors(form.totalSession) }}
+                                    {{ form_errors(form.imageFile) }}
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label fw-bold" for="{{ form.hours.vars.id }}">Hours *</label>
+                                <label class="form-label fw-bold" for="{{ form.course.vars.id }}">Course *</label>
 
-                                {{ form_widget(form.hours, {'attr': {'class': hoursError}}) }}
+                                {{ form_widget(form.course, {'attr': {'class': 'form-control'}}) }}
                                 <div class="invalid-feedback">
-                                    {{ form_errors(form.hours) }}
+                                    {{ form_errors(form.course) }}
                                 </div>
                             </div>
                         </div>
@@ -87,11 +78,13 @@
                         {{ form_rest(form) }}
 
                         <div class="col-12 mt-4">
-                            <button type="submit" name="createUser" class="btn btn-label-primary">Update Course</button>
+                            <button type="submit" name="createUser" class="btn btn-label-primary">Create Module</button>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
+

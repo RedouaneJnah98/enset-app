@@ -33,12 +33,16 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}"/>
 
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toaster/jquery.toast.min.css') }}">
 
     <!-- Page CSS -->
     {% block page_stylesheet %}{% endblock %}
 
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
+
+
+    {#    <script src="{{ asset('assets/vendor/libs/toaster/jquery.toast.min.css') }}"></script> #}
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
@@ -127,8 +131,8 @@
                                         <div data-i18n="Accordion">Courses</div>
                                     </a>
                                 </li>
-                                <li class="menu-item {{ route == 'app_course_index' ? 'active' : '' }}">
-                                    <a href="{{ path('app_course_index') }}" class="menu-link">
+                                <li class="menu-item {{ route == 'app_module_index' ? 'active' : '' }}">
+                                    <a href="{{ path('app_module_index') }}" class="menu-link">
                                         <div data-i18n="Accordion">Modules</div>
                                     </a>
                                 </li>
@@ -1145,7 +1149,23 @@
 <!-- Page JS -->
 <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
 
+<script src="{{ asset('assets/vendor/libs/toaster/jquery.toast.min.js') }}"></script>
+
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+{# <script src="{{ asset('assets/vendor/libs/toaster/jquery.toast.min.css') }}"></script> #}
+
+
 </body>
 </html>
+
+
+<script>
+    $.toast({
+        heading: 'Information',
+        text: 'Now you can add icons to generate different kinds of toasts',
+        showHideTransition: 'slide',
+        icon: 'info'
+    })
+</script>
