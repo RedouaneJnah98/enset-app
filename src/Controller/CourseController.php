@@ -30,6 +30,7 @@ class CourseController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $courseRepository->save($course, true);
+            $this->addFlash('success', 'Course added successfully to system. You can update it later!');
 
             return $this->redirectToRoute('app_course_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -43,9 +44,9 @@ class CourseController extends AbstractController
     #[Route('/{id}', name: 'app_course_show', methods: ['GET'])]
     public function show(Course $course): Response
     {
-        return $this->render('course/show.html.twig', [
-            'course' => $course,
-        ]);
+//        return $this->render('course/show.html.twig', [
+//            'course' => $course,
+//        ]);
     }
 
     #[Route('/{id}/edit', name: 'app_course_edit', methods: ['GET', 'POST'])]
@@ -56,7 +57,7 @@ class CourseController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $courseRepository->save($course, true);
-            $this->addFlash('success', 'You updated the course information');
+            $this->addFlash('info', 'Course information updated successfully.');
 
             return $this->redirectToRoute('app_course_index', [], Response::HTTP_SEE_OTHER);
         }

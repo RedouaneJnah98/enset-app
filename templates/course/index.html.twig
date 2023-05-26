@@ -9,11 +9,6 @@
         <p class="mb-4">Each category (Basic, Professional, and Business) includes the four predefined roles shown below.</p>
 
         <div class="card">
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-info">
-                    {{ message }}
-                </div>
-            {% endfor %}
             <div class="card-datatable table-responsive">
                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                     <div class="row mx-1">
@@ -153,4 +148,13 @@
             </div>
         </div>
     </div>
+
+    {% for flashMessage in app.flashes('info') %}
+        {{ component('Toast', {
+            heading: 'Information',
+            type: 'info',
+            message: flashMessage
+        }) }}
+    {% endfor %}
+
 {% endblock %}

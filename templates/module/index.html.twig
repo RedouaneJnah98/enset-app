@@ -136,4 +136,13 @@
             </div>
         </div>
     </div>
+
+    {% for flashMessage in app.flashes('success') %}
+        {{ component('Toast', {
+            heading: 'Success',
+            type: 'success',
+            message: flashMessage
+        }) }}
+    {% endfor %}
+
 {% endblock %}

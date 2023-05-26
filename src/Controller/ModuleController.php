@@ -30,6 +30,7 @@ class ModuleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $moduleRepository->save($module, true);
+            $this->addFlash('success', 'Module added successfully to system. You can update it later!');
 
             return $this->redirectToRoute('app_module_index', [], Response::HTTP_SEE_OTHER);
         }
