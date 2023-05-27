@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,7 +25,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager, FormFactoryInterface $formFactory): Response
+    public function new(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -43,7 +44,6 @@ class UserController extends AbstractController
             $address->setStreet($street);
             $address->setCity($city);
             $address->setZipCode($zipCode);
-
             $user->setRoles($roles);
 
             $entityManager->persist($address);
@@ -61,14 +61,6 @@ class UserController extends AbstractController
         ]);
     }
 
-//    #[Route('/user/{id}', name: 'app_user_show', methods: ['GET'])]
-//    public function show(User $user): Response
-//    {
-//        return $this->render('user/show.html.twig', [
-//            'user' => $user,
-//        ]);
-//    }
-
     #[Route('/user/{id}', name: 'app_user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
@@ -76,11 +68,12 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->save($user, true);
+            if ($request->isXmlHttpRequest()) {
+                $data = $form->getData();
+                $userRepository->save($data, true);
 
-            //dd($form->getData());
-
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+                return $this->json(['success' => 'User information updated successfully.']);
+            }
         }
 
         return $this->render('user/edit.html.twig', [

@@ -23,7 +23,7 @@ class DepartmentType extends AbstractType
             ])
             ->add('headDepartment', EntityType::class, [
                 'class' => User::class,
-                'placeholder' => 'Choose'
+                'placeholder' => 'Choose',
             ]);
     }
 
@@ -31,6 +31,7 @@ class DepartmentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Department::class,
+            'csrf_token_id' => 'department_csrfToken'
         ]);
     }
 }

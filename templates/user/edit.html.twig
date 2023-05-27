@@ -147,13 +147,13 @@
                                                     {{ form_errors(form.gender) }}
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 mb-3">
-                                                <label class="form-label" for="{{ form.email.vars.id }}">Email</label>
-                                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                                                <div class="invalid-feedback">
-                                                    {{ form_errors(form.email) }}
-                                                </div>
-                                            </div>
+                                            {#                                            <div class="col-md-6 mb-3"> #}
+                                            {#                                                <label class="form-label" for="{{ form.email.vars.id }}">Email</label> #}
+                                            {#                                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }} #}
+                                            {#                                                <div class="invalid-feedback"> #}
+                                            {#                                                    {{ form_errors(form.email) }} #}
+                                            {#                                                </div> #}
+                                            {#                                            </div> #}
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label" for="{{ form.phoneNumber.vars.id }}">Phone Number</label>
                                                 {{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control'}}) }}
@@ -170,12 +170,12 @@
                                             </div>
                                         </div>
 
-                                        <input type="hidden" name="user[_token]" value="{{ csrf_token('user_csrf') }}">
+                                        <input type="hidden" name="user[_token]" id="user_csrfToken" value="{{ csrf_token('user_csrfToken') }}">
 
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Discard</button>
-                                        <button type="submit" class="btn btn-label-primary">Save Changes</button>
+                                        <button type="submit" class="btn btn-label-primary" id="saveUserBtn">Save Changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -758,7 +758,15 @@
         <!--/ User Content -->
 
         <!-- Modals -->
-        {{ include('components/modals/_update-email.html.twig') }}
+        {#        {{ include('components/modals/_update-email.html.twig') }} #}
         <!--/ Modals -->
+
+        {% for flashMessage in app.flashes('success') %}
+            {{ component('Toast', {
+                heading: 'Success',
+                type: 'success',
+                message: flashMessage,
+            }) }}
+        {% endfor %}
     </div>
 {% endblock %}

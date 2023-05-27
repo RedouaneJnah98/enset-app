@@ -1,35 +1,97 @@
-// $(function () {
-//     $("form[name='department']").on('submit', function (e) {
-//         e.preventDefault();
-//
-//         let formData = {
-//             name: $("#department_name").val(),
-//             building: $("#department_building").val(),
-//             token: $("#department__token").val()
-//         };
-//
-//         //let token = $("#department__token").val();
-//         // let action = $(this).closest('form').serialize();
-//
-//         // console.log(action);
-//         let url = $(location).attr('href');
-//         let formURL = $(this).attr('action');
-//
-//         $.post(formURL, formData)
-//             .then(function (res) {
-//                 console.log(res)
-//             });
-//     })
-//
-//
-// })
+$(function () {
+    $("form[name='user']").on('submit', function (event) {
+        event.preventDefault();
 
-// Non sticky version
+        let url = $(this).attr('action');
+        let cardId = $("#user_cardId");
+        let username = $("#user_username");
+        let firstName = $("#user_firstName");
+        let lastName = $("#user_lastName");
+        let employeeId = $("#user_employeeId");
+        let gender = $("#user_gender");
+        let email = $("#user_email");
+        let phone = $("#user_phoneNumber");
+        let dof = $("#user_dateOfBirth");
+        let token = $("#user_csrfToken");
+        let data = {};
 
-// Sticky version
-// $.toast({
-//     text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, consequuntur doloremque eveniet eius eaque dicta repudiandae illo ullam. Minima itaque sint magnam dolorum asperiores repudiandae dignissimos expedita, voluptatum vitae velit.",
-//     hideAfter: false
-// })
+        data[$(cardId).attr('name')] = cardId.val();
+        data[$(username).attr('name')] = username.val();
+        data[$(firstName).attr('name')] = firstName.val();
+        data[$(lastName).attr('name')] = lastName.val();
+        data[$(employeeId).attr('name')] = employeeId.val();
+        data[$(gender).attr('name')] = gender.val();
+        data[$(email).attr('name')] = email.val();
+        data[$(phone).attr('name')] = phone.val();
+        data[$(dof).attr('name')] = dof.val();
+        data[$(token).attr('name')] = token.val();
 
-// $.toast('test toast');
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: data,
+            success: function (response) {
+                $.toast({
+                    heading: 'Success',
+                    text: response.success,
+                    icon: 'success',
+                    position: 'top-right',
+                    hideAfter: 4000,
+                    bgColor: '#62A786',
+                    textColor: 'white',
+                })
+
+                $("#modalEdit").modal('hide');
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        })
+    })
+
+    $("#modalAddDepartment").on('submit', function (event) {
+        event.preventDefault();
+
+        const departmentName = $("#department_name");
+        const departmentBuilding = $("#department_building");
+        const headDepartment = $("#department_headDepartment");
+        const token = $("#department_csrToken");
+
+        let formData = {};
+        formData[$(departmentName).attr('name')] = departmentName.val();
+        formData[$(departmentBuilding).attr('name')] = departmentBuilding.val();
+        formData[$(headDepartment).attr('name')] = headDepartment.val();
+        formData[$(token).attr('name')] = token.val();
+
+
+        $.ajax({
+            url: '/department/new',
+            method: 'POST',
+            data: formData,
+            success: function (response) {
+                showToast('New Department', response.success, 'success', '#62A786');
+                $("#modalAddDepartment").modal('hide');
+                departmentName.val('');
+                departmentBuilding.val('')
+                headDepartment.val('')
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr, status, error);
+            }
+        })
+    })
+
+})
+
+function showToast(heading, message, icon, color) {
+    $.toast({
+        heading: heading,
+        text: message,
+        icon: icon,
+        position: 'top-right',
+        hideAfter: 4000,
+        bgColor: color,
+        textColor: 'white',
+    })
+}
+

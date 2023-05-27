@@ -35,7 +35,8 @@ class UserType extends AbstractType
                 'attr' => ['placeholder' => 'Doe']
             ])
             ->add('email', EmailType::class, [
-                'attr' => ['placeholder' => 'john.doe@example.com']
+                'attr' => ['placeholder' => 'john.doe@example.com'],
+                'mapped' => false
             ])
             ->add('plainPassword', PasswordType::class, [
                 'hash_property_path' => 'password',
@@ -71,7 +72,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'csrf_token_id' => 'user_csrf'
+            'csrf_token_id' => 'user_csrfToken'
         ]);
     }
 }

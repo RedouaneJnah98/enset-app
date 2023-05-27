@@ -33,11 +33,12 @@
                                         </label>
                                     </div>
                                 </div>
-                                <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
-                                    <a href="{{ path('app_department_new') }}" class="text-white">
-                                        <i class='bx bx-plus me-0 me-sm-1'></i>
-                                        <span class="d-none d-sm-inline-block">Add Department</span>
-                                    </a>
+                                <button class="btn btn-secondary add-new btn-primary" type="button"
+                                        data-bs-toggle="modal" data-bs-target="#modalAddDepartment">
+                                    {#                                    <a href="{{ path('app_department_new') }}" class="text-white"> #}
+                                    <i class='bx bx-plus me-0 me-sm-1'></i>
+                                    <span class="d-none d-sm-inline-block">Add Department</span>
+                                    {#                                    </a> #}
                                 </button>
                             </div>
                         </div>
@@ -139,6 +140,54 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Department Modal -->
+    {#    {{ include('department/new.html.twig') }} #}
+    <div class="modal fade" id="modalAddDepartment" tabindex="-1" aria-labelledby="modalAddDepartment" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom pb-4">
+                    <h5 class="modal-title" id="modalScrollableTitle">Add Department</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="text-capitalize">Create new department</h5>
+
+                    {{ form_start(form) }}
+                    <div class="row mt-2">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label" for="{{ form.name.vars.id }}">Name *</label>
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                            <div class="invalid-feedback">
+                                {{ form_errors(form.name) }}
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label" for="{{ form.building.vars.id }}">Building</label>
+                            {{ form_widget(form.building, {'attr': {'class': 'form-control'}}) }}
+                            <div class="invalid-feedback">
+                                {{ form_errors(form.building) }}
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label" for="{{ form.headDepartment.vars.id }}">Head of Department *</label>
+                            {{ form_widget(form.headDepartment, {'attr': {'class': 'form-control'}}) }}
+                            <div class="invalid-feedback">
+                                {{ form_errors(form.headDepartment) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="department[_token]" id="department_csrToken" value="{{ csrf_token('department_csrfToken') }}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Discard</button>
+                    <button type="submit" class="btn btn-label-primary">Create Department</button>
                 </div>
             </div>
         </div>
