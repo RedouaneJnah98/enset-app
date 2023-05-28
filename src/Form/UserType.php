@@ -36,7 +36,6 @@ class UserType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'attr' => ['placeholder' => 'john.doe@example.com'],
-                'mapped' => false
             ])
             ->add('plainPassword', PasswordType::class, [
                 'hash_property_path' => 'password',

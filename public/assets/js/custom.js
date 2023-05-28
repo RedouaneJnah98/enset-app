@@ -1,5 +1,5 @@
 $(function () {
-    $("form[name='user']").on('submit', function (event) {
+    $("#saveUserBtn").on('click', function (event) {
         event.preventDefault();
 
         let url = $(this).attr('action');

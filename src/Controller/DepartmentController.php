@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/department')]
+#[Route('/admin/department')]
 class DepartmentController extends AbstractController
 {
     #[Route('/', name: 'app_department_index', methods: ['GET', 'POST'])]
@@ -39,7 +39,7 @@ class DepartmentController extends AbstractController
 
         return $this->json(['success' => 'New Department added to the system successfully.']);
     }
-    
+
     #[Route('/{id}/edit', name: 'app_department_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Department $department, DepartmentRepository $departmentRepository): Response
     {
