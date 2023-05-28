@@ -437,3 +437,23 @@ div.dataTables_wrapper div.dataTables_length select {
 .form-check label {
     display: inline-block;
 }
+
+/* Sweet Alert */
+.light-style .swal2-container {
+    z-index: 1090;
+}
+
+/* label buttons */
+.btn-label-danger {
+    color: #ff3e1d;
+    border-color: rgba(0, 0, 0, 0);
+    background: #ffe0db;
+}
+
+.btn-label-danger:hover {
+    border-color: rgba(0, 0, 0, 0);
+    background: #e6381a;
+    color: #fff;
+    box-shadow: 0 .125rem .25rem 0 rgba(255, 62, 29, .4);
+    transform: translateY(-1px);
+}

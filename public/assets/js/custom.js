@@ -81,6 +81,48 @@ $(function () {
         })
     })
 
+    $(".delete-record").on('click', function (e) {
+        e.preventDefault();
+
+        const form = e.target.form;
+
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                cancelButton: 'btn btn-label-danger me-3',
+                confirmButton: 'btn btn-label-primary',
+            },
+            buttonsStyling: false
+        })
+
+        swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this record if you deleted it!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                    'Deleted!',
+                    'Record has been deleted.',
+                    'success'
+                ).then(() => {
+                    form.submit();
+                })
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelled',
+                    'Your record is safe 😃',
+                    'error'
+                )
+            }
+        })
+    })
 })
 
 function showToast(heading, message, icon, color) {
@@ -94,4 +136,3 @@ function showToast(heading, message, icon, color) {
         textColor: 'white',
     })
 }
-
