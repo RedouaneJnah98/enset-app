@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+ {% block title %}Verify Email{% endblock %}
+{% block page_stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}">
+{% endblock %}
+
+ {% block body %}
+     <div class="container-xxl">
+         <div class="authentication-wrapper authentication-basic container-p-y">
+             <div class="authentication-inner">
+                 <!-- Register -->
+                 <div class="card">
+                     <div class="card-body">
+                         <!-- Logo -->
+                         <div class="app-brand justify-content-center m-0 p-0">
+                             <a href="#" class="app-brand-link">
+                          <span class="app-brand-logo demo">
+                              <img src="{{ asset('assets/img/enset-logo.png') }}" width="170" height="100" style="object-fit: cover" alt="ENSET Logo">
+                          </span>
+                             </a>
+                             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                                 <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                             </a>
+                         </div>
+                         <!-- /Logo -->
+                         <h3 class="mb-2">Verify your email! 🔒</h3>
+                         <p class="text-start">Account activation link sent to your email address: hello@example.com Please follow the link inside to continue.</p>
+                         <a href="#" class="btn btn-primary w-100 my-3">Skip for now</a>
+                         <p class="text-center">Didn't get the mail? <a href="#">Resend</a></p>
+                     </div>
+                 </div>
+                 <!-- /Register -->
+             </div>
+         </div>
+     </div>
+ {% endblock %}
