@@ -20,6 +20,13 @@ security:
       logout:
         path: app_logout
         target: app_login
+      remember_me:
+        secret: '%kernel.secret%'
+        lifetime: 604800
+      
+      two_factor:
+        auth_form_path: 2fa_login
+        check_path: 2fa_login_check
       
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
@@ -31,8 +38,10 @@ security:
   # Note: Only the *first* access control that matches will be used
   access_control:
     - { path: ^/login, roles: PUBLIC_ACCESS }
+    - { path: ^/2fa, role: IS_AUTHENTICATED_2FA_IN_PROGRESS }
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/, roles: ROLE_USER }
+
 
 when@test:
   security:

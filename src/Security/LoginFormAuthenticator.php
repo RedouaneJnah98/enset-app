@@ -42,7 +42,6 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $username = $request->get('username');
         $password = $request->get('password');
 
-
         return new Passport(
             new UserBadge($username),
             new PasswordCredentials($password),
@@ -57,21 +56,22 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        $user = $this->security->getUser();
-
-        $signatureComponents = $this->verifyEmailHelper->generateSignature(
-            'app_email_confirmation',
-            $user->getId(),
-            $user->getEmail()
-        );
-
-        $email = new TemplatedEmail();
-        $email->from('send@example.com');
-        $email->to($user->getEmail());
-        $email->htmlTemplate('security/confirmation_email.html.twig');
-        $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
-
-        $this->mailer->send($email);
+//        $user = $this->security->getUser();
+//
+//        $signatureComponents = $this->verifyEmailHelper->generateSignature(
+//            'app_email_confirmation',
+//            $user->getId(),
+//            $user->getEmail(),
+//            ['id' => $user->getId()]
+//        );
+//
+//        $email = new TemplatedEmail();
+//        $email->from('send@example.com');
+//        $email->to($user->getEmail());
+//        $email->htmlTemplate('security/two_factor.html.twig');
+//        $email->context(['signedUrl' => $signatureComponents->getSignedUrl()]);
+//
+//        $this->mailer->send($email);
 
         return new RedirectResponse(
             $this->router->generate('app_dashboard')

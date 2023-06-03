@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -22,7 +23,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[UniqueEntity('username')]
 #[UniqueEntity('employeeId')]
 #[UniqueEntity('cardId')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorInterface
 {
     use TimestampableEntity;
 
@@ -89,6 +90,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'headDepartment', targetEntity: Department::class)]
     private Collection $departments;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $authCode = null;
 
     public function __construct()
     {
@@ -362,5 +366,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->firstName . ' ' . $this->lastName;
+    }
+
+//    public function getAuthCode(): ?string
+//    {
+//        return $this->authCode;
+//    }
+//
+//    public function setAuthCode(string $authCode): self
+//    {
+//        $this->authCode = $authCode;
+//
+//        return $this;
+//    }
+
+    public function isEmailAuthEnabled(): bool
+    {
+        return true;
+    }
+
+    public function getEmailAuthRecipient(): string
+    {
+        return $this->email;
+    }
+
+    public function getEmailAuthCode(): ?string
+    {
+        if (null == $this->authCode) {
+            throw new \LogicException('The email authentication code was not set.');
+        }
+
+        return $this->authCode;
+    }
+
+    public function setEmailAuthCode(string $authCode): void
+    {
+        $this->authCode = $authCode;
     }
 }
