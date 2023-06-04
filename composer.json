@@ -12,6 +12,7 @@
         "doctrine/orm": "^2.15",
         "scheb/2fa-bundle": "^6.8",
         "scheb/2fa-email": "^6.8",
+        "scheb/2fa-trusted-device": "^6.8",
         "sensio/framework-extra-bundle": "^6.2",
         "stof/doctrine-extensions-bundle": "^1.7",
         "symfony/asset": "6.2.*",

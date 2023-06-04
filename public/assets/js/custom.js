@@ -65,7 +65,7 @@ $(function () {
 
 
         $.ajax({
-            url: '/department/new',
+            url: '/admin/department/new',
             method: 'POST',
             data: formData,
             success: function (response) {
@@ -136,3 +136,9 @@ function showToast(heading, message, icon, color) {
         textColor: 'white',
     })
 }
+
+$(".twoFa-number").on('keyup', function () {
+    if (this.value.length === this.maxLength) {
+        $(this).next(".twoFa-number").focus();
+    }
+})
