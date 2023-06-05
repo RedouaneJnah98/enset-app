@@ -191,7 +191,7 @@
                         <thead>
                         <tr>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
-                                aria-label="Plan: activate to sort column ascending">Emp ID
+                                aria-label="Plan: activate to sort column ascending" style="width: 100px">Emp ID
                             </th>
                             <th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1" style="width: 0; display: none;"
                                 aria-label=""></th>
@@ -225,11 +225,15 @@
                                     <div class="d-flex justify-content-start align-items-center user-name">
                                         <div class="avatar-wrapper">
                                             <div class="avatar avatar-sm me-3">
-                                                {#                                                <img src="{{ user.imageName }}" alt="Avatar" class="rounded-circle"> #}
-                                                <span
-                                                        class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}"
-                                                >
-                                                    {{ user.firstName|first }}{{ user.lastName|first }}</span>
+                                                {% if user.imageName is null %}
+                                                    <span
+                                                            class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}"
+                                                    >
+                                                    {{ user.firstName|first }}{{ user.lastName|first }}
+                                                </span>
+                                                {% else %}
+                                                    <img src="{{ vich_uploader_asset(user) }}" alt="Avatar" class="rounded-circle">
+                                                {% endif %}
                                             </div>
                                         </div>
                                         <div class="d-flex flex-column">
@@ -270,7 +274,17 @@
                                     <span class="badge bg-label-dark fs-tiny text-lowercase">2 days ago</span>
                                 </td>
                                 <td>
-                                    <span class="badge bg-label-success fs-tiny">Enabled</span>
+                                    {% if user.authCode is not null %}
+                                        <span class="badge bg-label-success fs-tiny">
+                                            Enabled
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-label-danger fs-tiny">
+                                            Disabled
+                                        </span>
+                                    {% endif %}
+
+
                                 </td>
                                 <td>
                                     <span class="fs-6">{{ user.createdAt|date }}</span>

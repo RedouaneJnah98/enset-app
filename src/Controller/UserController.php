@@ -69,12 +69,13 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($request->isXmlHttpRequest()) {
-                $data = $form->getData();
-                $userRepository->save($data, true);
+//            if ($request->isXmlHttpRequest()) {
+            $data = $form->getData();
+            //dd($data);
+            $userRepository->save($data, true);
 
-                return $this->json(['success' => 'User information updated successfully.']);
-            }
+            return $this->json(['success' => 'User information updated successfully.']);
+//            }
         }
 
         return $this->render('user/edit.html.twig', [

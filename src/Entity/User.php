@@ -316,9 +316,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     /**
      * @param File|null $imageFile
      */
-    public function setImageFile(?File $imageFile): void
+    public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
     }
 
     public function getAddress(): ?Address
@@ -400,6 +404,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     }
 
     public function setEmailAuthCode(string $authCode): void
+    {
+        $this->authCode = $authCode;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getAuthCode(): ?string
+    {
+        return $this->authCode;
+    }
+
+    /**
+     * @param string|null $authCode
+     */
+    public function setAuthCode(?string $authCode): void
     {
         $this->authCode = $authCode;
     }

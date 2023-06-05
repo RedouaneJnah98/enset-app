@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <div class="user-avatar-section">
                         <div class=" d-flex align-items-center flex-column">
-                            <img class="img-fluid rounded-circle my-4" src="../../assets/img/avatars/1.png" alt="User avatar" width="110" height="110">
+                            <img class="img-fluid rounded my-4" src="{{ vich_uploader_asset(user) }}" alt="User avatar" width="110" height="110">
                             <div class="user-info text-center">
                                 <h5 class="mb-2 text-capitalize">{{ user.firstName }} {{ user.lastName }}</h5>
                                 <span class="badge bg-label-info">Author</span>
@@ -147,13 +147,13 @@
                                                     {{ form_errors(form.gender) }}
                                                 </div>
                                             </div>
-                                            {#                                            <div class="col-md-6 mb-3"> #}
-                                            {#                                                <label class="form-label" for="{{ form.email.vars.id }}">Email</label> #}
-                                            {#                                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }} #}
-                                            {#                                                <div class="invalid-feedback"> #}
-                                            {#                                                    {{ form_errors(form.email) }} #}
-                                            {#                                                </div> #}
-                                            {#                                            </div> #}
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="{{ form.email.vars.id }}">Email</label>
+                                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                                <div class="invalid-feedback">
+                                                    {{ form_errors(form.email) }}
+                                                </div>
+                                            </div>
                                             <div class="col-md-6 mb-3">
                                                 <label class="form-label" for="{{ form.phoneNumber.vars.id }}">Phone Number</label>
                                                 {{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control'}}) }}

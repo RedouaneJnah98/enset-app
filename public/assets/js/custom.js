@@ -2,7 +2,7 @@ $(function () {
     $("#saveUserBtn").on('click', function (event) {
         event.preventDefault();
 
-        let url = $(this).attr('action');
+        let url = window.location.pathname;
         let cardId = $("#user_cardId");
         let username = $("#user_username");
         let firstName = $("#user_firstName");
