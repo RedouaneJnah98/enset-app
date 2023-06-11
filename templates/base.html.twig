@@ -499,14 +499,14 @@
                                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                         {% if app.user.imageName is null %}
-                                            <div class="avatar avatar-sm">
+                                            <div class="avatar">
                                                 <img src="{{ user.imageName }}" alt="Avatar" class="rounded-circle">
                                                 <span class="avatar-initial rounded-circle bg-label-info">
                                                     {{ app.user.firstName|first }}{{ app.user.lastName|first }}
                                                 </span>
                                             </div>
                                         {% else %}
-                                            <div class="avatar avatar-online">
+                                            <div class="avatar">
                                                 <img src="{{ vich_uploader_asset(app.user) }}" alt="" class="rounded">
                                             </div>
                                         {% endif %}
@@ -563,7 +563,7 @@
                                             <div class="dropdown-divider"></div>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="{{ path('app_user_settings') }}">
                                                 <i class="bx bx-cog me-2"></i>
                                                 <span class="align-middle">Account Settings</span>
                                             </a>
