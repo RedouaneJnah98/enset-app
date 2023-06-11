@@ -142,3 +142,47 @@ $(".twoFa-number").on('keyup', function () {
         $(this).next(".twoFa-number").focus();
     }
 })
+
+
+const emailInfo = $("#emailInfo");
+const emailForm = $("#emailForm");
+const passwordInfo = $("#passwordInfo");
+const passwordForm = $("#passwordForm");
+
+$("#changeEmailBtn").on('click', function () {
+    addEmailLayout();
+})
+
+$("#emailCancelBtn").on('click', function (event) {
+    event.preventDefault();
+    removeEmailLayout();
+})
+
+$("#changePasswordBtn").on('click', function () {
+    addPasswordLayout();
+})
+
+$("#passwordCancelBtn").on('click', function (event) {
+    event.preventDefault();
+    removePasswordLayout();
+})
+
+function addPasswordLayout() {
+    passwordInfo.addClass('d-none');
+    passwordForm.removeClass('d-none');
+}
+
+function removePasswordLayout() {
+    passwordInfo.removeClass('d-none');
+    passwordForm.addClass('d-none');
+}
+
+function addEmailLayout() {
+    emailInfo.addClass('d-none');
+    emailForm.removeClass('d-none');
+}
+
+function removeEmailLayout() {
+    emailInfo.removeClass('d-none');
+    emailForm.addClass('d-none');
+}

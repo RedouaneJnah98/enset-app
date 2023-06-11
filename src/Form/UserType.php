@@ -26,20 +26,21 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'attr' => ['placeholder' => 'john.doe']
+                'attr' => ['placeholder' => 'john.doe', 'class' => 'form-control'],
             ])
             ->add('firstName', TextType::class, [
-                'attr' => ['placeholder' => 'John']
+                'attr' => ['placeholder' => 'John', 'class' => 'form-control']
             ])
             ->add('lastName', TextType::class, [
-                'attr' => ['placeholder' => 'Doe']
+                'attr' => ['placeholder' => 'Doe', 'class' => 'form-control']
             ])
             ->add('email', EmailType::class, [
-                'attr' => ['placeholder' => 'john.doe@example.com'],
+                'attr' => ['placeholder' => 'john.doe@example.com', 'class' => 'form-control'],
+                'mapped' => false
             ])
             ->add('plainPassword', PasswordType::class, [
                 'hash_property_path' => 'password',
-                'mapped' => false
+                'mapped' => false,
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -49,29 +50,35 @@ class UserType extends AbstractType
             ])
             ->add('gender', ChoiceType::class, [
                 'choices' => ['Male' => 'Male', 'Female' => 'Female'],
-                'placeholder' => 'Choose'
+                'attr' => ['placeholder' => 'Choose', 'class' => 'form-control'],
             ])
             ->add('phoneNumber', TextType::class, [
-                'attr' => ['placeholder' => '0612-345-678']
+                'attr' => ['placeholder' => '0612-345-678', 'class' => 'form-control']
             ])
             ->add('employeeId', IntegerType::class, [
-                'attr' => ['placeholder' => '1234']
+                'attr' => ['placeholder' => '1234', 'class' => 'form-control'],
+                'mapped' => false
             ])
             ->add('cardId', TextType::class, [
-                'attr' => ['placeholder' => 'K987345']
+                'attr' => ['placeholder' => 'K987345', 'class' => 'form-control'],
+                'mapped' => false
             ])
             ->add('dateOfBirth', BirthdayType::class, [
+                'attr' => ['class' => 'form-control'],
                 'widget' => 'single_text',
                 'empty_data' => null
             ])
-            ->add('imageFile', VichImageType::class);
+            ->add('imageFile', VichImageType::class, [
+                'attr' => ['class' => 'form-control']
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'csrf_token_id' => 'user_csrfToken'
+            'csrf_token_id' => 'user_csrfToken',
+//            'validation_groups' => false
         ]);
     }
 }

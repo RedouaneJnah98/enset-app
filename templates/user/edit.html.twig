@@ -27,7 +27,10 @@
                         <div class=" d-flex align-items-center flex-column">
                             <img class="img-fluid rounded my-4" src="{{ vich_uploader_asset(user) }}" alt="User avatar" width="110" height="110">
                             <div class="user-info text-center">
-                                <h5 class="mb-2 text-capitalize">{{ user.firstName }} {{ user.lastName }}</h5>
+                                <h5 class="mb-2 text-capitalize d-flex align-items-center">
+                                    <span>{{ user.firstName }} {{ user.lastName }}</span>
+                                    <i class='bx bxs-badge-check text-info ms-1'></i>
+                                </h5>
                                 <span class="badge bg-label-info">Author</span>
                             </div>
                         </div>

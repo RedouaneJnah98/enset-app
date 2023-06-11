@@ -226,8 +226,7 @@
                                         <div class="avatar-wrapper">
                                             <div class="avatar avatar-sm me-3">
                                                 {% if user.imageName is null %}
-                                                    <span
-                                                            class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}"
+                                                    <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}"
                                                     >
                                                     {{ user.firstName|first }}{{ user.lastName|first }}
                                                 </span>

@@ -8,11 +8,16 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+use Vich\UploaderBundle\Form\Type\VichImageType;
+
+use function Sodium\add;
 
 #[Route('/admin')]
 class UserController extends AbstractController
@@ -69,13 +74,10 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            if ($request->isXmlHttpRequest()) {
             $data = $form->getData();
-            //dd($data);
             $userRepository->save($data, true);
 
             return $this->json(['success' => 'User information updated successfully.']);
-//            }
         }
 
         return $this->render('user/edit.html.twig', [
@@ -92,6 +94,52 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/settings', name: 'app_user_settings', methods: ['GET', 'POST'])]
+    public function settings(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    {
+//        $defaults = [
+//            'csrf_token_id' => 'settings_csrfToken',
+//            'data_class' => User::class
+//        ];
+//
+//
+//        $form = $this->createFormBuilder(data: $user, options: $defaults)
+//            ->add('firstName', TextType::class)
+//            ->add('lastName', TextType::class)
+//            ->add('username', TextType::class)
+//            ->add('phoneNumber', TextType::class)
+//            ->add('gender', ChoiceType::class, [
+//                'choices' => ['Male' => 'Male', 'Female' => 'Female'],
+//                'attr' => ['placeholder' => 'Choose', 'class' => 'form-control']
+//            ])
+//            ->add('dateOfBirth', BirthdayType::class, [
+//                'attr' => ['class' => 'form-control'],
+//                'widget' => 'single_text',
+//                'empty_data' => null
+//            ])
+//            ->add('imageFile', VichImageType::class, [
+//                'attr' => ['class' => 'form-control']
+//            ])
+//            ->getForm();
+
+        $userId = $this->getUser()->getId();
+        $user = $userRepository->find($userId);
+
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            //  dd($data);
+            $userRepository->save($data, true);
+            $this->addFlash('success', 'Profile settings updated successfully!');
+        }
+
+        return $this->render('user/settings.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     #[Route('/profile', name: 'app_user_profile')]

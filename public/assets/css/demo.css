@@ -350,10 +350,14 @@ div.dataTables_wrapper div.dataTables_length select {
     color: #d9dee3;
 }
 
-.nav-tabs .nav-link, .nav-pills .nav-link {
+.nav-tabs .nav-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+.nav-pills .nav-link {
+    display: inline-flex;
 }
 
 /* Buttons styles */
@@ -456,4 +460,24 @@ div.dataTables_wrapper div.dataTables_length select {
     color: #fff;
     box-shadow: 0 .125rem .25rem 0 rgba(255, 62, 29, .4);
     transform: translateY(-1px);
+}
+
+.btn-label-info {
+    color: #03c3ec;
+    border-color: rgba(0, 0, 0, 0);
+    background: #d7f5fc;
+}
+
+.btn-label-info:hover {
+    border-color: rgba(0, 0, 0, 0);
+    background: #03b0d4;
+    color: #fff;
+    box-shadow: 0 .125rem .25rem 0 rgba(3, 195, 236, .4);
+    transform: translateY(-1px);
+}
+
+/*Settings page styles*/
+.user-avatar {
+    width: 125px;
+    object-fit: cover;
 }

@@ -19,10 +19,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[Vich\Uploadable]
-#[UniqueEntity('email')]
-#[UniqueEntity('username')]
-#[UniqueEntity('employeeId')]
-#[UniqueEntity('cardId')]
+//#[UniqueEntity('email')]
+//#[UniqueEntity('username')]
+//#[UniqueEntity('employeeId')]
+//#[UniqueEntity('cardId')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorInterface
 {
     use TimestampableEntity;
@@ -32,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank]
+    // #[Assert\NotBlank]
     #[ORM\Column(length: 180, unique: true)]
     private ?string $username = null;
 
@@ -44,15 +44,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     private $plainPassword;
 
-    #[Assert\NotBlank]
+    //#[Assert\NotBlank]
     #[ORM\Column(length: 100)]
     private ?string $firstName = null;
 
-    #[Assert\NotBlank]
+    //#[Assert\NotBlank]
     #[ORM\Column(length: 100)]
     private ?string $lastName = null;
 
-    #[Assert\NotBlank]
+    // #[Assert\NotBlank]
     #[Assert\Email]
     #[ORM\Column(length: 150, unique: true)]
     private ?string $email = null;
@@ -60,15 +60,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateOfBirth = null;
 
-    #[Assert\NotBlank]
+    // #[Assert\NotBlank]
     #[ORM\Column(length: 15)]
     private ?string $phoneNumber = null;
 
-    #[Assert\NotBlank]
+    // #[Assert\NotBlank]
     #[ORM\Column(unique: true)]
     private ?int $employeeId = null;
 
-    #[Assert\NotBlank]
+    // #[Assert\NotBlank]
     #[ORM\Column(length: 10, unique: true)]
     private ?string $cardId = null;
 

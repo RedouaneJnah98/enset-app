@@ -498,16 +498,27 @@
                                 <!-- User -->
                                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                                        {#                                        <div class="avatar avatar-sm me-3"> #}
-                                        {#                                            <img src="../../assets/img/avatars/1.png" alt="" class="w-px-40 h-auto rounded-circle"> #}
-                                        {#                                        </div> #}
+                                        {% if app.user.imageName is null %}
+                                            <div class="avatar avatar-sm">
+                                                <img src="{{ user.imageName }}" alt="Avatar" class="rounded-circle">
+                                                <span class="avatar-initial rounded-circle bg-label-info">
+                                                    {{ app.user.firstName|first }}{{ app.user.lastName|first }}
+                                                </span>
+                                            </div>
+                                        {% else %}
+                                            <div class="avatar avatar-online">
+                                                <img src="{{ vich_uploader_asset(app.user) }}" alt="" class="rounded-circle">
+                                            </div>
+                                        {% endif %}
 
-                                        <div class="avatar avatar-sm ">
-                                            {#                                            <img src="{{ user.imageName }}" alt="Avatar" class="rounded-circle"> #}
-                                            <span class="avatar-initial rounded-circle bg-label-info">
-                                                {{ app.user.firstName|first }}{{ app.user.lastName|first }}
-                                            </span>
-                                        </div>
+                                        {#                                        {% if app.user.imageName is null %} #}
+                                        {#                                            <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}" #}
+                                        {#                                            > #}
+                                        {#                                                    {{ app.user.firstName|first }}{{ app.user.lastName|first }} #}
+                                        {#                                                </span> #}
+                                        {#                                        {% else %} #}
+                                        {#                                            <img src="{{ vich_uploader_asset(app.user) }}" alt="Avatar" class="rounded-circle"> #}
+                                        {#                                        {% endif %} #}
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
