@@ -97,33 +97,8 @@ class UserController extends AbstractController
     }
 
     #[Route('/settings', name: 'app_user_settings', methods: ['GET', 'POST'])]
-    public function settings(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
+    public function settings(Request $request, UserRepository $userRepository): Response
     {
-//        $defaults = [
-//            'csrf_token_id' => 'settings_csrfToken',
-//            'data_class' => User::class
-//        ];
-//
-//
-//        $form = $this->createFormBuilder(data: $user, options: $defaults)
-//            ->add('firstName', TextType::class)
-//            ->add('lastName', TextType::class)
-//            ->add('username', TextType::class)
-//            ->add('phoneNumber', TextType::class)
-//            ->add('gender', ChoiceType::class, [
-//                'choices' => ['Male' => 'Male', 'Female' => 'Female'],
-//                'attr' => ['placeholder' => 'Choose', 'class' => 'form-control']
-//            ])
-//            ->add('dateOfBirth', BirthdayType::class, [
-//                'attr' => ['class' => 'form-control'],
-//                'widget' => 'single_text',
-//                'empty_data' => null
-//            ])
-//            ->add('imageFile', VichImageType::class, [
-//                'attr' => ['class' => 'form-control']
-//            ])
-//            ->getForm();
-
         $userId = $this->getUser()->getId();
         $user = $userRepository->find($userId);
 
@@ -132,7 +107,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            //  dd($data);
+            
             $userRepository->save($data, true);
             $this->addFlash('success', 'Profile settings updated successfully!');
         }

@@ -69,7 +69,11 @@ class UserType extends AbstractType
                 'empty_data' => null
             ])
             ->add('imageFile', VichImageType::class, [
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'allow_delete' => false,
+                'allow_file_upload' => false,
+                'download_label' => false,
+                'image_uri' => false
             ]);
     }
 

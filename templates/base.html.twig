@@ -507,22 +507,13 @@
                                             </div>
                                         {% else %}
                                             <div class="avatar avatar-online">
-                                                <img src="{{ vich_uploader_asset(app.user) }}" alt="" class="rounded-circle">
+                                                <img src="{{ vich_uploader_asset(app.user) }}" alt="" class="rounded">
                                             </div>
                                         {% endif %}
-
-                                        {#                                        {% if app.user.imageName is null %} #}
-                                        {#                                            <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}" #}
-                                        {#                                            > #}
-                                        {#                                                    {{ app.user.firstName|first }}{{ app.user.lastName|first }} #}
-                                        {#                                                </span> #}
-                                        {#                                        {% else %} #}
-                                        {#                                            <img src="{{ vich_uploader_asset(app.user) }}" alt="Avatar" class="rounded-circle"> #}
-                                        {#                                        {% endif %} #}
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
-                                            <a class="dropdown-item" href="pages-account-settings-account.html">
+                                            <a class="dropdown-item" href="#">
                                                 <div class="d-flex">
                                                     <div class="flex-shrink-0 me-3">
                                                         <div class="avatar avatar-online">
