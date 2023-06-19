@@ -1,0 +1,245 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Student{% endblock %}
+
+{% block content %}
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <nav aria-label="breadcrumb mb-0">
+            <ol class="breadcrumb breadcrumb-style2">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_student_index') }}">Students</a>
+                </li>
+                <li class="breadcrumb-item active">New Student</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <!-- Account Details -->
+                    <div class="card-header">
+                        <h5 class="fw-semibold">Account Details</h5>
+                        <hr class="mt-0"/>
+                    </div>
+
+                    {# store the errors in a variable #}
+                    {#                    {% set usernameError = form_errors(form.username) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set firstNameError = form_errors(form.firstName) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set lastNameError = form_errors(form.lastName) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set emailError = form_errors(form.email) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set passwordFirstError = form_errors(form.plainPassword.first) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set passwordSecondtError = form_errors(form.plainPassword.second) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set employeeIdError = form_errors(form.employeeId) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set cardIdError = form_errors(form.cardId) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set phoneError = form_errors(form.phoneNumber) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set dateError = form_errors(form.dateOfBirth) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set genderError = form_errors(form.gender) ? 'form-control is-invalid' : 'form-control' %} #}
+
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
+
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label" for="{{ form.username.vars.id }}">Username *</label>
+
+                                {{ form_widget(form.username) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.username) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="{{ form.firstName.vars.id }}">First Name *</label>
+                                {{ form_widget(form.firstName) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.firstName) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="{{ form.lastName.vars.id }}">Last Name *</label>
+                                {{ form_widget(form.lastName) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.lastName) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="email">
+                                    Email
+                                    <i class='bx bxs-error-circle text-muted fs-6 ms-1 mb-1' data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                       data-bs-placement="top" data-bs-html="true" title="Email must be active"></i>
+                                </label>
+                                {{ form_widget(form.email) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.email) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-password-toggle">
+                                    <label class="form-label" for="{{ form.plainPassword.first.vars.id }}">Password</label>
+                                    <div class="input-group input-group-merge">
+                                        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control',
+                                            'placeholder': '············'}}) }}
+                                        <span class="input-group-text cursor-pointer" id="basic-default-password">
+                                            <i class="bx bx-hide"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-password-toggle">
+                                    <label class="form-label" for="{{ form.plainPassword.second.vars.id }}">Confirm Password *</label>
+                                    <div class="input-group input-group-merge">
+                                        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': '············'}}) }}
+                                        <span class="input-group-text cursor-pointer" id="multicol-confirm-password2">
+                                            <i class="bx bx-hide"></i>
+                                        </span>
+                                        {#                                        <div class="invalid-feedback"> #}
+                                        {#                                            {{ form_errors(form.plainPassword.second) }} #}
+                                        {#                                        </div> #}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Personal Info -->
+
+                            <div class="col-12">
+                                <h5 class="mt-2 fw-semibold">Personal Info</h5>
+                                <hr class="mt-0"/>
+                            </div>
+
+                            {#                            <div class="col-md-4"> #}
+                            {#                                <label class="form-label" for="{{ form.employeeId.vars.id }}">Employee ID *</label> #}
+                            {#                                {{ form_widget(form.employeeId, {'attr': {'class': employeeIdError}}) }} #}
+                            {#                                <div class="invalid-feedback"> #}
+                            {#                                    {{ form_errors(form.employeeId) }} #}
+                            {#                                </div> #}
+                            {#                            </div> #}
+                            <div class="col-md-4">
+                                <label class="form-label" for="{{ form.cardId.vars.id }}">CIN *</label>
+                                {{ form_widget(form.cardId) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.cardId) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="{{ form.mobileNumber.vars.id }}">
+                                    Phone no
+                                    <i class='bx bxs-error-circle text-muted fs-6 ms-1 mb-1' data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                       data-bs-placement="top" data-bs-html="true" title="Phone must be active"></i>
+                                </label>
+                                {{ form_widget(form.mobileNumber) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.mobileNumber) }}
+                                </div>
+                            </div>
+
+                            {#                            <div class="col-md-4"> #}
+                            {#                                <label for="{{ form.imageFile.vars.id }}" class="form-label">Profile Pic</label> #}
+                            {#                                {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }} #}
+                            {#                            </div> #}
+                            <div class="col-md-4">
+                                <label class="form-label" for="formValidationDob">Date of Birth *</label>
+                                {{ form_widget(form.birthDate) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.birthDate) }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label" for="{{ form.gender.vars.id }}">Gender *</label>
+                                {{ form_widget(form.gender) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.gender) }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="address">Address Line</label>
+                                <input type="text" class="form-control" name="street" id="address" placeholder="Rue Mohamed V"/>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="form-label" for="city">
+                                    City
+                                    <i class='bx bxs-error-circle text-muted fs-6 ms-1 mb-1' data-bs-toggle="tooltip" data-bs-offset="0,4"
+                                       data-bs-placement="top" data-bs-html="true" title="Resident city"></i>
+                                </label>
+                                <input type="text" name="city" id="city" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label" for="zipCode">Zip Code</label>
+                                <input type="number" class="form-control" name="zipCode" id="zipCode" placeholder="90000"/>
+                            </div>
+
+                            <!-- Choose Your Plan -->
+
+                            <div class="col-12">
+                                <h5 class="mt-2 fw-semibold">Security & Roles</h5>
+                                <hr class="mt-0"/>
+                            </div>
+                            <div class="alert alert-info d-flex" role="alert">
+                                <span class="me-2">
+                                    <i class='bx bxs-error-circle fs-1'></i>
+                                </span>
+                                <div class="d-flex flex-column ps-1 text-black">
+                                    <h6 class="alert-heading d-flex align-items-center fw-bold mb-1">Choose User Role</h6>
+                                    <span class="w-75">For security reasons please choose role carefully, the Administrator will receive a notification. For more info, please read our
+                                        <a href="#">Security Section</a>.
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col-xl-3 col-md-5 col-sm-6 col-12">
+                                    <div class="form-check custom-option custom-option-icon">
+                                        <label class="form-check-label custom-option-content" for="basicPlanMain1">
+                                              <span class="custom-option-body">
+                                                <i class='bx bx-shield-quarter'></i>
+                                                <span class="custom-option-title"> Administrator </span>
+                                                <small>Can have access to the hole system.</small>
+                                              </span>
+                                            <input name="roles[]" class="form-check-input" type="radio" value="ROLE_ADMIN" id="basicPlanMain1"/>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-5 col-sm-6 col-12">
+                                    <div class="form-check custom-option custom-option-icon">
+                                        <label class="form-check-label custom-option-content" for="basicPlanMain2">
+                                              <span class="custom-option-body">
+                                                <i class="bx bx-user"></i>
+                                                <span class="custom-option-title"> Professor </span>
+                                                <small>Can have access to some parts of the system.</small>
+                                              </span>
+                                            <input name="roles[]" class="form-check-input" type="radio" value="ROLE_PROFESSOR" id="basicPlanMain2" checked/>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-5 col-sm-6 col-12">
+                                    <div class="form-check custom-option custom-option-icon">
+                                        <label class="form-check-label custom-option-content" for="basicPlanMain3">
+                                          <span class="custom-option-body">
+                                            <i class='bx bxs-business'></i>
+                                            <span class="custom-option-title"> Human Resources </span>
+                                            <small>Can have access to what users need in the system.</small>
+                                          </span>
+                                            <input name="roles[]" class="form-check-input" type="radio" value="ROLE_HUMAN_RESOURCES" id="basicPlanMain3"/>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            {# CSRF Token #}
+                            {{ form_rest(form) }}
+
+                            <div class="col-12 mt-2">
+                                <button type="submit" name="createUser" class="btn btn-label-primary">Create User</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

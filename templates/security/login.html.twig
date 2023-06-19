@@ -27,10 +27,14 @@
                          <h4 class="mb-2">Welcome to ENSET! 👋</h4>
                          <p class="mb-4">Please sign-in to your account and start the adventure.</p>
 
+                         {% if error %}
+                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                         {% endif %}
+
                          <form id="formAuthentication" class="mb-3" action="{{ path('app_login') }}" method="POST">
                              <div class="mb-3">
                                  <label for="email" class="form-label">Email or Username</label>
-                                 <input type="text" class="form-control" id="email" name="username" placeholder="Enter your email or username" autofocus/>
+                                 <input type="text" class="form-control" id="email" name="_username" placeholder="Enter your email or username" value="{{ last_username }}"/>
                              </div>
                              <div class="mb-3 form-password-toggle">
                                  <div class="d-flex justify-content-between">
@@ -44,7 +48,7 @@
                                              type="password"
                                              id="password"
                                              class="form-control"
-                                             name="password"
+                                             name="_password"
                                              placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                              aria-describedby="password"
                                      />
