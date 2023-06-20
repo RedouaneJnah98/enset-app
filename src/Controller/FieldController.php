@@ -60,7 +60,7 @@ class FieldController extends AbstractController
             return $this->redirectToRoute('app_field_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('field/edit.html.twig', [
+        return $this->render('field/edit.html.twig', [
             'field' => $field,
             'form' => $form,
         ]);

@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class StudentType extends AbstractType
 {
@@ -43,18 +44,26 @@ class StudentType extends AbstractType
             ->add('gender', ChoiceType::class, [
                 'choices' => ['Male' => 'Male', 'Female' => 'Female'],
                 'attr' => ['placeholder' => 'Choose', 'class' => 'form-control'],
+                'placeholder' => 'Select'
             ])
             ->add('mobileNumber', TextType::class, [
                 'attr' => ['placeholder' => '0612-345-678', 'class' => 'form-control']
             ])
             ->add('cardId', TextType::class, [
                 'attr' => ['placeholder' => 'K987345', 'class' => 'form-control'],
-                'mapped' => false
+//                'mapped' => false
             ])
             ->add('birthDate', BirthdayType::class, [
                 'attr' => ['class' => 'form-control'],
                 'widget' => 'single_text',
                 'empty_data' => null
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'attr' => ['class' => 'form-control'],
+                'allow_delete' => false,
+                'allow_file_upload' => false,
+                'download_label' => false,
+                'image_uri' => false
             ]);
     }
 

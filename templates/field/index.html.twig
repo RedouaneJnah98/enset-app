@@ -34,9 +34,9 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
-                                    <a href="{{ path('app_module_new') }}" class="text-white">
+                                    <a href="{{ path('app_field_new') }}" class="text-white">
                                         <i class='bx bx-plus me-0 me-sm-1'></i>
-                                        <span class="d-none d-sm-inline-block">Add Module</span>
+                                        <span class="d-none d-sm-inline-block">Add Field</span>
                                     </a>
                                 </button>
                             </div>
@@ -49,11 +49,9 @@
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
                                 Name
                             </th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Assigned To">Department</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Assigned To">Status</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Assigned To">Type</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Assigned To">degree</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Created Date">Created Date</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">Actions</th>
                         </tr>
                         </thead>
@@ -75,13 +73,10 @@
                                         <span class="text-nowrap">{{ field.name }}</span>
                                     </td>
                                     <td>
-                                        <span class="text-nowrap">{{ field.department.name }}</span>
+                                        <span class="badge bg-label-success">{{ field.status|capitalize }}</span>
                                     </td>
                                     <td>
-                                        <span class="text-nowrap">{{ field.status }}</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-nowrap">{{ field.type }}</span>
+                                        <span class="text-nowrap">{{ field.type|capitalize }}</span>
                                     </td>
                                     <td>
                                         <span class="text-nowrap">{{ field.degree }}</span>
@@ -93,10 +88,13 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>
-                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                    <a class="dropdown-item" href="{{ path('app_field_edit', {'id': field.id}) }}">Edit</a>
                                                 </li>
                                                 <li>
-                                                    {{ include('module/_delete_form.html.twig') }}
+                                                    <a class="dropdown-item" href="#">Show</a>
+                                                </li>
+                                                <li>
+                                                    {{ include('field/_delete_form.html.twig') }}
                                                 </li>
                                             </ul>
                                         </div>
