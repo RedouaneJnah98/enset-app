@@ -2,10 +2,94 @@
 
 {% block title %}New Field{% endblock %}
 
-{% block body %}
-    <h1>Create new Field</h1>
+{% block content %}
+    <div class="container-xxl flex-grow-1 container-p-y">
 
-    {{ include('field/_form.html.twig') }}
+        <nav aria-label="breadcrumb mb-0">
+            <ol class="breadcrumb breadcrumb-style2">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_field_index') }}">Fields</a>
+                </li>
+                <li class="breadcrumb-item active">New Field</li>
+            </ol>
+        </nav>
 
-    <a href="{{ path('app_field_index') }}">back to list</a>
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <!-- Account Details -->
+                    <div class="card-header">
+                        <h5 class="fw-semibold">Field Details</h5>
+                        <hr class="mt-0"/>
+                    </div>
+
+                    {# store the errors in a variable #}
+                    {#                    {% set nameError = form_errors(form.name) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set totalSessionError = form_errors(form.totalSession) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set hoursError = form_errors(form.hours) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set departmentError = form_errors(form.department) ? 'form-control is-invalid' : 'form-control' %} #}
+
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold" for="{{ form.name.vars.id }}">Name *</label>
+
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.name) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold" for="{{ form.status.vars.id }}">Status *</label>
+
+                                {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.status) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold" for="{{ form.type.vars.id }}">Type *</label>
+
+                                {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.type) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold" for="{{ form.degree.vars.id }}">Degree *</label>
+
+                                {{ form_widget(form.degree, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.degree) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold" for="{{ form.department.vars.id }}">Department *</label>
+
+                                {{ form_widget(form.department, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.department) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        {{ form_rest(form) }}
+
+                        <div class="col-12 mt-4">
+                            <button type="submit" name="createUser" class="btn btn-label-primary">Create Field</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

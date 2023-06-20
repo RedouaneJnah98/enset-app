@@ -5,14 +5,11 @@
 {% block content %}
     <div class="container-xxl flex-grow-1 container-p-y">
 
-        {#        <h4 class="fw-bold py-3 mb-2">Courses List</h4> #}
-        {#        <p class="mb-4">Each category (Basic, Professional, and Business) includes the four predefined roles shown below.</p> #}
-
         {{ include('components/statistics/_courses_stats.htmt.twig') }}
 
         <div class="card">
             <div class="card-datatable table-responsive">
-                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                <div class="dataTables_wrapper dt-bootstrap5 no-footer">
                     <div class="row mx-1">
                         <div class="col-sm-12 col-md-3">
                             <div class="dataTables_length" id="DataTables_Table_0_length">
@@ -44,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <table class="datatables-permissions table border-top dataTable no-footer dtr-column" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" style="width: 1130px;">
+                    <table class="table border-top dataTable dtr-column table-striped" style="width: 1130px;">
                         <thead>
                         <tr>
                             <th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1" style="width: 0px; display: none;" aria-label=""></th>

@@ -114,7 +114,7 @@
                         <li class="menu-item">
                             <a href="cards-basic.html" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-calendar"></i>
-                                <div data-i18n="Basic">Daily Attendance</div>
+                                <div data-i18n="Basic">Year View</div>
                             </a>
                         </li>
 
@@ -150,6 +150,12 @@
                                 <div data-i18n="Boxicons">Admission</div>
                             </a>
                         </li>
+                        <li class="menu-item">
+                            <a href="{{ path('app_field_index') }}" class="menu-link">
+                                <i class='menu-icon tf-icons bx bx-customize'></i>
+                                <div data-i18n="Boxicons">Fields</div>
+                            </a>
+                        </li>
                         {% if is_granted('ROLE_ADMIN') %}
                             <!-- Department -->
                             <li class="menu-item {{ route == 'app_department_index' ? 'active' : '' }}">
@@ -174,12 +180,6 @@
                             <a href="tables-basic.html" class="menu-link">
                                 <i class='menu-icon tf-icon bx bxs-folder-open'></i>
                                 <div data-i18n="Tables">Documents Request</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="tables-basic.html" class="menu-link">
-                                <i class='menu-icon tf-icon bx bx-credit-card'></i>
-                                <div data-i18n="Tables">Student Fee Manager</div>
                             </a>
                         </li>
                     </ul>

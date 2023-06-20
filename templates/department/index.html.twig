@@ -33,17 +33,14 @@
                                         </label>
                                     </div>
                                 </div>
-                                <button class="btn btn-secondary add-new btn-primary" type="button"
-                                        data-bs-toggle="modal" data-bs-target="#modalAddDepartment">
-                                    {#                                    <a href="{{ path('app_department_new') }}" class="text-white"> #}
+                                <button class="btn btn-secondary add-new btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#modalAddDepartment">
                                     <i class='bx bx-plus me-0 me-sm-1'></i>
                                     <span class="d-none d-sm-inline-block">Add Department</span>
-                                    {#                                    </a> #}
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <table class="datatables-permissions table border-top dataTable no-footer dtr-column" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" style="width: 1130px;">
+                    <table class="table border-top dataTable table-striped" style="width: 1130px;">
                         <thead>
                         <tr>
                             <th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1" style="width: 0px; display: none;" aria-label=""></th>
@@ -62,7 +59,7 @@
                                 <td colspan="5" class="text-center">
                                     <div class="d-flex flex-column align-items-center py-3">
                                         <img src="{{ asset('assets/img/illustrations/empty.svg') }}" width="200" alt="empty svg">
-                                        <span class="mt-2">Not enough data</span>
+                                        <span class="mt-2">Not row found</span>
                                     </div>
                                 </td>
                             </tr>

@@ -34,9 +34,9 @@ class FieldController extends AbstractController
             return $this->redirectToRoute('app_field_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('field/new.html.twig', [
+        return $this->render('field/new.html.twig', [
             'field' => $field,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -69,7 +69,7 @@ class FieldController extends AbstractController
     #[Route('/{id}', name: 'app_field_delete', methods: ['POST'])]
     public function delete(Request $request, Field $field, FieldRepository $fieldRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$field->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $field->getId(), $request->request->get('_token'))) {
             $fieldRepository->remove($field, true);
         }
 

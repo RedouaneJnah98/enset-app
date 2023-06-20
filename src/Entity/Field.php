@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use App\Repository\FieldRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: FieldRepository::class)]
 class Field
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -24,6 +27,10 @@ class Field
 
     #[ORM\Column(length: 100)]
     private ?string $degree = null;
+
+    #[ORM\ManyToOne(inversedBy: 'fields')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Department $department = null;
 
     public function getId(): ?int
     {
@@ -74,6 +81,18 @@ class Field
     public function setDegree(string $degree): self
     {
         $this->degree = $degree;
+
+        return $this;
+    }
+
+    public function getDepartment(): ?Department
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(?Department $department): self
+    {
+        $this->department = $department;
 
         return $this;
     }

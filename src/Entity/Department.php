@@ -36,9 +36,13 @@ class Department
     #[ORM\OneToMany(mappedBy: 'department', targetEntity: Course::class)]
     private Collection $courses;
 
+    #[ORM\OneToMany(mappedBy: 'department', targetEntity: Field::class)]
+    private Collection $fields;
+
     public function __construct()
     {
         $this->courses = new ArrayCollection();
+        $this->fields = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -115,5 +119,35 @@ class Department
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Field>
+     */
+    public function getFields(): Collection
+    {
+        return $this->fields;
+    }
+
+    public function addField(Field $field): self
+    {
+        if (!$this->fields->contains($field)) {
+            $this->fields->add($field);
+            $field->setDepartment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeField(Field $field): self
+    {
+        if ($this->fields->removeElement($field)) {
+            // set the owning side to null (unless already changed)
+            if ($field->getDepartment() === $this) {
+                $field->setDepartment(null);
+            }
+        }
+
+        return $this;
     }
 }
