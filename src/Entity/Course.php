@@ -56,9 +56,13 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Module::class)]
     private Collection $modules;
 
+    #[ORM\OneToMany(mappedBy: 'course', targetEntity: Section::class)]
+    private Collection $sections;
+
     public function __construct()
     {
         $this->modules = new ArrayCollection();
+        $this->sections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,5 +163,35 @@ class Course
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Section>
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections->add($section);
+            $section->setCourse($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->sections->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getCourse() === $this) {
+                $section->setCourse(null);
+            }
+        }
+
+        return $this;
     }
 }

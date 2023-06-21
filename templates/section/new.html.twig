@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Section{% endblock %}
+
+{% block content %}
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <nav aria-label="breadcrumb mb-0">
+            <ol class="breadcrumb breadcrumb-style2">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_section_index') }}">Sections</a>
+                </li>
+                <li class="breadcrumb-item active">New Section</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <!-- Account Details -->
+                    <div class="card-header">
+                        <h5 class="fw-semibold">Section Details</h5>
+                        <hr class="mt-0"/>
+                    </div>
+
+                    {# store the errors in a variable #}
+                    {#                    {% set nameError = form_errors(form.name) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set totalSessionError = form_errors(form.totalSession) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set hoursError = form_errors(form.hours) ? 'form-control is-invalid' : 'form-control' %} #}
+                    {#                    {% set departmentError = form_errors(form.department) ? 'form-control is-invalid' : 'form-control' %} #}
+
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold" for="{{ form.semester.vars.id }}">Semester *</label>
+
+                                {{ form_widget(form.semester, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.semester) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-8">
+                                <label class="form-label fw-bold" for="{{ form.year.vars.id }}">Year *</label>
+
+                                {{ form_widget(form.year, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.year) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold" for="{{ form.roomNo.vars.id }}">Room No *</label>
+
+                                {{ form_widget(form.roomNo, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.roomNo) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold" for="{{ form.field.vars.id }}">Field *</label>
+
+                                {{ form_widget(form.field, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.field) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold" for="{{ form.course.vars.id }}">Course *</label>
+
+                                {{ form_widget(form.course, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.course) }}
+                                </div>
+                            </div>
+                        </div>
+
+                        {{ form_rest(form) }}
+
+                        <div class="col-12 mt-4">
+                            <button type="submit" name="createUser" class="btn btn-label-primary">Create Field</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

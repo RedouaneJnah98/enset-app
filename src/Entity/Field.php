@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FieldRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -31,6 +33,14 @@ class Field
     #[ORM\ManyToOne(inversedBy: 'fields')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Department $department = null;
+
+    #[ORM\OneToMany(mappedBy: 'field', targetEntity: Section::class)]
+    private Collection $sections;
+
+    public function __construct()
+    {
+        $this->sections = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -95,5 +105,40 @@ class Field
         $this->department = $department;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Section>
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections->add($section);
+            $section->setField($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->sections->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getField() === $this) {
+                $section->setField(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

@@ -31,7 +31,7 @@ class FieldType extends AbstractType
                 'placeholder' => 'Select'
             ])
             ->add('department', EntityType::class, [
-                'class' => Department::class,
+                'class' => 'App\Entity\Department',
                 'placeholder' => 'Select'
             ]);
     }
