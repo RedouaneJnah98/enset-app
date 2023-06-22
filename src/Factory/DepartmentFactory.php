@@ -3,6 +3,7 @@
 namespace App\Factory;
 
 use App\Entity\Department;
+use App\Factory\Sequence\DepartmentName;
 use App\Repository\DepartmentRepository;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
@@ -46,10 +47,18 @@ final class DepartmentFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $names = [
+            "Administrative Sciences and Techniques and Skills Engineering",
+            "Electrical Engineering",
+            "Mechanical Engineering",
+            "Mathematics and Computer Science",
+            "Economics and Management Engineering"
+        ];
+
         return [
             'building' => self::faker()->buildingNumber(),
-            //'headDepartment' => UserFactory::new(),
-            'name' => 'Mathematics and Computer Science',
+            'headDepartment' => UserFactory::random(),
+            // 'name' => self::faker()->randomElement($names),
         ];
     }
 

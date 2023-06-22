@@ -61,7 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private ?\DateTimeInterface $dateOfBirth = null;
 
     // #[Assert\NotBlank]
-    #[ORM\Column(length: 15)]
+    #[ORM\Column(length: 50)]
     private ?string $phoneNumber = null;
 
     // #[Assert\NotBlank]

@@ -47,14 +47,12 @@ final class FieldFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'createdAt' => self::faker()->dateTime(),
-            'degree' => self::faker()->text(100),
-            'department' => DepartmentFactory::new(),
-            'name' => self::faker()->text(200),
-            'shortName' => self::faker()->text(100),
-            'status' => self::faker()->text(100),
-            'type' => self::faker()->text(100),
-            'updatedAt' => self::faker()->dateTime(),
+            'degree' => self::faker()->randomElement(["University License", "University Masters"]),
+            'department' => DepartmentFactory::random(),
+            // 'name' => self::faker()->text(200),
+            'shortName' => self::faker()->text(10),
+            'status' => self::faker()->randomElement(['Accredited', 'Pending']),
+            'type' => self::faker()->randomElement(['Initial Training', 'Continuing Training']),
         ];
     }
 
@@ -63,9 +61,8 @@ final class FieldFactory extends ModelFactory
      */
     protected function initialize(): self
     {
-        return $this
-            // ->afterInstantiate(function(Field $field): void {})
-        ;
+        return $this// ->afterInstantiate(function(Field $field): void {})
+            ;
     }
 
     protected static function getClass(): string

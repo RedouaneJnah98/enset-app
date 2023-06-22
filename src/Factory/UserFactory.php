@@ -60,9 +60,10 @@ final class UserFactory extends ModelFactory
             'gender' => self::faker()->randomElement(['Male', 'Female']),
             'lastName' => self::faker()->lastName(),
             'plainPassword' => 'test',
-            'phoneNumber' => '06060606060',
-            'roles' => (new User())->getRoles(),
+            'phoneNumber' => self::faker()->e164PhoneNumber(),
+            'roles' => ['ROLE_PROFESSOR'],
             'username' => self::faker()->unique()->userName(),
+            'address' => AddressFactory::random()
         ];
     }
 

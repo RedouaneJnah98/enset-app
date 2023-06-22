@@ -503,7 +503,7 @@
                                     <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                         {% if app.user.imageName is null %}
                                             <div class="avatar">
-                                                <img src="{{ user.imageName }}" alt="Avatar" class="rounded-circle">
+                                                {#                                                <img src="{{ user.imageName }}" alt="Avatar" class="rounded-circle"> #}
                                                 <span class="avatar-initial rounded-circle bg-label-info">
                                                     {{ app.user.firstName|first }}{{ app.user.lastName|first }}
                                                 </span>

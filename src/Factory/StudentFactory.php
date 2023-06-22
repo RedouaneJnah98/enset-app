@@ -53,17 +53,14 @@ final class StudentFactory extends ModelFactory
         return [
             'birthDate' => self::faker()->dateTime(),
             'cardId' => self::faker()->text(10),
-            //'createdAt' => self::faker()->dateTime(),
             'email' => self::faker()->unique()->email(),
-            'field' => FieldFactory::new(),
-            'firstName' => self::faker()->text(100),
-            'gender' => self::faker()->text(20),
-            'lastName' => self::faker()->text(100),
-            'mobileNumber' => self::faker()->text(100),
+            'field' => FieldFactory::random(),
+            'firstName' => self::faker()->firstName(),
+            'gender' => self::faker()->randomElement(['Male', 'Female']),
+            'lastName' => self::faker()->lastName(),
+            'mobileNumber' => self::faker()->phoneNumber(),
             'plainPassword' => 'test',
-            //'password' => self::faker()->text(),
-            'roles' => ['ROLE_USER'],
-            // 'updatedAt' => self::faker()->dateTime(),
+            'roles' => (new Student())->getRoles(),
             'username' => self::faker()->unique()->userName(),
         ];
     }
