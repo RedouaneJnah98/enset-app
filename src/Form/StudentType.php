@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Student;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -64,6 +65,10 @@ class StudentType extends AbstractType
                 'allow_file_upload' => false,
                 'download_label' => false,
                 'image_uri' => false
+            ])
+            ->add('field', EntityType::class, [
+                'class' => 'App\Entity\Field',
+                'placeholder' => 'Select'
             ]);
     }
 

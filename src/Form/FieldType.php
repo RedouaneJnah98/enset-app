@@ -20,19 +20,23 @@ class FieldType extends AbstractType
                 'attr' => ['placeholder' => 'Electrical Engineering']
             ])
             ->add('status', ChoiceType::class, [
-                'choices' => ['Accredited' => 'accredited', 'In Process of Accreditation' => 'in process', 'Pending' => 'pending']
+                'choices' => ['Accredited' => 'accredited', 'In Process of Accreditation' => 'in process', 'Pending' => 'pending'],
+                'placeholder' => 'Select'
             ])
             ->add('type', ChoiceType::class, [
-                'choices' => ['Initial Training' => 'initial training', 'Continuing Training' => 'continuing training'],
+                'choices' => ['Initial Training' => 'initial training', 'Continuing Training' => 'continuing training', 'Both' => true],
                 'placeholder' => 'Select'
             ])
             ->add('degree', ChoiceType::class, [
-                'choices' => ['University License' => 'University License', 'University Masters' => 'University Masters'],
+                'choices' => ['University License' => 'University License', 'University Masters' => 'University Masters', 'Engineering Cycle' => 'engineering cycle'],
                 'placeholder' => 'Select'
             ])
             ->add('department', EntityType::class, [
                 'class' => 'App\Entity\Department',
                 'placeholder' => 'Select'
+            ])
+            ->add('shortName', TextType::class, [
+                'attr' => ['placeholder' => 'e.g.BDCC']
             ]);
     }
 

@@ -21,8 +21,8 @@ class Address
     #[ORM\Column(length: 100)]
     private ?string $city = null;
 
-    #[ORM\Column]
-    private ?int $zipCode = null;
+    #[ORM\Column(length: 10)]
+    private ?string $zipCode = null;
 
     #[ORM\OneToMany(mappedBy: 'address', targetEntity: User::class)]
     private Collection $users;
@@ -61,12 +61,12 @@ class Address
         return $this;
     }
 
-    public function getZipCode(): ?int
+    public function getZipCode(): ?string
     {
         return $this->zipCode;
     }
 
-    public function setZipCode(int $zipCode): self
+    public function setZipCode(string $zipCode): self
     {
         $this->zipCode = $zipCode;
 

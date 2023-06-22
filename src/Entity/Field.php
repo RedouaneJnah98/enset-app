@@ -37,9 +37,16 @@ class Field
     #[ORM\OneToMany(mappedBy: 'field', targetEntity: Section::class)]
     private Collection $sections;
 
+    #[ORM\OneToMany(mappedBy: 'field', targetEntity: Student::class)]
+    private Collection $students;
+
+    #[ORM\Column(length: 100)]
+    private ?string $shortName = null;
+
     public function __construct()
     {
         $this->sections = new ArrayCollection();
+        $this->students = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,5 +147,47 @@ class Field
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Student>
+     */
+    public function getStudents(): Collection
+    {
+        return $this->students;
+    }
+
+    public function addStudent(Student $student): self
+    {
+        if (!$this->students->contains($student)) {
+            $this->students->add($student);
+            $student->setField($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStudent(Student $student): self
+    {
+        if ($this->students->removeElement($student)) {
+            // set the owning side to null (unless already changed)
+            if ($student->getField() === $this) {
+                $student->setField(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getShortName(): ?string
+    {
+        return $this->shortName;
+    }
+
+    public function setShortName(string $shortName): self
+    {
+        $this->shortName = $shortName;
+
+        return $this;
     }
 }

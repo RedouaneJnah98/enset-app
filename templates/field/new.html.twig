@@ -47,6 +47,16 @@
                         </div>
                         <div class="row g-3 mb-4">
                             <div class="col-md-8">
+                                <label class="form-label fw-bold" for="{{ form.shortName.vars.id }}">Short Name *</label>
+
+                                {{ form_widget(form.shortName, {'attr': {'class': 'form-control'}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.shortName) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
                                 <label class="form-label fw-bold" for="{{ form.status.vars.id }}">Status *</label>
 
                                 {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
@@ -54,8 +64,6 @@
                                     {{ form_errors(form.status) }}
                                 </div>
                             </div>
-                        </div>
-                        <div class="row g-3 mb-4">
                             <div class="col-md-4">
                                 <label class="form-label fw-bold" for="{{ form.type.vars.id }}">Type *</label>
 
@@ -64,6 +72,8 @@
                                     {{ form_errors(form.type) }}
                                 </div>
                             </div>
+                        </div>
+                        <div class="row g-3 mb-4">
                             <div class="col-md-4">
                                 <label class="form-label fw-bold" for="{{ form.degree.vars.id }}">Degree *</label>
 
