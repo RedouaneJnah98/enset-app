@@ -7,19 +7,37 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Omines\DataTablesBundle\Adapter\ArrayAdapter;
+use Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter;
+use Omines\DataTablesBundle\Column\TextColumn;
+use Omines\DataTablesBundle\DataTableFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin')]
+//#[Route('/admin')]
 class UserController extends AbstractController
 {
-    #[Route('/users', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    #[Route('/users', name: 'app_user_index', methods: ['GET', 'POST'])]
+    public function index(UserRepository $userRepository, DataTableFactory $dataTableFactory, Request $request): Response
     {
+//        $table = $dataTableFactory->create()
+//            ->add('firstName', TextColumn::class)
+//            ->add('lastName', TextColumn::class)
+//            ->add('Email', TextColumn::class)
+//            ->createAdapter(ORMAdapter::class, [
+//                'entity' => User::class
+//            ])
+//            ->handleRequest($request);
+//
+//        if ($table->isCallback()) {
+//            return $table->getResponse();
+//        }
+
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll()
+//            'datatable' => $table
         ]);
     }
 

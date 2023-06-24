@@ -68,7 +68,8 @@ class StudentType extends AbstractType
             ])
             ->add('field', EntityType::class, [
                 'class' => 'App\Entity\Field',
-                'placeholder' => 'Select'
+                'placeholder' => 'Select',
+                'attr' => ['class' => 'form-control']
             ]);
     }
 

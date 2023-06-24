@@ -1,0 +1,57 @@
+<div class="row mx-2">
+    <div class="col-sm-12 col-md-6">
+        <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 10 of
+            50 entries
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+            {% if pageCount > 1 %}
+                <ul class="pagination">
+                    {% if first is defined and current != first %}
+                        <li class="paginate_button page-item previous " id="DataTables_Table_0_previous">
+                            <a href="{{ path(route, query|merge({(pageParameterName): first})) }}" aria-controls="DataTables_Table_0" data-dt-idx="previous"
+                               tabindex="0" class="page-link">First
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if previous is defined %}
+                        <li class="paginate_button page-item previous " id="DataTables_Table_0_previous">
+                            <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}" aria-controls="DataTables_Table_0" data-dt-idx="previous"
+                               tabindex="0" class="page-link">Previous
+                            </a>
+                        </li>
+                    {% endif %}
+
+                    {% for page in pagesInRange %}
+                        {% if page != current %}
+                            <li class="paginate_button page-item">
+                                <a href="{{ path(route, query|merge({(pageParameterName): page})) }}" aria-controls="DataTables_Table_0"
+                                   data-dt-idx="0" tabindex="0" class="page-link">{{ page }}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="paginate_button page-item active">
+                                <a href="#" aria-controls="DataTables_Table_0"
+                                   data-dt-idx="0" tabindex="0" class="page-link">{{ page }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if next is defined %}
+                        <li class="paginate_button page-item next" id="DataTables_Table_0_next">
+                            <a href="{{ path(route, query|merge({(pageParameterName): next})) }}" aria-controls="DataTables_Table_0" data-dt-idx="next" tabindex="0" class="page-link">Next
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% if last is defined and current != last %}
+                        <li class="paginate_button page-item next" id="DataTables_Table_0_next">
+                            <a href="{{ path(route, query|merge({(pageParameterName): last})) }}" aria-controls="DataTables_Table_0" data-dt-idx="next" tabindex="0" class="page-link">Last
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>

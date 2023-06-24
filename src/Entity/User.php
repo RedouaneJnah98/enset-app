@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
+use Scheb\TwoFactorBundle\Model\TrustedDeviceInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -65,8 +66,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private ?string $phoneNumber = null;
 
     // #[Assert\NotBlank]
-    #[ORM\Column(unique: true)]
-    private ?int $employeeId = null;
+    #[ORM\Column(type: Types::STRING, unique: true)]
+    private ?string $employeeId = null;
 
     // #[Assert\NotBlank]
     #[ORM\Column(length: 10, unique: true)]
@@ -93,6 +94,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $authCode = null;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private int $trustedVersion;
 
     public function __construct()
     {
@@ -245,12 +249,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this;
     }
 
-    public function getEmployeeId(): ?int
+    public function getEmployeeId(): ?string
     {
         return $this->employeeId;
     }
 
-    public function setEmployeeId(int $employeeId): self
+    public function setEmployeeId(string $employeeId): self
     {
         $this->employeeId = $employeeId;
 
@@ -372,18 +376,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this->firstName . ' ' . $this->lastName;
     }
 
-//    public function getAuthCode(): ?string
-//    {
-//        return $this->authCode;
-//    }
-//
-//    public function setAuthCode(string $authCode): self
-//    {
-//        $this->authCode = $authCode;
-//
-//        return $this;
-//    }
-
     public function isEmailAuthEnabled(): bool
     {
         return true;
@@ -396,7 +388,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     public function getEmailAuthCode(): ?string
     {
-        if (null == $this->authCode) {
+        if (null === $this->authCode) {
             throw new \LogicException('The email authentication code was not set.');
         }
 
@@ -422,5 +414,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function setAuthCode(?string $authCode): void
     {
         $this->authCode = $authCode;
+    }
+
+    public function getTrustedTokenVersion(): int
+    {
+        return $this->trustedVersion;
     }
 }

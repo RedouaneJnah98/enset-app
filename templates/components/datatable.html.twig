@@ -1,0 +1,219 @@
+{# {% trans_default_domain datatable.translationDomain %} #}
+
+{# <table id="{{ datatable.name }}" class="{% if className is defined and className is not empty %}{{ className }}{% endif %}"> #}
+{#    <thead> #}
+{#    <tr> #}
+{#        {% for column in datatable.columns %} #}
+{#            <th>{{ column.label|trans }}</th> #}
+{#        {% endfor %} #}
+{#    </tr> #}
+{#    #}{# % if datatable.option('searching') and datatable.setting('column_filter') in ['both', 'thead'] %} #}
+{#        <tr class="datatable-filters"> #}
+{#            {% for column in datatable.columns %} #}
+{#                <td>{% if column.filter != null %}{% include column.filter.templateHtml %}{% endif %}</td> #}
+{#            {% endfor %} #}
+{#        </tr> #}
+{#    {% endif % #}
+{#    </thead> #}
+{#    #}{# % if datatable.option('searching') and datatable.setting('column_filter') in ['both', 'tfoot'] %} #}
+{#        <tfoot> #}
+{#        <tr class="datatable-filters"> #}
+{#            {% for column in datatable.columns %} #}
+{#                <td>{% if column.filter != null %}{% include column.filter.templateHtml %}{% endif %}</td> #}
+{#            {% endfor %} #}
+{#        </tr> #}
+{#        </tfoot> #}
+{#    {% endif % #}
+{#    <tbody> #}
+{#    </tbody> #}
+{# </table> #}
+
+
+<table id="{{ datatable.name }}" class="table border-top dataTable table-striped" style="width: 1131px;">
+    <thead>
+    <tr>
+        {% for column in datatable.columns %}
+            <th>{{ column.label|trans }}</th>
+        {% endfor %}
+        {#        <th>Test</th> #}
+        {#        <th>test 2</th> #}
+        {#        <th>test 3</th> #}
+        {#        <th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1" style="width: 0; display: none;" #}
+        {#            aria-label=""></th> #}
+        {#        <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" #}
+        {#            aria-label="User: activate to sort column ascending" aria-sort="descending">Student #}
+        {#        </th> #}
+        {#        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" #}
+        {#            aria-label="Role: activate to sort column ascending">Field #}
+        {#        </th> #}
+        {#        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" #}
+        {#            aria-label="Status: activate to sort column ascending">Last Login #}
+        {#        </th> #}
+        {#        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" #}
+        {#            aria-label="Role: activate to sort column ascending">Two-Step #}
+        {#        </th> #}
+        {#        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" #}
+        {#            aria-label="Role: activate to sort column ascending">Joined Date #}
+        {#        </th> #}
+        {#        <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">Actions</th> #}
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        {% for column in datatable.columns %}
+            {% if column.label == 'First Name' %}
+                <td class="sorting_1">
+                    <div class="d-flex justify-content-start align-items-center user-name">
+                        <div class="avatar-wrapper">
+                            <div class="avatar avatar-sm me-3">
+                                {#                        {% if student.imageName is null %} #}
+                                <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}"
+                                >
+{#                                                                                        {{ student.firstName|first }}{{ student.lastName|first }} #}
+                                                                                    </span>
+                                {#                        {% else %} #}
+                                {#                            <img src="{{ vich_uploader_asset(student) }}" alt="Avatar" class="rounded-circle"> #}
+                                {#                        {% endif %} #}
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <a href="#" class="text-body text-truncate">
+                                <span class="fw-semibold text-capitalize">John doe</span>
+                            </a>
+                            <small class="text-muted">test</small>
+                        </div>
+                    </div>
+                </td>
+            {% endif %}
+        {% endfor %}
+
+    </tr>
+    </tbody>
+    {#    <tbody> #}
+    {#    {% if students is empty %} #}
+    {#        <tr> #}
+    {#            <td colspan="7" class="text-center"> #}
+    {#                <div class="d-flex flex-column align-items-center py-3"> #}
+    {#                    <img src="{{ asset('assets/img/illustrations/empty.svg') }}" width="200" alt="empty svg"> #}
+    {#                    <span class="mt-2">No row found</span> #}
+    {#                </div> #}
+    {#            </td> #}
+    {#        </tr> #}
+    {#    {% else %} #}
+    {#        {% for student in students %} #}
+    {#            <tr class="{{ student.id is odd ? 'odd' : 'even' }}"> #}
+    {#                <td class="  control" style="display: none;" tabindex="0"></td> #}
+    {#                <td> #}
+    {#                    <span class="fw-semibold">{{ student.id }}</span> #}
+    {#                </td> #}
+    {#                <td class="sorting_1"> #}
+    {#                    <div class="d-flex justify-content-start align-items-center user-name"> #}
+    {#                        <div class="avatar-wrapper"> #}
+    {#                            <div class="avatar avatar-sm me-3"> #}
+    {#                                {% if student.imageName is null %} #}
+    {#                                    <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}" #}
+    {#                                    > #}
+    {#                                                                            {{ student.firstName|first }}{{ student.lastName|first }} #}
+    {#                                                                        </span> #}
+    {#                                {% else %} #}
+    {#                                    <img src="{{ vich_uploader_asset(student) }}" alt="Avatar" class="rounded-circle"> #}
+    {#                                {% endif %} #}
+    {#                            </div> #}
+    {#                        </div> #}
+    {#                        <div class="d-flex flex-column"> #}
+    {#                            <a href="#" class="text-body text-truncate"> #}
+    {#                                <span class="fw-semibold text-capitalize">{{ student.firstName }} {{ student.lastName }}</span> #}
+    {#                            </a> #}
+    {#                            <small class="text-muted">{{ student.email }}</small> #}
+    {#                        </div> #}
+    {#                    </div> #}
+    {#                </td> #}
+    {#                <td> #}
+    {#                    <span title="{{ student.field.name }}">{{ student.field.shortName }}</span> #}
+    {#                </td> #}
+    {#                <td> #}
+    {#                    <span class="badge bg-label-dark fs-tiny text-lowercase">2 days ago</span> #}
+    {#                </td> #}
+    {#                <td> #}
+    {#                    {% if user.authCode is not null %} #}
+    {#                        <span class="badge bg-label-success fs-tiny">Enabled</span> #}
+    {#                    {% else %} #}
+    {#                        <span class="badge bg-label-danger fs-tiny">Disabled</span> #}
+    {#                    {% endif %} #}
+    {#                    auth code #}
+    {#                </td> #}
+    {#                <td> #}
+    {#                    <span class="fs-6">{{ student.createdAt|date }}</span> #}
+    {#                </td> #}
+    {#                <td> #}
+    {#                    <div class="btn-group"> #}
+    {#                        <button type="button" class="btn btn-sm btn-label-secondary btn-icon rounded-pill dropdown-toggle hide-arrow" data-bs-toggle="dropdown"> #}
+    {#                            <i class="bx bx-dots-vertical-rounded"></i> #}
+    {#                        </button> #}
+    {#                        <ul class="dropdown-menu"> #}
+    {#                            <li> #}
+    {#                                <a class="dropdown-item" href="{{ path('app_student_edit', {'id': student.id}) }}">Edit</a> #}
+    {#                            </li> #}
+    {#                            <li> #}
+    {#                                {{ include('student/_delete_form.html.twig') }} #}
+    {#                            </li> #}
+    {#                        </ul> #}
+    {#                    </div> #}
+    {#                </td> #}
+    {#            </tr> #}
+    {#        {% endfor %} #}
+    {#    {% endif %} #}
+
+    {#    </tbody> #}
+</table>
+
+{# <div class="navigation"> #}
+{#    {{ knp_pagination_render(students) }} #}
+{# </div> #}
+{# <div class="row mx-2"> #}
+{#    <div class="col-sm-12 col-md-6"> #}
+{#        <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 10 of #}
+{#            50 entries #}
+{#        </div> #}
+{#    </div> #}
+{#    <div class="col-sm-12 col-md-6"> #}
+{#        <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate"> #}
+{#            <ul class="pagination"> #}
+{#                <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous"> #}
+{#                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="previous" #}
+{#                       tabindex="0" class="page-link">Previous #}
+{#                    </a> #}
+{#                </li> #}
+{#                <li class="paginate_button page-item active"> #}
+{#                    <a href="#" aria-controls="DataTables_Table_0" #}
+{#                       data-dt-idx="0" tabindex="0" class="page-link">1 #}
+{#                    </a> #}
+{#                </li> #}
+{#                <li class="paginate_button page-item "> #}
+{#                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" #}
+{#                       tabindex="0" class="page-link">2 #}
+{#                    </a> #}
+{#                </li> #}
+{#                <li class="paginate_button page-item "> #}
+{#                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" #}
+{#                       tabindex="0" class="page-link">3 #}
+{#                    </a> #}
+{#                </li> #}
+{#                <li class="paginate_button page-item "> #}
+{#                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="3" #}
+{#                       tabindex="0" class="page-link">4 #}
+{#                    </a> #}
+{#                </li> #}
+{#                <li class="paginate_button page-item "> #}
+{#                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="4" #}
+{#                       tabindex="0" class="page-link">5 #}
+{#                    </a> #}
+{#                </li> #}
+{#                <li class="paginate_button page-item next" id="DataTables_Table_0_next"> #}
+{#                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="next" tabindex="0" class="page-link">Next #}
+{#                    </a> #}
+{#                </li> #}
+{#            </ul> #}
+{#        </div> #}
+{#    </div> #}
+{# </div> #}

@@ -8,6 +8,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
+use Faker\Provider\en_SG\Person;
 
 /**
  * @extends ModelFactory<Student>
@@ -52,7 +53,7 @@ final class StudentFactory extends ModelFactory
     {
         return [
             'birthDate' => self::faker()->dateTime(),
-            'cardId' => self::faker()->text(10),
+            'cardId' => Person::nric(),
             'email' => self::faker()->unique()->email(),
             'field' => FieldFactory::random(),
             'firstName' => self::faker()->firstName(),

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/department')]
+//#[Route('/admin/department')]
 class DepartmentController extends AbstractController
 {
     #[Route('/', name: 'app_department_index', methods: ['GET', 'POST'])]

@@ -227,8 +227,8 @@
                                                 {% if user.imageName is null %}
                                                     <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}"
                                                     >
-                                                    {{ user.firstName|first }}{{ user.lastName|first }}
-                                                </span>
+                                                                        {{ user.firstName|first }}{{ user.lastName|first }}
+                                                                    </span>
                                                 {% else %}
                                                     <img src="{{ vich_uploader_asset(user) }}" alt="Avatar" class="rounded-circle">
                                                 {% endif %}
@@ -246,25 +246,25 @@
                                     {% for role in user.roles %}
                                         {% if role == "ROLE_ADMIN" %}
                                             <span class="text-truncate d-flex align-items-center">
-                                                <span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2">
-                                                    <i class='bx bx-shield-quarter bx-xs'></i>
-                                                </span>
-                                                Admin
-                                            </span>
+                                                                    <span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2">
+                                                                        <i class='bx bx-shield-quarter bx-xs'></i>
+                                                                    </span>
+                                                                    Admin
+                                                                </span>
                                         {% elseif role == "ROLE_PROFESSOR" %}
                                             <span class="text-truncate d-flex align-items-center">
-                                                <span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2">
-                                                    <i class='bx bx-user bx-xs'></i>
-                                                </span>
-                                                Professor
-                                            </span>
+                                                                    <span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2">
+                                                                        <i class='bx bx-user bx-xs'></i>
+                                                                    </span>
+                                                                    Professor
+                                                                </span>
                                         {% elseif role == "ROLE_HUMAN_RESOURCES" %}
                                             <span class="text-truncate d-flex align-items-center">
-                                                <span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30 me-2">
-                                                    <i class='bx bxs-business bx-xs'></i>
-                                                </span>
-                                                Human Resources
-                                            </span>
+                                                                    <span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30 me-2">
+                                                                        <i class='bx bxs-business bx-xs'></i>
+                                                                    </span>
+                                                                    Human Resources
+                                                                </span>
                                         {% endif %}
                                     {% endfor %}
                                 </td>
@@ -274,12 +274,12 @@
                                 <td>
                                     {% if user.authCode is not null %}
                                         <span class="badge bg-label-success fs-tiny">
-                                            Enabled
-                                        </span>
+                                                                Enabled
+                                                            </span>
                                     {% else %}
                                         <span class="badge bg-label-danger fs-tiny">
-                                            Disabled
-                                        </span>
+                                                                Disabled
+                                                            </span>
                                     {% endif %}
 
 
@@ -306,6 +306,11 @@
                         {% endfor %}
                         </tbody>
                     </table>
+                    <!-- Insert this where you want the table to appear -->
+                    {#                    <div id="presidents" class="table border-top dataTable table-striped">Loading...</div> #}
+
+                    <!-- Insert this at the end of your body element, but before the closing tag -->
+
                     <div class="row mx-2">
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 10 of

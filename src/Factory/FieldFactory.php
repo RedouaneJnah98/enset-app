@@ -49,7 +49,6 @@ final class FieldFactory extends ModelFactory
         return [
             'degree' => self::faker()->randomElement(["University License", "University Masters"]),
             'department' => DepartmentFactory::random(),
-            // 'name' => self::faker()->text(200),
             'shortName' => self::faker()->text(10),
             'status' => self::faker()->randomElement(['Accredited', 'Pending']),
             'type' => self::faker()->randomElement(['Initial Training', 'Continuing Training']),

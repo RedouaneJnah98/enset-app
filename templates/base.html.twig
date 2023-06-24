@@ -13,6 +13,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}"/>
 
+    <!-- Datatables Styles -->
+    {#    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/> #}
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -1198,5 +1201,15 @@
 {% block javascripts %}{% endblock %}
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+
+<script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
 </body>
 </html>
+
+<script>
+    $(function () {
+        $('#presidents').initDataTables({{ datatable_settings(datatable) }});
+    });
+</script>

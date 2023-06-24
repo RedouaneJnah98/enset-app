@@ -5,10 +5,11 @@ namespace App\Factory;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
+use Faker\Provider\en_US\Person;
+use Faker\Provider\en_SG\Person as SingaporePerson;
 
 /**
  * @extends ModelFactory<User>
@@ -52,10 +53,10 @@ final class UserFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'cardId' => self::faker()->unique()->randomNumber(2),
+            'cardId' => SingaporePerson::nric(),
             'dateOfBirth' => self::faker()->dateTime(),
             'email' => self::faker()->unique()->email(),
-            'employeeId' => self::faker()->unique()->randomNumber(3),
+            'employeeId' => Person::ssn(),
             'firstName' => self::faker()->firstName(),
             'gender' => self::faker()->randomElement(['Male', 'Female']),
             'lastName' => self::faker()->lastName(),

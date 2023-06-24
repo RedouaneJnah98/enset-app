@@ -40,13 +40,13 @@ class UserType extends AbstractType
             ])
             ->add('plainPassword', PasswordType::class, [
                 'hash_property_path' => 'password',
-//                'mapped' => false,
+                'mapped' => false,
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'Password', 'hash_property_path' => 'password'],
                 'second_options' => ['label' => 'Repeat Password'],
-//                'mapped' => false
+                'mapped' => false
             ])
             ->add('gender', ChoiceType::class, [
                 'choices' => ['Male' => 'Male', 'Female' => 'Female'],
