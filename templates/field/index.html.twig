@@ -11,38 +11,7 @@
         <div class="card">
             <div class="card-datatable table-responsive">
                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                    <div class="row mx-1">
-                        <div class="col-sm-12 col-md-3">
-                            <div class="dataTables_length" id="DataTables_Table_0_length">
-                                <label>
-                                    <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-9">
-                            <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-md-end justify-content-center flex-wrap me-1">
-                                <div class="me-3">
-                                    <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                                        <label>Search
-                                            <input type="search" class="form-control" placeholder="Search.." aria-controls="DataTables_Table_0">
-                                        </label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
-                                    <a href="{{ path('app_field_new') }}" class="text-white">
-                                        <i class='bx bx-plus me-0 me-sm-1'></i>
-                                        <span class="d-none d-sm-inline-block">Add Field</span>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table border-top dataTable table-striped" style="width: 1130px;">
+                    <table id="datatable" class="table border-top dataTable table-striped" style="width: 1130px;">
                         <thead>
                         <tr>
                             <th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1" style="width: 0; display: none;" aria-label=""></th>
@@ -70,10 +39,17 @@
                                 <tr class="{{ field.id is odd ? 'odd' : 'even' }}">
                                     <td class="control" style="display: none;" tabindex="0"></td>
                                     <td class="sorting_1">
-                                        <span class="text-nowrap">{{ field.name }}</span>
+                                        <span title="{{ field.name }}" class="text-nowrap">{{ field.name|length > 20 ? field.name|slice(0, 20) ~ '...' : field.name }}</span>
                                     </td>
                                     <td>
-                                        <span class="badge bg-label-success">{{ field.status|capitalize }}</span>
+                                        {% if field.status == 'Accredited' %}
+                                            <span class="badge bg-label-success">{{ field.status|capitalize }}</span>
+                                        {% elseif field.status == 'Pending' %}
+                                            <span class="badge bg-label-warning">{{ field.status|capitalize }}</span>
+                                        {% else %}
+                                            <span class="badge bg-label-danger">{{ field.status|capitalize }}</span>
+                                        {% endif %}
+
                                     </td>
                                     <td>
                                         <span class="text-nowrap">{{ field.type|capitalize }}</span>
@@ -104,26 +80,6 @@
                         {% endif %}
                         </tbody>
                     </table>
-                    <div class="row mx-2">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 9 of 9 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
-                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="previous" tabindex="0" class="page-link">Previous</a>
-                                    </li>
-                                    <li class="paginate_button page-item active">
-                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">1</a>
-                                    </li>
-                                    <li class="paginate_button page-item next disabled" id="DataTables_Table_0_next">
-                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

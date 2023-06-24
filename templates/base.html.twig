@@ -13,9 +13,6 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}"/>
 
-    <!-- Datatables Styles -->
-    {#    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.css"/> #}
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -1202,14 +1199,29 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.2.1/dt-1.10.16/datatables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
-<script src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
 </body>
 </html>
 
 <script>
     $(function () {
-        $('#presidents').initDataTables({{ datatable_settings(datatable) }});
-    });
+        $('#datatable').DataTable({
+            lengthMenu: [5, 10, 25, 50],
+            pageLength: 10,
+            language: {
+                lengthMenu: "_MENU_ Rows per page",
+                info: "Showing <b>_START_ to _END_</b> of _TOTAL_ entries",
+                sSearch: "Search",
+                sSearchPlaceholder: "Search...",
+            }
+        });
+    })
 </script>

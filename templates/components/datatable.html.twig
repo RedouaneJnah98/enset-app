@@ -60,33 +60,33 @@
     </thead>
     <tbody>
     <tr>
-        {% for column in datatable.columns %}
-            {% if column.label == 'First Name' %}
-                <td class="sorting_1">
-                    <div class="d-flex justify-content-start align-items-center user-name">
-                        <div class="avatar-wrapper">
-                            <div class="avatar avatar-sm me-3">
-                                {#                        {% if student.imageName is null %} #}
-                                <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}"
-                                >
-{#                                                                                        {{ student.firstName|first }}{{ student.lastName|first }} #}
-                                                                                    </span>
-                                {#                        {% else %} #}
-                                {#                            <img src="{{ vich_uploader_asset(student) }}" alt="Avatar" class="rounded-circle"> #}
-                                {#                        {% endif %} #}
-                            </div>
-                        </div>
-                        <div class="d-flex flex-column">
-                            <a href="#" class="text-body text-truncate">
-                                <span class="fw-semibold text-capitalize">John doe</span>
-                            </a>
-                            <small class="text-muted">test</small>
-                        </div>
-                    </div>
-                </td>
-            {% endif %}
-        {% endfor %}
-
+        {#        {% for column in datatable.columns %} #}
+        {#            {% if column.label == 'First Name' %} #}
+        {#                <td class="sorting_1"> #}
+        {#                    <div class="d-flex justify-content-start align-items-center user-name"> #}
+        {#                        <div class="avatar-wrapper"> #}
+        {#                            <div class="avatar avatar-sm me-3"> #}
+        {#                                #}{#                        {% if student.imageName is null %} #}
+        {#                                <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}" #}
+        {#                                > #}
+        {#                                                                                        {{ student.firstName|first }}{{ student.lastName|first }} #}
+        {#                                                                                    </span> #}
+        {#                                #}{#                        {% else %} #}
+        {#                                #}{#                            <img src="{{ vich_uploader_asset(student) }}" alt="Avatar" class="rounded-circle"> #}
+        {#                                #}{#                        {% endif %} #}
+        {#                            </div> #}
+        {#                        </div> #}
+        {#                        <div class="d-flex flex-column"> #}
+        {#                            <a href="#" class="text-body text-truncate"> #}
+        {#                                <span class="fw-semibold text-capitalize">John doe</span> #}
+        {#                            </a> #}
+        {#                            <small class="text-muted">test</small> #}
+        {#                        </div> #}
+        {#                    </div> #}
+        {#                </td> #}
+        {#            {% endif %} #}
+        {#        {% endfor %} #}
+        <td>test</td>
     </tr>
     </tbody>
     {#    <tbody> #}

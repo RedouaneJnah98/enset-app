@@ -5,10 +5,6 @@ namespace App\Controller;
 use App\Entity\Student;
 use App\Form\StudentType;
 use App\Repository\StudentRepository;
-use Knp\Component\Pager\PaginatorInterface;
-use Omines\DataTablesBundle\Adapter\Doctrine\ORMAdapter;
-use Omines\DataTablesBundle\Column\TextColumn;
-use Omines\DataTablesBundle\DataTableFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,30 +13,11 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/student')]
 class StudentController extends AbstractController
 {
-    #[Route('/', name: 'app_student_index', methods: ['GET', 'POST'])]
-    public function index(StudentRepository $studentRepository, DataTableFactory $dataTableFactory, Request $request): Response
+    #[Route('/', name: 'app_student_index', methods: ['GET'])]
+    public function index(StudentRepository $studentRepository): Response
     {
-//        $result = $paginator->paginate(
-//            $studentRepository->findAll(),
-//            $request->query->getInt('page', 1),
-//            20
-//        );
-
-        $table = $dataTableFactory->create()
-            ->add('firstName', TextColumn::class, ['label' => 'First Name'])
-//            ->add('lastName', TextColumn::class)
-//            ->add('email', TextColumn::class)
-            ->createAdapter(ORMAdapter::class, [
-                'entity' => Student::class
-            ])
-            ->handleRequest($request);
-
-        if ($table->isCallback()) {
-            return $table->getResponse();
-        }
-
         return $this->render('student/index.html.twig', [
-            'datatable' => $table,
+            'students' => $studentRepository->findAll(),
         ]);
     }
 
