@@ -32,7 +32,16 @@ class Section
     #[ORM\ManyToOne(inversedBy: 'sections')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Course $course = null;
-    
+
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'sections')]
+//    #[ORM\JoinColumn(nullable: false)]
+    private Collection $professor;
+
+    public function __construct()
+    {
+        $this->professor = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -97,4 +106,37 @@ class Section
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getProfessor(): Collection
+    {
+        return $this->professor;
+    }
+
+    public function addProfessor(User $professor): self
+    {
+        if (!$this->professor->contains($professor)) {
+            $this->professor->add($professor);
+            $professor->addSection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProfessor(User $professor): self
+    {
+        $this->professor->removeElement($professor);
+
+        return $this;
+    }
+//
+//    /**
+//     * @param Collection $professor
+//     */
+//    public function setProfessor(Collection $professor): void
+//    {
+//        $this->professor = $professor;
+//    }
 }

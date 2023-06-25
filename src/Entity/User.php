@@ -98,9 +98,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column(type: 'integer', nullable: true)]
     private int $trustedVersion;
 
+    #[ORM\ManyToMany(targetEntity: Section::class, mappedBy: 'professor')]
+//    #[ORM\JoinColumn(nullable: false)]
+    private Collection $sections;
+
     public function __construct()
     {
         $this->departments = new ArrayCollection();
+        $this->sections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -371,11 +376,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->firstName . ' ' . $this->lastName;
-    }
-
     public function isEmailAuthEnabled(): bool
     {
         return true;
@@ -419,5 +419,37 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function getTrustedTokenVersion(): int
     {
         return $this->trustedVersion;
+    }
+
+    /**
+     * @return Collection<int, Section>
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections->add($section);
+            $section->addProfessor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->sections->removeElement($section)) {
+            $section->removeProfessor($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->firstName . ' ' . $this->lastName;
     }
 }

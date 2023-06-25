@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Section;
+use App\Entity\User;
 use App\Form\SectionType;
 use App\Repository\SectionRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,14 +24,22 @@ class SectionController extends AbstractController
     }
 
     #[Route('/new', name: 'app_section_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SectionRepository $sectionRepository): Response
+    public function new(Request $request, SectionRepository $sectionRepository, UserRepository $userRepository): Response
     {
         $section = new Section();
         $form = $this->createForm(SectionType::class, $section);
         $form->handleRequest($request);
 
+        // $user = $userRepository->findOneBy(['id' => 797]);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            // $section->getProfessor()->add($request->request->get('user'));
+//            dd($request->request->get('section[professor][]'));
+
+            //$section->addProfessor($request->request->get('professor'));
+//            $section->addProfessor
             $sectionRepository->save($section, true);
+
 
             return $this->redirectToRoute('app_section_index', [], Response::HTTP_SEE_OTHER);
         }
