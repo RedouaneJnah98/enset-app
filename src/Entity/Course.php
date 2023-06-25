@@ -10,10 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CourseRepository::class)]
-#[Vich\Uploadable]
 #[UniqueEntity('name')]
 class Course
 {
@@ -30,16 +28,6 @@ class Course
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
-
-//    #[Assert\NotBlank]
-//    #[Vich\UploadableField(mapping: 'avatars', fileNameProperty: 'imageName', size: 'imageSize')]
-//    private ?File $imageFile = null;
-//
-//    #[ORM\Column(length: 255)]
-//    private ?string $imageName = null;
-//
-//    #[ORM\Column(length: 255)]
-//    private ?string $imageSize = null;
 
     #[Assert\NotBlank]
     #[ORM\Column]

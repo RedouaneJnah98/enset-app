@@ -84,6 +84,34 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //        ;
 //    }
     /**
+     * @return array
+     * @throws NonUniqueResultException
+     */
+    public function totalUsers(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+//    public function totalHumanResources($role)
+//    {
+//        $rsm = $this->createResultSetMappingBuilder('u');
+//
+//        $rawQuery = sprintf(
+//            'SELECT count(u.id)
+//                    FROM public.user u
+//                    WHERE u.roles::jsonb ?? :role',
+//            $rsm->generateSelectClause()
+//        );
+//
+//        $query = $this->getEntityManager()->createNativeQuery($rawQuery, $rsm);
+//        $query->setParameter('role', $role);
+//        return $query->getResult();
+//    }
+
+    /**
      * @throws NonUniqueResultException
      */
     public function loadUserByIdentifier(string $identifier): ?UserInterface
