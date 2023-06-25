@@ -11,48 +11,17 @@
         <div class="card">
             <div class="card-datatable table-responsive">
                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                    <div class="row mx-1">
-                        <div class="col-sm-12 col-md-3">
-                            <div class="dataTables_length" id="DataTables_Table_0_length">
-                                <label>
-                                    <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-9">
-                            <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-md-end justify-content-center flex-wrap me-1">
-                                <div class="me-3">
-                                    <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                                        <label>Search
-                                            <input type="search" class="form-control" placeholder="Search.." aria-controls="DataTables_Table_0">
-                                        </label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
-                                    <a href="{{ path('app_section_new') }}" class="text-white">
-                                        <i class='bx bx-plus me-0 me-sm-1'></i>
-                                        <span class="d-none d-sm-inline-block">Add Section</span>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table border-top dataTable table-striped" style="width: 1130px;">
+                    <table id="datatable" class="table border-top dataTable table-striped" style="width: 1130px;">
                         <thead>
                         <tr>
                             <th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1" style="width: 0; display: none;" aria-label=""></th>
+                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Assigned To">Professor</th>
                             <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
                                 Field
                             </th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Assigned To">Course</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Assigned To">Semester</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Assigned To">Year</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Assigned To">Room No</th>
                             <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">Actions</th>
                         </tr>
                         </thead>
@@ -71,19 +40,45 @@
                                 <tr class="{{ section.id is odd ? 'odd' : 'even' }}">
                                     <td class="control" style="display: none;" tabindex="0"></td>
                                     <td class="sorting_1">
-                                        <span class="text-nowrap">{{ section.field.name }}</span>
+                                        <div class="d-flex justify-content-start align-items-center user-name">
+                                            {% if section.professor is empty %}
+                                                <span class="badge bg-label-warning">No professor</span>
+                                            {% else %}
+                                                {% for professor in section.professor %}
+                                                    <div class="avatar-wrapper">
+                                                        <div class="avatar avatar-sm me-3">
+                                                            {#                                                <img src="{{ user.imageName }}" alt="Avatar" class="rounded-circle"> #}
+                                                            <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary']) }}">
+                                                    {{ professor.firstName|first }}{{ professor.lastName|first }}
+                                                    </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-column">
+                                                        <a href="{{ path('app_user_profile', {'id': professor.id}) }}" class="text-body text-truncate">
+                                                            <span class="fw-semibold text-capitalize">{{ professor.firstName }} {{ professor.lastName }}</span>
+                                                        </a>
+                                                        <small class="text-muted">{{ professor.email }}</small>
+                                                    </div>
+                                                {% endfor %}
+
+                                            {% endif %}
+                                        </div>
                                     </td>
                                     <td>
-                                        <span class="text-nowrap">{{ section.course.name }}</span>
+                                        <span title="{{ section.field.name }}" class="text-nowrap text-capitalize">
+                                            {{ section.field.shortName }}
+                                        </span>
                                     </td>
                                     <td>
-                                        <span class="text-nowrap">{{ section.semester }}</span>
+                                        <span title="{{ section.course.name }}" class="text-nowrap">
+                                            {{ section.course.name|length > 20 ? section.course.name|slice(0, 30) ~ '...' : section.course.name }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-label-info text-nowrap">Semester {{ section.semester }}</span>
                                     </td>
                                     <td>
                                         <span class="text-nowrap">{{ section.year|ago }}</span>
-                                    </td>
-                                    <td>
-                                        <span class="text-nowrap">{{ section.roomNo }}</span>
                                     </td>
                                     <td>
                                         <div class="btn-group">
@@ -105,26 +100,6 @@
                         {% endif %}
                         </tbody>
                     </table>
-                    <div class="row mx-2">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 9 of 9 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
-                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="previous" tabindex="0" class="page-link">Previous</a>
-                                    </li>
-                                    <li class="paginate_button page-item active">
-                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">1</a>
-                                    </li>
-                                    <li class="paginate_button page-item next disabled" id="DataTables_Table_0_next">
-                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

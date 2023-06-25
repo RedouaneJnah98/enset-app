@@ -30,16 +30,8 @@ class SectionController extends AbstractController
         $form = $this->createForm(SectionType::class, $section);
         $form->handleRequest($request);
 
-        // $user = $userRepository->findOneBy(['id' => 797]);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            // $section->getProfessor()->add($request->request->get('user'));
-//            dd($request->request->get('section[professor][]'));
-
-            //$section->addProfessor($request->request->get('professor'));
-//            $section->addProfessor
             $sectionRepository->save($section, true);
-
 
             return $this->redirectToRoute('app_section_index', [], Response::HTTP_SEE_OTHER);
         }

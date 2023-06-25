@@ -32,15 +32,8 @@ class SectionType extends AbstractType
             ->add('professor', EntityType::class, [
                 'class' => 'App\Entity\User',
                 'placeholder' => 'Choose',
-                'multiple' => true
+                'multiple' => true,
             ]);
-//        ->add('');
-//            ->add('professor', EntityType::class, [
-//                'class' => 'App\Entity\User',
-//                'placeholder' => 'Choose',
-////                'mapped' => false
-//                'by_reference' => false
-//            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

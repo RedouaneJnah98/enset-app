@@ -131,12 +131,4 @@ class Section
 
         return $this;
     }
-//
-//    /**
-//     * @param Collection $professor
-//     */
-//    public function setProfessor(Collection $professor): void
-//    {
-//        $this->professor = $professor;
-//    }
 }
