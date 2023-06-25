@@ -10,50 +10,19 @@
         <div class="card">
             <div class="card-datatable table-responsive">
                 <div class="dataTables_wrapper dt-bootstrap5 no-footer">
-                    <div class="row mx-1">
-                        <div class="col-sm-12 col-md-3">
-                            <div class="dataTables_length" id="DataTables_Table_0_length">
-                                <label>
-                                    <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-9">
-                            <div class="dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-md-end justify-content-center flex-wrap me-1">
-                                <div class="me-3">
-                                    <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                                        <label>Search
-                                            <input type="search" class="form-control" placeholder="Search.." aria-controls="DataTables_Table_0">
-                                        </label>
-                                    </div>
-                                </div>
-                                <button class="btn btn-secondary add-new btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button">
-                                    <a href="{{ path('app_course_new') }}" class="text-white">
-                                        <i class='bx bx-plus me-0 me-sm-1'></i>
-                                        <span class="d-none d-sm-inline-block">Add Course</span>
-                                    </a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table border-top dataTable dtr-column table-striped" style="width: 1130px;">
+                    <table id="datatable" class="table border-top dataTable dtr-column table-striped" style="width: 1130px;">
                         <thead>
                         <tr>
                             <th class="control sorting_disabled dtr-hidden" rowspan="1" colspan="1" style="width: 0px; display: none;" aria-label=""></th>
-                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 400px;" aria-label="Name: activate to sort column ascending">
+                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
                                 Name
                             </th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 400px;" aria-label="Assigned To">Department</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 600px;" aria-label="Assigned To">Modules</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 500px;" aria-label="Assigned To">Total session</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 150px;" aria-label="Assigned To">hours</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 234px;" aria-label="Created Date">Created Date</th>
-                            <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 112px;" aria-label="Actions">Actions</th>
+                            <th class="sorting_disabled text-nowrap" rowspan="1" colspan="1" aria-label="Assigned To">Department</th>
+                            <th class="sorting_disabled text-nowrap" rowspan="1" colspan="1" aria-label="Assigned To">Modules</th>
+                            <th class="sorting_disabled text-nowrap" rowspan="1" colspan="1" aria-label="Assigned To">Total session</th>
+                            <th class="sorting_disabled text-nowrap" rowspan="1" colspan="1" aria-label="Assigned To">hours</th>
+                            <th class="sorting_disabled text-nowrap" rowspan="1" colspan="1" aria-label="Created Date">Created Date</th>
+                            <th class="sorting_disabled text-nowrap" rowspan="1" colspan="1" aria-label="Actions">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -101,7 +70,7 @@
                                         <span class="badge bg-label-secondary">{{ course.hours }} hours</span>
                                     </td>
                                     <td>
-                                        <span class="text-nowrap">{{ course.createdAt|date }}</span>
+                                        <span class="text-nowrap">{{ course.createdAt|date('d/m/y') }}</span>
                                     </td>
                                     <td>
                                         <div class="btn-group">
@@ -123,30 +92,18 @@
                         {% endif %}
                         </tbody>
                     </table>
-                    <div class="row mx-2">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 9 of 9 entries</div>
-                        </div>
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                                <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
-                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="previous" tabindex="0" class="page-link">Previous</a>
-                                    </li>
-                                    <li class="paginate_button page-item active">
-                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">1</a>
-                                    </li>
-                                    <li class="paginate_button page-item next disabled" id="DataTables_Table_0_next">
-                                        <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    {% for flashMessage in app.flashes('success') %}
+        {{ component('Toast', {
+            heading: 'Success',
+            type: 'success',
+            message: flashMessage
+        }) }}
+    {% endfor %}
 
     {% for flashMessage in app.flashes('info') %}
         {{ component('Toast', {
