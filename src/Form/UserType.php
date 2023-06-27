@@ -36,6 +36,7 @@ class UserType extends AbstractType
             ])
             ->add('email', EmailType::class, [
                 'attr' => ['placeholder' => 'john.doe@example.com', 'class' => 'form-control'],
+                'mapped' => false
             ])
             ->add('plainPassword', PasswordType::class, [
                 'hash_property_path' => 'password',
@@ -56,9 +57,11 @@ class UserType extends AbstractType
             ])
             ->add('employeeId', TextType::class, [
                 'attr' => ['placeholder' => '1234', 'class' => 'form-control'],
+                'mapped' => false
             ])
             ->add('cardId', TextType::class, [
                 'attr' => ['placeholder' => 'K987345', 'class' => 'form-control'],
+                'mapped' => false
             ])
             ->add('dateOfBirth', BirthdayType::class, [
                 'attr' => ['class' => 'form-control'],

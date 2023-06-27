@@ -187,6 +187,10 @@
                         </li>
                     </ul>
                 </aside>
+                {% if is_granted('ROLE_STUDENT') %}
+                    {{ include('components/student/_sidebar.html.twig') }}
+                {% endif %}
+
                 <!-- / Menu -->
             {% endblock %}
 
@@ -614,7 +618,7 @@
                                         <div class="d-flex align-items-end row">
                                             <div class="col-sm-7">
                                                 <div class="card-body">
-                                                    <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+                                                    <h5 class="card-title text-primary">Welcome back {{ app.user.firstName }}! 🎉</h5>
                                                     <p class="mb-4">
                                                         You have done <span class="fw-bold">72%</span> more sales today. Check
                                                         your new badge in

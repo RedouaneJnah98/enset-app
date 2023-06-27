@@ -8,14 +8,14 @@ security:
     user_provider:
       entity:
         class: App\Entity\User
-        property: username
-    #    student_provider:
-    #      entity:
-    #        class: App\Entity\Student
     #        property: username
-    #    all_users:
-    #      chain:
-    #        providers: [ 'user_provider', 'student_provider' ]
+    student_provider:
+      entity:
+        class: App\Entity\Student
+        property: username
+    all_users:
+      chain:
+        providers: [ 'user_provider', 'student_provider' ]
     
     # used to reload user from session & other features (e.g. switch_user)
     # used to reload user from session & other features (e.g. switch_user)
@@ -26,7 +26,7 @@ security:
       security: false
     main:
       lazy: true
-      provider: user_provider
+      provider: all_users
       custom_authenticator: App\Security\LoginFormAuthenticator
       logout:
         path: app_logout

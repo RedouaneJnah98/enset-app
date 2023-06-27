@@ -61,7 +61,7 @@ final class StudentFactory extends ModelFactory
             'lastName' => self::faker()->lastName(),
             'mobileNumber' => self::faker()->phoneNumber(),
             'plainPassword' => 'test',
-            'roles' => (new Student())->getRoles(),
+            'roles' => ["ROLE_STUDENT"],
             'username' => self::faker()->unique()->userName(),
         ];
     }
