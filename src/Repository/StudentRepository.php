@@ -69,6 +69,15 @@ class StudentRepository extends ServiceEntityRepository implements PasswordUpgra
             ->getOneOrNullResult();
     }
 
+    public function findAllCourseByField($value): array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.field = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Student[] Returns an array of Student objects
 //     */
