@@ -25,10 +25,16 @@
             <span class="menu-header-text">Academic</span>
         </li>
         <!-- Professors -->
-        <li class="menu-item">
+        <li class="menu-item {{ route == 'app_student_professors' ? 'active' : '' }}">
             <a href="{{ path('app_student_professors') }}" class="menu-link">
                 <i class='menu-icon tf-icon bx bx-group'></i>
                 <div data-i18n="Basic">Professors</div>
+            </a>
+        </li>
+        <li class="menu-item {{ route == 'app_student_courses' ? 'active' : '' }}">
+            <a href="{{ path('app_student_courses') }}" class="menu-link">
+                <i class='menu-icon tf-icon bx bxs-graduation'></i>
+                <div data-i18n="Basic">Courses</div>
             </a>
         </li>
         <!-- Daily attendance -->
@@ -37,31 +43,6 @@
                 <i class="menu-icon tf-icons bx bx-calendar"></i>
                 <div data-i18n="Basic">Year View</div>
             </a>
-        </li>
-
-        <!-- Class -->
-        <li class="menu-item {{ route == 'app_course_index' ? 'active open' : '' }}">
-            <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-chalkboard"></i>
-                <div data-i18n="User interface">Class</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item {{ route == 'app_student_courses' ? 'active' : '' }}">
-                    <a href="{{ path('app_student_courses') }}" class="menu-link">
-                        <div data-i18n="Accordion">Courses</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ route == 'app_module_index' ? 'active' : '' }}">
-                    <a href="{{ path('app_module_index') }}" class="menu-link">
-                        <div data-i18n="Accordion">Modules</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ route == 'app_section_index' ? 'active' : '' }}">
-                    <a href="{{ path('app_section_index') }}" class="menu-link">
-                        <div data-i18n="Badges">Sections</div>
-                    </a>
-                </li>
-            </ul>
         </li>
 
         <!-- Human Resource -->

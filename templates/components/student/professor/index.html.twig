@@ -7,10 +7,15 @@
             <div class="col-lg-8 mb-4 order-0">
                 <div class="card">
                     <div class="card-body">
-                        <div>
-                            <h4 class="text-capitalize">Meet our professors</h4>
-                            <span class="text-secondary">ENSET is fortunate to have a team of exceptional professors who bring a wealth of knowledge, expertise, and passion to their teaching.</span>
+                        <div class="mb-4">
+                            <div class="divider mb-0">
+                                <h4 class="divider-text fs-4 text-capitalize">meet our professors</h4>
+                            </div>
+                            <span class="text-secondary">
+                                ENSET is fortunate to have a team of exceptional professors who bring a wealth of <mark>knowledge</mark>, <mark>expertise</mark>, and <mark>passion</mark> to their teaching.
+                            </span>
                         </div>
+
                         <div class="my-4">
                             <img src="{{ asset('assets/img/backgrounds/professors.jpg') }}" class="rounded"
                                  style="height: 300px; width: 100%; object-fit: cover"
@@ -18,31 +23,27 @@
                         </div>
                         <div>
                             <p class="text-secondary">
-                                Extensive Knowledge and Expertise: Our professors are highly educated individuals with advanced degrees and extensive knowledge in their respective fields. They have
+                                Our professors are highly educated individuals with advanced degrees and extensive knowledge in their respective fields. They have
                                 dedicated years to studying and researching their subject areas, becoming experts in their domains. Their depth of understanding allows them to provide valuable
-                                insights and perspectives to students. <br>
-                                Passionate about Teaching: Our professors have a genuine passion for teaching and a deep desire to inspire and empower their students. They are committed to creating an
-                                engaging and interactive learning environment, fostering intellectual curiosity, and igniting a love for learning. Their enthusiasm is contagious and motivates students
-                                to actively participate in their education.
+                                insights and perspectives to students.
                             </p>
                             <p class="text-secondary">
-                                Approachability and Availability: Our professors are approachable and prioritize building strong relationships with their students. They are dedicated to creating a
-                                supportive and inclusive classroom atmosphere where students feel comfortable asking questions, seeking guidance, and sharing their ideas. They hold regular office
-                                hours and are readily available to provide individualized assistance and support. <br>
                                 Innovative Teaching Methods: Our professors employ innovative teaching methods to enhance the learning experience. They utilize a combination of lectures, discussions,
                                 multimedia resources, and hands-on activities to cater to different learning styles. They also leverage technology to create interactive and immersive learning
                                 opportunities, keeping pace with the ever-evolving educational landscape
                             </p>
                         </div>
-                        <hr>
                         <div class="mt-5">
                             <div class="mb-4">
-                                <h4 class="text-capitalize">our great professors</h4>
-                                <span class="text-secondary">ENSET is fortunate to have a team of exceptional professors who bring a wealth of knowledge, expertise, and passion to their teaching
-                                .</span>
+                                <div class="divider mb-0">
+                                    <h4 class="divider-text fs-4 text-capitalize">our great professors</h4>
+                                </div>
+                                <span class="text-secondary">
+                                    ENSET is fortunate to have a team of exceptional professors who bring a wealth of knowledge, expertise, and passion to their teaching.
+                                </span>
                             </div>
 
-                            <div class="d-flex flex-wrap justify-content-between gap-3">
+                            <div class="d-flex flex-wrap gap-4">
                                 {% for section in sections %}
                                     {% for prof in section.professor %}
                                         <div class="d-flex flex-column text-center mb-4">
@@ -52,11 +53,13 @@
                                                      style="object-fit: cover" alt="professor image">
                                             </div>
                                             <div class="text-center">
-                                                <h5 class="text-dark fw-bold text-hover-primary mt-2 mb-1 fs-5">
+                                                <h5 class="text-dark fw-bold text-hover-primary mt-2 mb-1 fs-6">
                                                     Dr.{{ prof.firstName }} {{ prof.lastName }}
                                                 </h5>
                                                 <small class="text-muted d-block fw-semibold text-capitalize">
-                                                    {{ section.course.name }}
+                                                    <span class="text-secondary">Teach</span> :
+                                                    {#                                                    {{ section.course.name }} #}
+                                                    {{ section.course.name|length > 10 ? section.course.name|slice(0, 20) ~ '...' : section.course.name }}
                                                 </small>
                                             </div>
                                         </div>
@@ -71,7 +74,65 @@
 
             <div class="col-lg-4 col-md-4 order-1">
                 <div class="card">
-                    test 2
+                    <div class="card-body">
+                        <h5 class="text-capitalize">Training aims</h5>
+                        <span class="text-secondary">
+                            First, a disclaimer – the entire process of writing a blog post often takes more than a couple of hours.
+                        </span>
+
+                        <div class="my-3">
+                            <ul class="list-group list-group-timeline">
+                                <li class="list-group-item list-group-timeline-primary">
+                                    <small><strong>HTML5</strong> to structure web content</small>
+                                </li>
+                                <li class="list-group-item list-group-timeline-success">
+                                    <small><strong>CSS3</strong> to format Web content (CSS frameworks: Implementation of Bootstrap, Bulma, Materialize)</small>
+                                </li>
+                                <li class="list-group-item list-group-timeline-warning">
+                                    <small>
+                                        <strong>Javascript</strong> for interactivity (Jquery, Angular)
+                                    </small>
+                                </li>
+                                <li class="list-group-item list-group-timeline-info">
+                                    <small>
+                                        Object-oriented <strong>PHP</strong> (PHP frameworks: Laravel, ...)
+                                    </small>
+                                </li>
+                                <li class="list-group-item list-group-timeline-danger">
+                                    <small><strong>HTTP</strong> to manage the communication between the web client and the web server and to control the use of Rest APIs</small>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <a href="https://www.enset-media.ac.ma/formations/continues/description-dwm" class="link-primary" target="_blank">
+                                Explore more
+                                <i class='bx bx-link-external'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card bg-dark border-0 my-3 text-white">
+                    <img class="card-img" src="{{ asset('assets/img/backgrounds/img-card-1.jpg') }}" alt="Card image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title fw-semibold">Jihane Bakkali</h5>
+                        <p class="card-text fw-semibold">
+                            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a
+                            little bit longer.
+                        </p>
+                        <p class="card-text fw-semibold">Software Engineer</p>
+                    </div>
+                </div>
+                <div class="card bg-dark border-0 text-white">
+                    <img class="card-img" src="{{ asset('assets/img/backgrounds/img-card-2.jpg') }}" alt="Card image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title fw-semibold">Lina Ben Jelloun</h5>
+                        <p class="card-text fw-semibold">
+                            This is a wider card with supporting text below as a natural lead-in to additional content. This content is a
+                            little bit longer.
+                        </p>
+                        <p class="card-text fw-semibold">Big Data & Cloud Engineer</p>
+                    </div>
                 </div>
             </div>
         </div>

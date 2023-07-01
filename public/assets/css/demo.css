@@ -486,3 +486,23 @@ div.dataTables_wrapper div.dataTables_length select {
 #datatable_filter {
     float: right;
 }
+
+.list-group-timeline-primary::before {
+    background-color: #696cff;
+}
+
+.list-group-timeline-success::before {
+    background-color: #71dd37;
+}
+
+.list-group-timeline-warning::before {
+    background-color: #ffab00;
+}
+
+.list-group-timeline-info::before {
+    background-color: #03c3ec;
+}
+
+.list-group-timeline-danger::before {
+    background-color: #ff3e1d;
+}
