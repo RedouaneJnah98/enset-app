@@ -99,7 +99,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private int $trustedVersion;
 
     #[ORM\ManyToMany(targetEntity: Section::class, mappedBy: 'professor')]
-//    #[ORM\JoinColumn(nullable: false)]
     private Collection $sections;
 
     public function __construct()

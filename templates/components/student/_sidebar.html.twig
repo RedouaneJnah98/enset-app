@@ -26,7 +26,7 @@
         </li>
         <!-- Professors -->
         <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
+            <a href="{{ path('app_student_professors') }}" class="menu-link">
                 <i class='menu-icon tf-icon bx bx-group'></i>
                 <div data-i18n="Basic">Professors</div>
             </a>
@@ -46,7 +46,7 @@
                 <div data-i18n="User interface">Class</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item {{ route == 'app_course_index' ? 'active' : '' }}">
+                <li class="menu-item {{ route == 'app_student_courses' ? 'active' : '' }}">
                     <a href="{{ path('app_student_courses') }}" class="menu-link">
                         <div data-i18n="Accordion">Courses</div>
                     </a>

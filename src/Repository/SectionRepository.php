@@ -39,6 +39,15 @@ class SectionRepository extends ServiceEntityRepository
         }
     }
 
+    public function findRelatedProfessorsByField($value): array
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.field = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Section[] Returns an array of Section objects
 //     */

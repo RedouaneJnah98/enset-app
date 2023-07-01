@@ -34,7 +34,6 @@ class Section
     private ?Course $course = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'sections')]
-//    #[ORM\JoinColumn(nullable: false)]
     private Collection $professor;
 
     public function __construct()
