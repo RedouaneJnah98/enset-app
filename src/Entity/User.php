@@ -101,6 +101,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\ManyToMany(targetEntity: Section::class, mappedBy: 'professor')]
     private Collection $sections;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Field $field = null;
+
     public function __construct()
     {
         $this->departments = new ArrayCollection();
@@ -450,5 +453,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function __toString()
     {
         return $this->firstName . ' ' . $this->lastName;
+    }
+
+    public function getField(): ?Field
+    {
+        return $this->field;
+    }
+
+    public function setField(?Field $field): self
+    {
+        $this->field = $field;
+
+        return $this;
     }
 }

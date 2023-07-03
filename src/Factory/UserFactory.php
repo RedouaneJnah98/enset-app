@@ -64,7 +64,7 @@ final class UserFactory extends ModelFactory
             'phoneNumber' => self::faker()->e164PhoneNumber(),
             'roles' => ['ROLE_PROFESSOR'],
             'username' => self::faker()->unique()->userName(),
-            'address' => AddressFactory::random()
+            'address' => AddressFactory::random(),
         ];
     }
 

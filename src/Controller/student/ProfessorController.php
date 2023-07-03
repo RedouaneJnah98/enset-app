@@ -13,18 +13,7 @@ class ProfessorController extends AbstractController
     public function index(SectionRepository $sectionRepository): Response
     {
         $fieldId = $this->getUser()->getField();
-//        $sections = $sectionRepository->findBy(['field' => $fieldId]);
-
         $sections = $sectionRepository->findRelatedProfessorsByField($fieldId);
-//        $test = $sectionRepository->find
-
-//        foreach ($sections as $item) {
-//            $professors = $item->getProfessor();
-//
-//            foreach ($professors as $professor) {
-//                dump($professor->getFirstName());
-//            }
-//        }
 
         return $this->render('components/student/professor/index.html.twig', [
             'sections' => $sections
