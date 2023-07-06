@@ -4,17 +4,17 @@
 
 {% block content %}
     <div class="container-xxl flex-grow-1 container-p-y">
-        <nav aria-label="breadcrumb mb-0">
-            <ol class="breadcrumb breadcrumb-style2">
-                <li class="breadcrumb-item">
-                    <a href="{{ path('app_dashboard') }}">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ path('app_user_index') }}">Users</a>
-                </li>
-                <li class="breadcrumb-item active">Profile</li>
-            </ol>
-        </nav>
+        {#        <nav aria-label="breadcrumb mb-0"> #}
+        {#            <ol class="breadcrumb breadcrumb-style2"> #}
+        {#                <li class="breadcrumb-item"> #}
+        {#                    <a href="{{ path('app_dashboard') }}">Dashboard</a> #}
+        {#                </li> #}
+        {#                <li class="breadcrumb-item"> #}
+        {#                    <a href="{{ path('app_user_index') }}">Users</a> #}
+        {#                </li> #}
+        {#                <li class="breadcrumb-item active">Profile</li> #}
+        {#            </ol> #}
+        {#        </nav> #}
         <!-- Header -->
         <div class="row">
             <div class="col-lg-4">
@@ -233,7 +233,13 @@
                                             <div class="d-flex align-items-start">
                                                 <div class="d-flex align-items-start">
                                                     <div class="avatar me-3">
-                                                        <img src="{{ vich_uploader_asset(student) }}" alt="Avatar" class="rounded-circle">
+                                                        {% if student.imageName is null %}
+                                                            <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}">
+                                                                 {{ student.firstName|first }}{{ student.lastName|first }}
+                                                            </span>
+                                                        {% else %}
+                                                            <img src="{{ vich_uploader_asset(student) }}" alt="Avatar" class="rounded-circle">
+                                                        {% endif %}
                                                     </div>
                                                     <div class="me-2">
                                                         <h6 class="mb-0">{{ student.firstName }} {{ student.lastName }}</h6> <small class="text-muted">45 Connections</small>
@@ -279,7 +285,13 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="d-flex align-items-start">
                                                     <div class="avatar me-3">
-                                                        <img src="{{ vich_uploader_asset(user) }}" alt="Avatar" class="rounded-circle">
+                                                        {% if user.imageName is null %}
+                                                            <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}">
+                                                                {{ user.firstName|first }}{{ user.lastName|first }}
+                                                            </span>
+                                                        {% else %}
+                                                            <img src="{{ vich_uploader_asset(user) }}" alt="Avatar" class="rounded-circle">
+                                                        {% endif %}
                                                     </div>
                                                     <div class="me-2">
                                                         <h6 class="mb-0">Dr.{{ user.firstName }} {{ user.lastName }}</h6>

@@ -1,0 +1,83 @@
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="{{ path('app_dashboard') }}" class="app-brand-link">
+              <span class="app-brand-logo demo">
+                  <img src="{{ asset('assets/img/logo.svg') }}" width="170" alt="ENSET Logo">
+              </span>
+        </a>
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+    </div>
+
+    <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+        <!-- Dashboard -->
+        <li class="menu-item {{ route == 'app_dashboard' ? 'active' : '' }}">
+            <a href="{{ path('app_dashboard') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Dashboard</div>
+            </a>
+        </li>
+        <!-- Academic -->
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Academic</span>
+        </li>
+        <!-- Professors -->
+        <li class="menu-item">
+            <a href="{{ path('app_student_professors') }}" class="menu-link">
+                <i class='menu-icon tf-icon bx bx-group'></i>
+                <div data-i18n="Basic">Professors</div>
+            </a>
+        </li>
+        <li class="menu-item ">
+            <a href="{{ path('app_student_courses') }}" class="menu-link">
+                <i class='menu-icon tf-icon bx bx-collection'></i>
+                <div data-i18n="Basic">Courses</div>
+            </a>
+        </li>
+        <li class="menu-item ">
+            <a href="{{ path('app_student_courses') }}" class="menu-link">
+                <i class='menu-icon tf-icon bx bx-book-reader'></i>
+                <div data-i18n="Basic">Modules</div>
+            </a>
+        </li>
+        <li class="menu-item ">
+            <a href="{{ path('app_student_courses') }}" class="menu-link">
+                <i class='menu-icon tf-icon bx bxs-graduation'></i>
+                <div data-i18n="Basic">Students</div>
+            </a>
+        </li>
+        <li class="menu-item ">
+            <a href="{{ path('app_student_courses') }}" class="menu-link">
+                <i class='menu-icon tf-icon bx bx-chalkboard'></i>
+                <div data-i18n="Basic">My Class</div>
+            </a>
+        </li>
+        <!-- Daily attendance -->
+        <li class="menu-item">
+            <a href="cards-basic.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-calendar"></i>
+                <div data-i18n="Basic">Year View</div>
+            </a>
+        </li>
+
+        <!-- Human Resource -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Human Resource</span></li>
+        <!-- leaves -->
+        <li class="menu-item">
+            <a href="tables-basic.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-calendar-exclamation"></i>
+                <div data-i18n="Tables">Leaves</div>
+            </a>
+        </li>
+        <!-- Documents request -->
+        <li class="menu-item">
+            <a href="tables-basic.html" class="menu-link">
+                <i class='menu-icon tf-icon bx bxs-folder-open'></i>
+                <div data-i18n="Tables">Documents Request</div>
+            </a>
+        </li>
+    </ul>
+</aside

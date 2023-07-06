@@ -40,42 +40,6 @@ class FieldRepository extends ServiceEntityRepository
         }
     }
 
-    public function testQuery($value): array
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.id = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.createdAt', 'ASC')
-            ->setMaxResults(8)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findStudentsByField($value): array
-    {
-//        $conn = $this->getEntityManager()->getConnection();
-//
-//        $sql = '
-//            SELECT * FROM public.field
-//	        JOIN public.student
-//	        ON field.id = :val
-//	        LIMIT 8
-//        ';
-//
-//        $resultSet = $conn->executeQuery($sql, ['val' => $value]);
-//        // returns an array of arrays (i.e. a raw data set)
-//        return $resultSet->fetchAllAssociative();
-
-        $qb = $this->createQueryBuilder('f')
-            ->andWhere('f.id = :val')
-            ->setParameter('val', $value)
-            ->addOrderBy('f.createdAt', 'DESC');
-
-        $query = $qb->getQuery();
-
-        return $query->setMaxResults(8)->getResult();
-    }
-
 //    /**
 //     * @return Field[] Returns an array of Field objects
 //     */

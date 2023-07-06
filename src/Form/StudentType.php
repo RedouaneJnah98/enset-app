@@ -52,7 +52,6 @@ class StudentType extends AbstractType
             ])
             ->add('cardId', TextType::class, [
                 'attr' => ['placeholder' => 'K987345', 'class' => 'form-control'],
-//                'mapped' => false
             ])
             ->add('birthDate', BirthdayType::class, [
                 'attr' => ['class' => 'form-control'],
@@ -77,6 +76,7 @@ class StudentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Student::class,
+            'csrf_token_id' => 'student_csrfToken'
         ]);
     }
 }

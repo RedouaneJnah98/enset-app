@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Student;
 use App\Form\StudentType;
+use App\Form\UserType;
 use App\Repository\StudentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,10 +42,21 @@ class StudentController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_student_show', methods: ['GET'])]
-    public function show(Student $student): Response
+    public function show(Student $student, Request $request, StudentRepository $studentRepository): Response
     {
+        $form = $this->createForm(UserType::class, $student);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $studentRepository->save($data, true);
+
+            $this->addFlash('success', 'User information updated successfully.');
+        }
+
         return $this->render('student/show.html.twig', [
             'student' => $student,
+            'form' => $form->createView()
         ]);
     }
 
