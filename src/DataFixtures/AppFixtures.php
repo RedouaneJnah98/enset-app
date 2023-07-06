@@ -24,7 +24,7 @@ class AppFixtures extends Fixture
             'lastName' => 'Jnah',
             'address' => AddressFactory::random()
         ]);
-        UserFactory::createMany(30);
+        UserFactory::createMany(35);
         DepartmentFactory::createSequence([
             ['name' => 'Administrative Sciences and Techniques and Skills Engineering'],
             ['name' => 'Electrical Engineering'],

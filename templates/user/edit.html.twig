@@ -439,7 +439,7 @@
                             <h5 class="card-header">User Details</h5>
                             <div class="card-body">
                                 <div class="row">
-                                    {{ form_start(form) }}
+                                    {{ form_start(form, {attr: {'novalidate': 'novalidate'}}) }}
                                     <div class="row mt-2">
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label" for="{{ form.cardId.vars.id }}">CIN</label>
@@ -505,10 +505,17 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
-                                            <label class="form-label" for="{{ form.dateOfBirth.vars.id }}">Profile Picture</label>
+                                            <label class="form-label" for="{{ form.imageFile.vars.id }}">Profile Picture</label>
                                             {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
                                             <div class="invalid-feedback">
                                                 {{ form_errors(form.imageFile) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="{{ form.field.vars.id }}">Field</label>
+                                            {{ form_widget(form.field, {'attr': {'class': 'form-control'}}) }}
+                                            <div class="invalid-feedback">
+                                                {{ form_errors(form.field) }}
                                             </div>
                                         </div>
                                     </div>

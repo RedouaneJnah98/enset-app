@@ -81,7 +81,6 @@ class UserController extends AbstractController
             $userRepository->save($data, true);
 
             $this->addFlash('success', 'User information updated successfully.');
-//            return $this->redirectToRoute('');
         }
 
         return $this->render('user/edit.html.twig', [

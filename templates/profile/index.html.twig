@@ -227,84 +227,26 @@
                             </div>
                             <div class="card-body">
                                 <ul class="list-unstyled mb-0">
-                                    {% for field in fields %}
-                                        {{ field.students|length }}
-                                        {% for student in field.students %}
-                                            {{ student|length }}
-                                        {% endfor %}
+
+                                    {% for student in students %}
+                                        <li class="mb-3">
+                                            <div class="d-flex align-items-start">
+                                                <div class="d-flex align-items-start">
+                                                    <div class="avatar me-3">
+                                                        <img src="{{ vich_uploader_asset(student) }}" alt="Avatar" class="rounded-circle">
+                                                    </div>
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">{{ student.firstName }} {{ student.lastName }}</h6> <small class="text-muted">45 Connections</small>
+                                                    </div>
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <button class="btn btn-label-primary btn-icon btn-sm"><i class="bx bx-user"></i></button>
+                                                </div>
+                                            </div>
+                                        </li>
                                     {% endfor %}
-                                    <li class="mb-3">
-                                        <div class="d-flex align-items-start">
-                                            <div class="d-flex align-items-start">
-                                                <div class="avatar me-3"><img src="../../assets/img/avatars/2.png" alt="Avatar"
-                                                                              class="rounded-circle"></div>
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">Cecilia Payne</h6> <small class="text-muted">45 Connections</small>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <button class="btn btn-label-primary btn-icon btn-sm"><i class="bx bx-user"></i></button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">
-                                        <div class="d-flex align-items-start">
-                                            <div class="d-flex align-items-start">
-                                                <div class="avatar me-3"><img src="../../assets/img/avatars/3.png" alt="Avatar"
-                                                                              class="rounded-circle"></div>
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">Curtis Fletcher</h6>
-                                                    <small class="text-muted">1.32k Connections</small>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <button class="btn btn-primary btn-icon btn-sm"><i class="bx bx-user"></i></button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">
-                                        <div class="d-flex align-items-start">
-                                            <div class="d-flex align-items-start">
-                                                <div class="avatar me-3"><img src="../../assets/img/avatars/10.png" alt="Avatar"
-                                                                              class="rounded-circle"></div>
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">Alice Stone</h6> <small class="text-muted">125 Connections</small>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <button class="btn btn-primary btn-icon btn-sm"><i class="bx bx-user"></i></button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">
-                                        <div class="d-flex align-items-start">
-                                            <div class="d-flex align-items-start">
-                                                <div class="avatar me-3"><img src="../../assets/img/avatars/7.png" alt="Avatar"
-                                                                              class="rounded-circle"></div>
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">Darrell Barnes</h6> <small class="text-muted">456 Connections</small>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <button class="btn btn-label-primary btn-icon btn-sm"><i class="bx bx-user"></i></button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">
-                                        <div class="d-flex align-items-start">
-                                            <div class="d-flex align-items-start">
-                                                <div class="avatar me-3"><img src="../../assets/img/avatars/12.png" alt="Avatar"
-                                                                              class="rounded-circle"></div>
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">Eugenia Moore</h6> <small class="text-muted">1.2k Connections</small>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto">
-                                                <button class="btn btn-label-primary btn-icon btn-sm"><i class="bx bx-user"></i></button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="text-center"><a href="javascript:;">View all connections</a></li>
+
+                                    <li class="text-center"><a href="javascript:;">View all students</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -332,69 +274,28 @@
                             </div>
                             <div class="card-body">
                                 <ul class="list-unstyled mb-0">
-                                    <li class="mb-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="d-flex align-items-start">
-                                                <div class="avatar me-3"><img src="../../assets/img/icons/brands/react-label.png"
-                                                                              alt="Avatar" class="rounded-circle"></div>
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">React Developers</h6> <small class="text-muted">72 Members</small>
+                                    {% for user in field.users %}
+                                        <li class="mb-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="d-flex align-items-start">
+                                                    <div class="avatar me-3">
+                                                        <img src="{{ vich_uploader_asset(user) }}" alt="Avatar" class="rounded-circle">
+                                                    </div>
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">Dr.{{ user.firstName }} {{ user.lastName }}</h6>
+                                                        <small class="text-muted">Professor</small>
+                                                    </div>
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <a href="javascript:;">
+                                                        <span class="badge bg-label-primary">
+                                                            {{ field.shortName }}
+                                                        </span>
+                                                    </a>
                                                 </div>
                                             </div>
-                                            <div class="ms-auto"><a href="javascript:;"><span
-                                                            class="badge bg-label-danger">Developer</span></a></div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="d-flex align-items-start">
-                                                <div class="avatar me-3"><img src="../../assets/img/icons/brands/support-label.png"
-                                                                              alt="Avatar" class="rounded-circle"></div>
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">Support Team</h6> <small class="text-muted">122 Members</small></div>
-                                            </div>
-                                            <div class="ms-auto"><a href="javascript:;"><span
-                                                            class="badge bg-label-primary">Support</span></a></div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="d-flex align-items-start">
-                                                <div class="avatar me-3"><img src="../../assets/img/icons/brands/figma-label.png"
-                                                                              alt="Avatar" class="rounded-circle"></div>
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">UI Designers</h6> <small class="text-muted">7 Members</small></div>
-                                            </div>
-                                            <div class="ms-auto"><a href="javascript:;"><span class="badge bg-label-info">Designer</span></a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="d-flex align-items-start">
-                                                <div class="avatar me-3"><img src="../../assets/img/icons/brands/vue-label.png"
-                                                                              alt="Avatar" class="rounded-circle"></div>
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">Vue.js Developers</h6> <small class="text-muted">289 Members</small>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto"><a href="javascript:;"><span
-                                                            class="badge bg-label-danger">Developer</span></a></div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="d-flex align-items-start">
-                                                <div class="avatar me-3"><img src="../../assets/img/icons/brands/twitter-label.png"
-                                                                              alt="Avatar" class="rounded-circle"></div>
-                                                <div class="me-w">
-                                                    <h6 class="mb-0">Digital Marketing</h6> <small class="text-muted">24 Members</small>
-                                                </div>
-                                            </div>
-                                            <div class="ms-auto"><a href="javascript:;"><span
-                                                            class="badge bg-label-secondary">Marketing</span></a></div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    {% endfor %}
                                     <li class="text-center"><a href="javascript:;">View all teams</a></li>
                                 </ul>
                             </div>
