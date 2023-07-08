@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Student;
 use App\Form\StudentType;
 use App\Form\UserType;
+use App\Repository\CourseRepository;
 use App\Repository\StudentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,8 +62,9 @@ class StudentController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_student_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Student $student, StudentRepository $studentRepository): Response
+    public function edit(Request $request, Student $student, StudentRepository $studentRepository, CourseRepository $courseRepository): Response
     {
+        $courses = $courseRepository->findBy(['department' => $student->getField()->getDepartment()]);
         $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
 
@@ -75,6 +77,7 @@ class StudentController extends AbstractController
         return $this->render('student/edit.html.twig', [
             'student' => $student,
             'form' => $form,
+            'courses' => $courses
         ]);
     }
 
