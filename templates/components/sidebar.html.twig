@@ -25,8 +25,8 @@
             <span class="menu-header-text">Academic</span>
         </li>
         <!-- Professors -->
-        <li class="menu-item">
-            <a href="{{ path('app_student_professors') }}" class="menu-link">
+        <li class="menu-item {{ route == 'app_professor_professors' ? 'active' : '' }}">
+            <a href="{{ path('app_professor_professors') }}" class="menu-link">
                 <i class='menu-icon tf-icon bx bx-group'></i>
                 <div data-i18n="Basic">Professors</div>
             </a>
@@ -37,25 +37,19 @@
                 <div data-i18n="Basic">Courses</div>
             </a>
         </li>
-        <li class="menu-item ">
-            <a href="{{ path('app_student_courses') }}" class="menu-link">
+        <li class="menu-item {{ route == 'app_professor_modules' ? 'active' : '' }}">
+            <a href="{{ path('app_professor_modules') }}" class="menu-link">
                 <i class='menu-icon tf-icon bx bx-book-reader'></i>
                 <div data-i18n="Basic">Modules</div>
             </a>
         </li>
-        <li class="menu-item ">
-            <a href="{{ path('app_student_courses') }}" class="menu-link">
+        <li class="menu-item {{ route == 'app_professor_students' ? 'active' : '' }}">
+            <a href="{{ path('app_professor_students') }}" class="menu-link">
                 <i class='menu-icon tf-icon bx bxs-graduation'></i>
                 <div data-i18n="Basic">Students</div>
             </a>
         </li>
-        <li class="menu-item ">
-            <a href="{{ path('app_student_courses') }}" class="menu-link">
-                <i class='menu-icon tf-icon bx bx-chalkboard'></i>
-                <div data-i18n="Basic">My Class</div>
-            </a>
-        </li>
-        <!-- Daily attendance -->
+
         <li class="menu-item">
             <a href="cards-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-calendar"></i>

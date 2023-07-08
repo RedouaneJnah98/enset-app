@@ -31,6 +31,7 @@
                     {% set totalSessionError = form_errors(form.totalSession) ? 'form-control is-invalid' : 'form-control' %}
                     {% set hoursError = form_errors(form.hours) ? 'form-control is-invalid' : 'form-control' %}
                     {% set departmentError = form_errors(form.department) ? 'form-control is-invalid' : 'form-control' %}
+                    {% set shortNameError = form_errors(form.shortName) ? 'form-control is-invalid' : 'form-control' %}
 
                     <div class="card-body">
                         {{ form_start(form, {'attr': {novalidate: 'novalidate'}}) }}
@@ -46,12 +47,20 @@
                             </div>
                         </div>
                         <div class="row g-3 mb-4">
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                 <label class="form-label fw-bold" for="{{ form.department.vars.id }}">Department *</label>
 
                                 {{ form_widget(form.department, {'attr': {'class': departmentError}}) }}
                                 <div class="invalid-feedback">
                                     {{ form_errors(form.department) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold" for="{{ form.shortName.vars.id }}">Short Name *</label>
+
+                                {{ form_widget(form.shortName, {'attr': {'class': shortNameError}}) }}
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.shortName) }}
                                 </div>
                             </div>
                         </div>

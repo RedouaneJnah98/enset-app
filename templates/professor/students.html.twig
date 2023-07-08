@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} My Students {% endblock %}
+
+{% block content %}
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="row g-4 mb-4">
+            <div class="col-lg-8 align-self-end mb-4">
+                <div class="card">
+                    <div class="d-flex align-items-end row">
+                        <div class="col-sm-5 text-center text-sm-left">
+                            <div class="card-body pb-0">
+                                <img src="{{ asset('assets/img/illustrations/mathematics.svg') }}" alt="Target User" height="140">
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="card-body">
+                                <h5 class="card-title">Welcome back Dr.{{ app.user.lastName }}!</h5>
+                                <p class="mb-4">In the list below you'll find all your students in this year.</p>
+                                <span class="badge bg-label-primary">{{ students|length }} total students</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <img src="../../assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded">
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn p-0" type="button" id="cardOpt1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="cardOpt1">
+                                    <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="fw-semibold d-block mb-1">Transactions</span>
+                        <h4 class="card-title mb-2">$14,857</h4>
+                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                                <img src="../../assets/img/icons/unicons/cube-secondary.png" alt="cube" class="rounded">
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn p-0" type="button" id="cardOpt2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt2">
+                                    <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="fw-semibold d-block mb-1">Order</span>
+                        <h4 class="card-title mb-2">$1,286</h4>
+                        <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -13.24%</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h5 class="card-title m-0 me-2">{{ app.user.field.name }}'s Students</h5>
+                    <div>
+                        <span class="badge bg-label-primary">{{ app.user.field.shortName }}</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-borderless table-striped" id="datatable">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Birth Date</th>
+                                <th>Phone No</th>
+                                {#                                <th>City</th> #}
+                                <th>Joined Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for student in students %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex justify-content-start align-items-center">
+                                            <div class="avatar me-2">
+                                                {% if student.imageName is null %}
+                                                    <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}">
+                                                        {{ student.firstName|first }}{{ student.lastName|first }}
+                                                    </span>
+                                                {% else %}
+                                                    <img src="{{ vich_uploader_asset(student) }}" alt="Avatar" class="rounded-circle">
+                                                {% endif %}
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                <h6 class="mb-0 text-truncate">{{ student.firstName }} {{ student.lastName }}</h6>
+                                                <small class="text-truncate text-muted">{{ student.email }}</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <small class="fw-semibold">{{ student.birthDate|date('d/m/y') }}</small>
+                                    </td>
+                                    <td>
+                                        <small class="fw-semibold">{{ student.mobileNumber }}</small></td>
+                                    <td>
+                                        <span>{{ student.createdAt|ago }}</span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -33,6 +33,9 @@ class CourseType extends AbstractType
             ->add('department', EntityType::class, [
                 'class' => Department::class,
                 'placeholder' => 'choose'
+            ])
+            ->add('shortName', TextType::class, [
+                'attr' => ['placeholder' => 'Java OOP']
             ]);
     }
 

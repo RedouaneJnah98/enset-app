@@ -47,6 +47,9 @@ class Course
     #[ORM\OneToMany(mappedBy: 'course', targetEntity: Section::class)]
     private Collection $sections;
 
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $shortName = null;
+
     public function __construct()
     {
         $this->modules = new ArrayCollection();
@@ -179,6 +182,18 @@ class Course
                 $section->setCourse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getShortName(): ?string
+    {
+        return $this->shortName;
+    }
+
+    public function setShortName(?string $shortName): self
+    {
+        $this->shortName = $shortName;
 
         return $this;
     }
