@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Address;
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\CourseRepository;
+use App\Repository\FieldRepository;
+use App\Repository\SectionRepository;
 use App\Repository\StudentRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -71,8 +74,11 @@ class UserController extends AbstractController
     }
 
     #[Route('/user/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
+    public function edit(Request $request, User $user, UserRepository $userRepository, SectionRepository $sectionRepository): Response
     {
+        $field = $user->getField();
+
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -86,6 +92,7 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
+            'sections' => $user->getSections()
         ]);
     }
 

@@ -25,7 +25,15 @@
                     <div class="card-body">
                         <div class="user-avatar-section">
                             <div class=" d-flex align-items-center flex-column">
-                                <img class="img-fluid rounded my-4" src="{{ vich_uploader_asset(student) }}" alt="User avatar" width="110" height="110">
+                                {% if student.imageName is null %}
+                                    {% if student.gender == 'Male' %}
+                                        <img class="img-fluid rounded my-4" src="{{ asset('assets/img/avatars/male-avatar.svg') }}" alt="User avatar" width="110" height="110">
+                                    {% else %}
+                                        <img class="img-fluid rounded my-4" src="{{ asset('assets/img/avatars/female-avatar.svg') }}" alt="User avatar" width="110" height="110">
+                                    {% endif %}
+                                {% else %}
+                                    <img class="img-fluid rounded my-4" src="{{ vich_uploader_asset(student) }}" alt="User avatar" width="110" height="110">
+                                {% endif %}
                                 <div class="user-info text-center">
                                     <h5 class="mb-2 text-capitalize d-flex align-items-center">
                                         <span>{{ student.firstName }} {{ student.lastName }}</span>

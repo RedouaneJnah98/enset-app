@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +23,22 @@ class SettingsController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
+        $singInForm = $this->createFormBuilder($user)
+            ->add('email', EmailType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('password', PasswordType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->getForm();
+
+        if ($request->isXmlHttpRequest()) {
+            $email = $request->get('email');
+            $password = $request->get('password');
+
+            dump($email, $password);
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
@@ -28,14 +46,9 @@ class SettingsController extends AbstractController
             $this->addFlash('success', 'Profile settings updated successfully!');
         }
 
-        return $this->render('user/settings.html.twig', [
-            'form' => $form->createView()
+        return $this->render('settings/index.html.twig', [
+            'form' => $form->createView(),
+            'emailForm' => $singInForm
         ]);
-    }
-
-    #[Route('/profile', name: 'app_user_profile')]
-    public function profile(): Response
-    {
-        return $this->render('user/profile.html.twig');
     }
 }

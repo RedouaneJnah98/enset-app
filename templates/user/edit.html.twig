@@ -31,7 +31,12 @@
                                         <span>{{ user.firstName }} {{ user.lastName }}</span>
                                         <i class='bx bxs-badge-check text-info ms-1'></i>
                                     </h5>
-                                    <span class="badge bg-label-info">Author</span>
+                                    {% if user.roles == 'ROLE_ADMIN' %}
+                                        <span class="badge bg-label-info">Admin</span>
+                                    {% else %}
+                                        <span class="badge bg-label-info">Professor</span>
+                                    {% endif %}
+
                                 </div>
                             </div>
                         </div>
@@ -41,17 +46,8 @@
                                     <i class="bx bx-check bx-sm"></i>
                                 </span>
                                 <div>
-                                    <h5 class="mb-0">1.23k</h5>
-                                    <span>Tasks Done</span>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-start mt-3 gap-3">
-                                <span class="badge bg-label-primary p-2 rounded">
-                                    <i class="bx bx-customize bx-sm"></i>
-                                </span>
-                                <div>
-                                    <h5 class="mb-0">568</h5>
-                                    <span>Projects Done</span>
+                                    <h5 class="mb-0">Last Login</h5>
+                                    <span>{{ user.createdAt|ago }}</span>
                                 </div>
                             </div>
                         </div>
@@ -200,235 +196,52 @@
                         <div class="tab-pane fade show active" id="navs-pills-top-overview" role="tabpanel">
                             <!-- Project table -->
                             <div class="card mb-4 tab-pane fade show active">
-                                <h5 class="card-header">Professor's Courses List</h5>
-                                <div class="table-responsive mb-3">
-                                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                                        <div class="d-flex justify-content-between align-items-center flex-column flex-sm-row mx-4 row">
-                                            <div class="col-sm-4 col-12 d-flex align-items-center justify-content-sm-start justify-content-center">
-                                                <div class="dataTables_length" id="DataTables_Table_0_length">
-                                                    <label>Show
-                                                        <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select">
-                                                            <option value="7">7</option>
-                                                            <option value="10">10</option>
-                                                            <option value="25">25</option>
-                                                            <option value="50">50</option>
-                                                            <option value="75">75</option>
-                                                            <option value="100">100</option>
-                                                        </select>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-8 col-12 d-flex align-items-center justify-content-sm-end justify-content-center">
-                                                <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                                                    <label>Search:
-                                                        <input type="search" class="form-control" placeholder="Search Course" aria-controls="DataTables_Table_0">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <table class="table datatable-project border-top dataTable no-footer dtr-column" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info"
-                                               style="width: 745px;">
+                                <h5 class="card-header">
+                                    {% for section in sections %}
+                                        {{ section.course.name }} Course
+                                    {% endfor %}
+                                </h5>
+                                <div class="card-body">
+                                    <div class="table-responsive mb-3">
+                                        <table class="table datatable-project border-top dataTable no-footer dtr-column" id=datatable style="width: 745px;">
                                             <thead>
                                             <tr>
                                                 <th class="control sorting dtr-hidden" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 0px; display: none;"
                                                     aria-label=": activate to sort column ascending"></th>
                                                 <th class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 275px;"
-                                                    aria-label="Project: activate to sort column ascending" aria-sort="descending">Course
+                                                    aria-label="Project: activate to sort column ascending" aria-sort="descending">Module
                                                 </th>
                                                 <th class="text-nowrap sorting_disabled" rowspan="1" colspan="1" style="width: 114px;" aria-label="Total Task">Total Session</th>
-                                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 105px;"
-                                                    aria-label="Progress: activate to sort column ascending">Progress
-                                                </th>
                                                 <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 79px;" aria-label="Hours">Hours</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr class="odd">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3">
-                                                                <img src="../../assets/img/icons/brands/vue-label.png" alt="Project Image" class="rounded-circle">
+                                            {% for section in sections %}
+                                                {% for module in section.course.modules %}
+                                                    <tr>
+                                                        <td class="  control" style="display: none;" tabindex="0"></td>
+                                                        <td class="sorting_1">
+                                                            <div class="d-flex justify-content-left align-items-center">
+                                                                <div class="avatar-wrapper">
+                                                                    <div class="avatar avatar-sm me-3">
+                                                                        <img src="{{ vich_uploader_asset(module) }}" alt="Project Image" class="rounded-circle">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex flex-column">
+                                                                    <span class="text-truncate fw-semibold">{{ module.name }}</span>
+                                                                    <small class="text-muted">{{ section.course.name }}</small>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column">
-                                                            <span class="text-truncate fw-semibold">Java course</span>
-                                                            <small class="text-muted">Spring Boot Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>2/8</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">78%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-success" style="width: 78%" aria-valuenow="78%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>32 hours</td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/event-label.png" alt="Project Image" class="rounded-circle">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Data Structure & Algorithms</span>
-                                                            <small class="text-muted">C Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>5/8</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">69%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-info" style="width: 69%" aria-valuenow="69%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>12:12h</td>
-                                            </tr>
-                                            <tr class="odd">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/html-label.png" alt="Project Image" class="rounded-circle"></div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Javascript Course</span>
-                                                            <small class="text-muted">Javascript Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>56/183</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">43%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-warning" style="width: 43%" aria-valuenow="43%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>76h</td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/sketch-label.png" alt="Project Image" class="rounded-circle">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Mobile App Course</span>
-                                                            <small class="text-muted">iPhone Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>12/86</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">49%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-warning" style="width: 49%" aria-valuenow="49%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>45h</td>
-                                            </tr>
-                                            <tr class="odd">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/xd-label.png" alt="Project Image" class="rounded-circle"></div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Network Course</span>
-                                                            <small class="text-muted">UI/UX Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>9/50</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">15%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-danger" style="width: 15%" aria-valuenow="15%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>89h</td>
-                                            </tr>
-                                            <tr class="even">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3"><img src="../../assets/img/icons/brands/react-label.png" alt="Project Image" class="rounded-circle">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column"><span class="text-truncate fw-semibold">Linux course</span>
-                                                            <small class="text-muted">Setup Ubuntu on local machine</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>234/378</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">73%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-info" style="width: 73%" aria-valuenow="73%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>67:10h</td>
-                                            </tr>
-                                            <tr class="odd">
-                                                <td class="  control" style="display: none;" tabindex="0"></td>
-                                                <td class="sorting_1">
-                                                    <div class="d-flex justify-content-left align-items-center">
-                                                        <div class="avatar-wrapper">
-                                                            <div class="avatar avatar-sm me-3">
-                                                                <img src="../../assets/img/icons/brands/vue-label.png" alt="Project Image" class="rounded-circle">
-                                                            </div>
-                                                        </div>
-                                                        <div class="d-flex flex-column">
-                                                            <span class="text-truncate fw-semibold">Dashboard Design</span>
-                                                            <small class="text-muted">Vuejs Project</small>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>100/190</td>
-                                                <td>
-                                                    <div class="d-flex flex-column"><small class="mb-1">90%</small>
-                                                        <div class="progress w-100 me-3" style="height: 6px;">
-                                                            <div class="progress-bar bg-success" style="width: 90%" aria-valuenow="90%" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>129:45h</td>
-                                            </tr>
+                                                        </td>
+                                                        <td>0/{{ section.course.totalSession }}</td>
+                                                        <td>
+                                                            <span class="badge bg-label-primary">{{ section.course.hours }} hours</span>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                            {% endfor %}
                                             </tbody>
                                         </table>
-                                        <div class="d-flex justify-content-between mx-4 row">
-                                            <div class="col-sm-12 col-md-6">
-                                                <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to 7 of 11 entries</div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6">
-                                                <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
-                                                    <ul class="pagination">
-                                                        <li class="paginate_button page-item previous disabled" id="DataTables_Table_0_previous">
-                                                            <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="previous" tabindex="0" class="page-link">Previous</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item active">
-                                                            <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">1</a>
-                                                        </li>
-                                                        <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">2</a></li>
-                                                        <li class="paginate_button page-item next" id="DataTables_Table_0_next">
-                                                            <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="next" tabindex="0" class="page-link">Next</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -96,7 +96,7 @@
                                 <tr>
                                     <td>
                                         <div class="d-flex justify-content-start align-items-center">
-                                            <div class="avatar me-2">
+                                            <a href="{{ path('app_professor_showStudent', {'id': student.id}) }}" class="avatar me-2">
                                                 {% if student.imageName is null %}
                                                     <span class="avatar-initial rounded-circle bg-label-{{ random(['success', 'info', 'primary', 'secondary', 'dark', 'warning', 'danger']) }}">
                                                         {{ student.firstName|first }}{{ student.lastName|first }}
@@ -104,7 +104,7 @@
                                                 {% else %}
                                                     <img src="{{ vich_uploader_asset(student) }}" alt="Avatar" class="rounded-circle">
                                                 {% endif %}
-                                            </div>
+                                            </a>
                                             <div class="d-flex flex-column">
                                                 <h6 class="mb-0 text-truncate">{{ student.firstName }} {{ student.lastName }}</h6>
                                                 <small class="text-truncate text-muted">{{ student.email }}</small>

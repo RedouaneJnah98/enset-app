@@ -186,3 +186,40 @@ function removeEmailLayout() {
     emailInfo.removeClass('d-none');
     emailForm.addClass('d-none');
 }
+
+
+$("#emailForm").on('submit', function (e) {
+    e.preventDefault();
+
+    let email = $("#userNewEmail");
+    let confirmPassword = $("#userConfirmPassword");
+    let token = $("#user_csrfToken");
+    let data = {};
+
+    data[$(email).attr('name')] = email.val();
+    data[$(confirmPassword).attr('name')] = confirmPassword.val();
+    data[$(token).attr('name')] = token.val();
+
+    $.ajax({
+        url: window.location.pathname,
+        method: 'POST',
+        data: data,
+        success: function (response) {
+            $.toast({
+                heading: 'Success',
+                text: response.success,
+                icon: 'success',
+                position: 'top-right',
+                hideAfter: 4000,
+                bgColor: '#62A786',
+                textColor: 'white',
+            })
+
+            // $("#modalEdit").modal('hide');
+        },
+        error: function (xhr, status, error) {
+            console.log(error);
+        }
+    })
+
+})

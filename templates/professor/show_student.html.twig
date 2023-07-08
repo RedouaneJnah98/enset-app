@@ -1,0 +1,171 @@
+{% extends 'base.html.twig' %}
+{% block title %} {{ student.firstName }} Student {% endblock %}
+
+{% block content %}
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <nav aria-label="breadcrumb mb-0">
+            <ol class="breadcrumb breadcrumb-style2">
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_dashboard') }}">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ path('app_student_index') }}">Student Management</a>
+                </li>
+                <li class="breadcrumb-item active">Student</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <!-- User Sidebar -->
+            <div class="col-xl-4 col-lg-5 col-md-5 order-1 order-md-0">
+                <!-- User Card -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="user-avatar-section">
+                            <div class=" d-flex align-items-center flex-column">
+                                {% if student.imageName is null %}
+                                    {% if student.gender == 'Male' %}
+                                        <img class="img-fluid rounded my-4" src="{{ asset('assets/img/avatars/male-avatar.svg') }}" alt="User avatar" width="110" height="110">
+                                    {% else %}
+                                        <img class="img-fluid rounded my-4" src="{{ asset('assets/img/avatars/female-avatar.svg') }}" alt="User avatar" width="110" height="110">
+                                    {% endif %}
+                                {% else %}
+                                    <img class="img-fluid rounded my-4" src="{{ vich_uploader_asset(student) }}" alt="User avatar" width="110" height="110">
+                                {% endif %}
+                                <div class="user-info text-center">
+                                    <h5 class="mb-2 text-capitalize d-flex align-items-center">
+                                        <span>{{ student.firstName }} {{ student.lastName }}</span>
+                                        <i class='bx bxs-badge-check text-info ms-1'></i>
+                                    </h5>
+                                    <span class="badge bg-label-info">Student</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-around  mb-4 py-3">
+                            <div class="d-flex align-items-start me-4 mt-3 gap-3">
+                                <span class="badge bg-label-primary p-2 rounded">
+                                    <i class="bx bx-time bx-sm"></i>
+                                </span>
+                                <div>
+                                    <h5 class="mb-0">Last Login</h5>
+                                    <span>{{ student.createdAt|ago }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between pb-2 border-bottom mb-4 h-100">
+                            <span class="fs-5">Details</span>
+                        </div>
+
+                        <div class="info-container">
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">CIN ID:</span>
+                                    <span>{{ student.cardId }}</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Username:</span>
+                                    <span>{{ student.username }}</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Email:</span>
+                                    <span>{{ student.email }}</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Status:</span>
+                                    <span class="badge bg-label-success">Active</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Department:</span>
+                                    <span>{{ student.field.department.name }}</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Field:</span>
+                                    <span>{{ student.field.name }}</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Joined:</span>
+                                    <span>{{ student.createdAt|ago }}</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">Contact:</span>
+                                    <span>{{ student.mobileNumber }}</span>
+                                </li>
+                                <li class="mb-3">
+                                    <span class="fw-bold me-2">City:</span>
+                                    <span>Tangier</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /User Card -->
+            </div>
+            <!--/ User Sidebar -->
+
+            <!-- User Content -->
+            <div class="col-xl-8 col-lg-7 col-md-7 order-0 order-md-1">
+                <div class="card mb-4 tab-pane fade show active">
+                    <h5 class="card-header">Student's Courses List</h5>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table datatable-project border-top dataTable no-footer dtr-column" id="datatable">
+                                <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Modules</th>
+                                    <th class="text-nowrap">Total Session</th>
+                                    <th>Hours</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for course in courses %}
+                                    <tr>
+                                        <td>
+                                            <span class="text-nowrap">{{ course.shortName }}</span>
+                                        </td>
+                                        <td>
+                                            {% set countRemaining = 0 %}
+                                            {% set totalIterations = course.modules|length %}
+
+                                            <div class="d-flex align-items-center avatar-group mb-3 mt-3">
+                                                {% for module in course.modules|slice(0, totalIterations) %}
+                                                    {% if loop.index > 2 %}
+                                                        {% set countRemaining = countRemaining + 1 %}
+                                                    {% else %}
+
+                                                        <div class="avatar avatar-sm">
+                                                            <img src="{{ vich_uploader_asset(module) }}" alt="Avatar" class="rounded-circle pull-up">
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {% if countRemaining != 0 %}
+                                                    <div class="avatar avatar-sm">
+                                                        <span class="avatar-initial rounded-circle pull-up" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                                              title="{{ countRemaining }} more">
+                                                            +{{ countRemaining }}
+                                                        </span>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            0/{{ course.totalSession }}
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-label-primary">{{ course.hours }} hours</span>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ User Content -->
+        </div>
+    </div>
+
+{% endblock %}

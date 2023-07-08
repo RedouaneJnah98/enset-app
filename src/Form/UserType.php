@@ -56,6 +56,7 @@ class UserType extends AbstractType
             ])
             ->add('employeeId', TextType::class, [
                 'attr' => ['placeholder' => '1234', 'class' => 'form-control'],
+                'mapped' => false
             ])
             ->add('cardId', TextType::class, [
                 'attr' => ['placeholder' => 'K987345', 'class' => 'form-control'],

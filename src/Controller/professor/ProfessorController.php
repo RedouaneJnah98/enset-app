@@ -3,6 +3,7 @@
 namespace App\Controller\professor;
 
 use App\Entity\Field;
+use App\Entity\Student;
 use App\Repository\CourseRepository;
 use App\Repository\FieldRepository;
 use App\Repository\SectionRepository;
@@ -21,6 +22,17 @@ class ProfessorController extends AbstractController
 
         return $this->render('professor/students.html.twig', [
             'students' => $fieldRepository->find($fieldId)->getStudents()
+        ]);
+    }
+
+    #[Route('/student/{id}', name: 'app_professor_showStudent')]
+    public function showStudent(Student $student, CourseRepository $courseRepository): Response
+    {
+        $courses = $courseRepository->findBy(['department' => $student->getField()->getDepartment()]);
+
+        return $this->render('professor/show_student.html.twig', [
+            'student' => $student,
+            'courses' => $courses
         ]);
     }
 
