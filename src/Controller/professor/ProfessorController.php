@@ -37,12 +37,10 @@ class ProfessorController extends AbstractController
     }
 
     #[Route('/modules', name: 'app_professor_modules')]
-    public function modules(CourseRepository $courseRepository, SectionRepository $sectionRepository): Response
+    public function modules(CourseRepository $courseRepository): Response
     {
         $fieldId = $this->getUser()->getField()->getDepartment();
         $courses = $courseRepository->findBy(['department' => $fieldId]);
-        $sections = $sectionRepository->findBy(['field' => $fieldId]);
-
 
         return $this->render('professor/modules.html.twig', [
             'courses' => $courses
@@ -50,11 +48,19 @@ class ProfessorController extends AbstractController
     }
 
     #[Route('/professors', name: 'app_professor_professors')]
-    public function professors(UserRepository $userRepository, FieldRepository $fieldRepository): Response
+    public function professors(UserRepository $userRepository, FieldRepository $fieldRepository, SectionRepository $sectionRepository): Response
     {
+        $fieldId = $this->getUser()->getField();
+        $field = $fieldRepository->find($fieldId);
+
+//        $courseByField = $fieldRepository->findBy(['department' => $field->getDepartment()]);
+        $sections = $sectionRepository->findRelatedProfessorsByField($field);
+
         return $this->render('professor/professors.html.twig', [
-            'fields' => $fieldRepository->findAll(),
-            'users' => $userRepository->findAll()
+            'team' => $field->getUsers(),
+            'sections' => $sections,
+            'users' => $userRepository->findAll(),
+            //'field' => $courseByField
         ]);
     }
 }

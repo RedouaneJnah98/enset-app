@@ -38,7 +38,7 @@ class StudentController extends AbstractController
 
         return $this->render('student/new.html.twig', [
             'student' => $student,
-            'form' => $form->createView(),
+            // 'form' => $form->createView(),
         ]);
     }
 

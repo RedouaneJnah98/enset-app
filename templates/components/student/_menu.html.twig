@@ -1,0 +1,73 @@
+<ul class="dropdown-menu dropdown-menu-end">
+    <li>
+        <a class="dropdown-item" href="#">
+            <div class="d-flex">
+                <div class="flex-shrink-0 me-3">
+                    <div class="avatar avatar-online">
+                        {#                                                            <img src="../../assets/img/avatars/1.png" alt="" class="w-px-40 h-auto rounded-circle"> #}
+                        <span class="avatar-initial rounded-circle bg-label-info">
+                            {{ app.user.firstName|first }}{{ app.user.lastName|first }}
+                        </span>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <span class="fw-semibold d-block">{{ app.user.firstName }} {{ app.user.lastName }}</span>
+                    <small class="badge bg-label-secondary fs-tiny">
+                        {{ is_granted('ROLE_ADMIN') ? 'Admin' : 'Member' }}
+                    </small>
+                </div>
+            </div>
+        </a>
+    </li>
+    <li>
+        <div class="dropdown-divider"></div>
+    </li>
+    <li>
+        <a class="dropdown-item" href="{{ path('app_student_profile') }}">
+            <i class="bx bx-user-circle me-2"></i>
+            <span class="align-middle">Profile</span>
+        </a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#">
+            <i class="bx bx-bookmarks me-2"></i>
+            <span class="align-middle">Courses</span>
+        </a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#">
+            <i class='bx bx-shield-quarter me-2'></i>
+            <span class="align-middle">Security</span>
+        </a>
+    </li>
+    <li>
+        <div class="dropdown-divider"></div>
+    </li>
+    <li>
+        <a class="dropdown-item" href="{{ path('app_user_settings') }}">
+            <i class="bx bx-cog me-2"></i>
+            <span class="align-middle">Account Settings</span>
+        </a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#">
+            <i class='bx bx-world me-2'></i>
+            <span class="align-middle">Language</span>
+        </a>
+    </li>
+    <li>
+        <a class="dropdown-item" href="#">
+            <i class='bx bx-help-circle me-2'></i>
+            <span class="align-middle">Help</span>
+        </a>
+    </li>
+    <li>
+        <div class="dropdown-divider"></div>
+    </li>
+    <li>
+        <a class="dropdown-item text-danger" href="{{ path('app_logout') }}">
+            <i class="bx bx-power-off me-2"></i>
+            <span class="align-middle">Log Out</span>
+        </a>
+    </li>
+</ul>

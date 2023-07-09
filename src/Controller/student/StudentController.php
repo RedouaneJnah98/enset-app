@@ -20,4 +20,10 @@ class StudentController extends AbstractController
             'courses' => $courses
         ]);
     }
+
+    #[Route('/profile', name: 'app_student_profile')]
+    public function profile(): Response
+    {
+        return $this->render('components/student/profie.html.twig');
+    }
 }

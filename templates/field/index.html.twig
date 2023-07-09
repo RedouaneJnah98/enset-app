@@ -9,6 +9,22 @@
         <p class="mb-4">Each category (Basic, Professional, and Business) includes the four predefined roles shown below.</p>
 
         <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="h4">Fields List</h4>
+                </div>
+
+                <div>
+                    <a href="{{ path('app_field_new') }}" class="btn btn-secondary add-new btn-primary">
+                    <span>
+                        <i class="bx bx-plus me-0 me-sm-1"></i>
+                        <span class="d-none d-sm-inline-block">Add New Field
+                        </span>
+                    </span>
+                    </a>
+                </div>
+            </div>
+
             <div class="card-datatable table-responsive">
                 <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                     <table id="datatable" class="table border-top dataTable table-striped" style="width: 1130px;">

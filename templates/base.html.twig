@@ -88,38 +88,36 @@
                                         <div data-i18n="Basic">Users</div>
                                     </a>
                                 </li>
-                                <li class="menu-item">
-                                    <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                        <i class='menu-icon tf-icon bx bx-check-shield'></i>
-                                        <div data-i18n="Account Settings">Roles & Permissions</div>
+                                <li class="menu-item {{ route == 'app_student_index' ? 'active' : '' }}">
+                                    <a href="{{ path('app_student_index') }}" class="menu-link">
+                                        <i class='menu-icon tf-icon bx bxs-graduation'></i>
+                                        <div data-i18n="Basic">Students</div>
                                     </a>
-                                    <ul class="menu-sub">
-                                        <li class="menu-item">
-                                            <a href="pages-account-settings-account.html" class="menu-link">
-                                                <div data-i18n="Account">Roles</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a href="pages-account-settings-notifications.html" class="menu-link">
-                                                <div data-i18n="Notifications">Permission</div>
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
                             {% endif %}
                             <!-- Academic -->
                             <li class="menu-header small text-uppercase">
                                 <span class="menu-header-text">Academic</span>
                             </li>
-                            <!-- Daily attendance -->
-                            <li class="menu-item">
-                                <a href="cards-basic.html" class="menu-link">
-                                    <i class="menu-icon tf-icons bx bx-calendar"></i>
-                                    <div data-i18n="Basic">Year View</div>
+                            <!-- Class -->
+                            <li class="menu-item {{ route == 'app_student_new' ? 'active' : '' }}">
+                                <a href="{{ path('app_student_new') }}" class="menu-link">
+                                    <i class='menu-icon tf-icon bx bx-user-plus'></i>
+                                    <div data-i18n="Basic">Admission</div>
                                 </a>
                             </li>
-
-                            <!-- Class -->
+                            <li class="menu-item {{ route == 'app_field_index' ? 'active' : '' }}">
+                                <a href="{{ path('app_field_index') }}" class="menu-link">
+                                    <i class='menu-icon tf-icon bx bxs-spreadsheet'></i>
+                                    <div data-i18n="Basic">Fields</div>
+                                </a>
+                            </li>
+                            <li class="menu-item {{ route == 'app_department_index' ? 'active' : '' }}">
+                                <a href="{{ path('app_department_index') }}" class="menu-link">
+                                    <i class='menu-icon tf-icon bx bx-sitemap'></i>
+                                    <div data-i18n="Basic">Departments</div>
+                                </a>
+                            </li>
                             <li class="menu-item {{ route == 'app_course_index' ? 'active open' : '' }}">
                                 <a href="javascript:void(0)" class="menu-link menu-toggle">
                                     <i class="menu-icon tf-icons bx bx-chalkboard"></i>
@@ -145,31 +143,31 @@
                             </li>
 
                             <!-- School -->
-                            <li class="menu-item {{ route == 'app_student_index' ? 'active open' : '' }}">
-                                <a href="javascript:void(0)" class="menu-link menu-toggle">
-                                    <i class="menu-icon tf-icons bx bxs-school"></i>
-                                    <div data-i18n="User interface">School</div>
-                                </a>
-                                <ul class="menu-sub">
-                                    <li class="menu-item {{ route == 'app_student_index' ? 'active' : '' }}">
-                                        <a href="{{ path('app_student_index') }}" class="menu-link">
-                                            <div data-i18n="Accordion">Admission</div>
-                                        </a>
-                                    </li>
-                                    <li class="menu-item {{ route == 'app_field_index' ? 'active' : '' }}">
-                                        <a href="{{ path('app_field_index') }}" class="menu-link">
-                                            <div data-i18n="Accordion">Fields</div>
-                                        </a>
-                                    </li>
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <li class="menu-item {{ route == 'app_department_index' ? 'active' : '' }}">
-                                            <a href="{{ path('app_department_index') }}" class="menu-link">
-                                                <div data-i18n="Badges">Departments</div>
-                                            </a>
-                                        </li>
-                                    {% endif %}
-                                </ul>
-                            </li>
+                            {#                            <li class="menu-item {{ route == 'app_student_index' ? 'active open' : '' }}"> #}
+                            {#                                <a href="javascript:void(0)" class="menu-link menu-toggle"> #}
+                            {#                                    <i class="menu-icon tf-icons bx bxs-school"></i> #}
+                            {#                                    <div data-i18n="User interface">School</div> #}
+                            {#                                </a> #}
+                            {#                                <ul class="menu-sub"> #}
+                            {#                                    <li class="menu-item {{ route == 'app_student_index' ? 'active' : '' }}"> #}
+                            {#                                        <a href="{{ path('app_student_index') }}" class="menu-link"> #}
+                            {#                                            <div data-i18n="Accordion">Admission</div> #}
+                            {#                                        </a> #}
+                            {#                                    </li> #}
+                            {#                                    <li class="menu-item {{ route == 'app_field_index' ? 'active' : '' }}"> #}
+                            {#                                        <a href="{{ path('app_field_index') }}" class="menu-link"> #}
+                            {#                                            <div data-i18n="Accordion">Fields</div> #}
+                            {#                                        </a> #}
+                            {#                                    </li> #}
+                            {#                                    {% if is_granted('ROLE_ADMIN') %} #}
+                            {#                                        <li class="menu-item {{ route == 'app_department_index' ? 'active' : '' }}"> #}
+                            {#                                            <a href="{{ path('app_department_index') }}" class="menu-link"> #}
+                            {#                                                <div data-i18n="Badges">Departments</div> #}
+                            {#                                            </a> #}
+                            {#                                        </li> #}
+                            {#                                    {% endif %} #}
+                            {#                                </ul> #}
+                            {#                            </li> #}
                             <!-- Human Resource -->
                             <li class="menu-header small text-uppercase"><span class="menu-header-text">Human Resource</span></li>
                             <!-- leaves -->
@@ -523,85 +521,84 @@
                                             </div>
                                         {% endif %}
                                     </a>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <div class="avatar avatar-online">
-                                                            {#                                                            <img src="../../assets/img/avatars/1.png" alt="" class="w-px-40 h-auto rounded-circle"> #}
-                                                            <span class="avatar-initial rounded-circle bg-label-info">
+                                    {% if is_granted('ROLE_PROFESSOR') or is_granted('ROLE_ADMIN') %}
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <a class="dropdown-item" href="#">
+                                                    <div class="d-flex">
+                                                        <div class="flex-shrink-0 me-3">
+                                                            <div class="avatar avatar-online">
+                                                                {#                                                            <img src="../../assets/img/avatars/1.png" alt="" class="w-px-40 h-auto rounded-circle"> #}
+                                                                <span class="avatar-initial rounded-circle bg-label-info">
                                                 {{ app.user.firstName|first }}{{ app.user.lastName|first }}
                                             </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex-grow-1">
+                                                            <span class="fw-semibold d-block">{{ app.user.firstName }} {{ app.user.lastName }}</span>
+                                                            <small class="badge bg-label-secondary fs-tiny">
+                                                                {{ is_granted('ROLE_ADMIN') ? 'Admin' : 'Member' }}
+                                                            </small>
                                                         </div>
                                                     </div>
-                                                    <div class="flex-grow-1">
-                                                        <span class="fw-semibold d-block">{{ app.user.firstName }} {{ app.user.lastName }}</span>
-                                                        <small class="badge bg-label-secondary fs-tiny">
-                                                            {{ is_granted('ROLE_ADMIN') ? 'Admin' : 'Member' }}
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div class="dropdown-divider"></div>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="{{ path('app_profile') }}">
-                                                <i class="bx bx-user-circle me-2"></i>
-                                                <span class="align-middle">Profile</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <i class="bx bx-credit-card me-2"></i>
-                                                <span class="align-middle">Payments <span class="badge badge-center rounded-pill bg-label-danger ms-2">3</span></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <i class="bx bx-bookmarks me-2"></i>
-                                                <span class="align-middle">Courses</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <i class='bx bx-shield-quarter me-2'></i>
-                                                <span class="align-middle">Security</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div class="dropdown-divider"></div>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="{{ path('app_user_settings') }}">
-                                                <i class="bx bx-cog me-2"></i>
-                                                <span class="align-middle">Account Settings</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <i class='bx bx-world me-2'></i>
-                                                <span class="align-middle">Language</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="#">
-                                                <i class='bx bx-help-circle me-2'></i>
-                                                <span class="align-middle">Help</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div class="dropdown-divider"></div>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item text-danger" href="{{ path('app_logout') }}">
-                                                <i class="bx bx-power-off me-2"></i>
-                                                <span class="align-middle">Log Out</span>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div class="dropdown-divider"></div>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ path('app_profile') }}">
+                                                    <i class="bx bx-user-circle me-2"></i>
+                                                    <span class="align-middle">Profile</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class="bx bx-bookmarks me-2"></i>
+                                                    <span class="align-middle">Courses</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class='bx bx-shield-quarter me-2'></i>
+                                                    <span class="align-middle">Security</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div class="dropdown-divider"></div>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ path('app_user_settings') }}">
+                                                    <i class="bx bx-cog me-2"></i>
+                                                    <span class="align-middle">Account Settings</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class='bx bx-world me-2'></i>
+                                                    <span class="align-middle">Language</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="#">
+                                                    <i class='bx bx-help-circle me-2'></i>
+                                                    <span class="align-middle">Help</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div class="dropdown-divider"></div>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item text-danger" href="{{ path('app_logout') }}">
+                                                    <i class="bx bx-power-off me-2"></i>
+                                                    <span class="align-middle">Log Out</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    {% else %}
+                                        {% include 'components/student/_menu.html.twig' %}
+                                    {% endif %}
+
                                 </li>
 
                                 <!--/ User -->
